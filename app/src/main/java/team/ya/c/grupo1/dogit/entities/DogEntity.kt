@@ -1,4 +1,4 @@
-package io.github.matirosen.dogit.entities
+package team.ya.c.grupo1.dogit.entities
 
 import android.os.Parcel
 import android.os.Parcelable
