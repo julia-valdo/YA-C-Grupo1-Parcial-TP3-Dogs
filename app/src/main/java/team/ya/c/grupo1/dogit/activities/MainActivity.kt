@@ -1,4 +1,4 @@
-package io.github.matirosen.dogit.activities
+package team.ya.c.grupo1.dogit.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

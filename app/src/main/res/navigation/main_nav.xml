@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="io.github.matirosen.dogit.fragments.HomeFragment"
+        android:name="team.ya.c.grupo1.dogit.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>
