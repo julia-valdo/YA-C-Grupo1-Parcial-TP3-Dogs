@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "io.github.matirosen.dogit"
+    namespace = "team.ya.c.grupo1.dogit"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "io.github.matirosen.dogit"
+        applicationId = "team.ya.c.grupo1.dogit"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

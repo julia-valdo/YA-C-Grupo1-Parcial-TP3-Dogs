@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!-- Guidelines -->
+    <dimen name="guideline_10">0.10</dimen>
+    <dimen name="guideline_20">0.20</dimen>
+    <dimen name="guideline_30">0.30</dimen>
+    <dimen name="guideline_40">0.40</dimen>
+    <dimen name="guideline_50">0.50</dimen>
+    <dimen name="guideline_60">0.60</dimen>
+    <dimen name="guideline_70">0.70</dimen>
+    <dimen name="guideline_80">0.80</dimen>
+    <dimen name="guideline_90">0.90</dimen>
+
+    <dimen name="guideline_93">0.93</dimen>
+</resources>
