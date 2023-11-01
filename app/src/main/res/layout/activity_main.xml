@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context="team.ya.c.grupo1.dogit.activities.MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerViewMainActivity"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewMainActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/main_nav" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationViewMainActivity"
         android:layout_width="0dp"
@@ -37,10 +25,22 @@
         android:id="@+id/drawerLayoutMainActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragmentContainerViewMainActivity"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineMainActivityHorizontal93"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarMainActivity">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerViewMainActivity"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewMainActivity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarMainActivity"
+            app:navGraph="@navigation/main_nav" />
 
 
         <com.google.android.material.navigation.NavigationView
