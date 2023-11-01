@@ -8,6 +8,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/adoptionFragment"
+        android:name="team.ya.c.grupo1.dogit.fragments.AdoptionFragment"
+        android:label="@string/adoption"
+        tools:layout="@layout/fragment_adoption" />
 </navigation>

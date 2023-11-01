@@ -4,6 +4,7 @@
     <color name="blue">#1B72C0</color>
     <color name="dark_blue">#001D42</color>
     <color name="dark_grey">#5F5B5B</color>
+    <color name="darkest_grey">#131313</color>
     <color name="grey">#C4C3C3</color>
 
     <color name="transparent">#00000000</color>
