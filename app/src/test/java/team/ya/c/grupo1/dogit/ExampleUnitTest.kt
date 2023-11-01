@@ -1,4 +1,4 @@
-package io.github.matirosen.dogit
+package team.ya.c.grupo1.dogit
 
 import org.junit.Test
 

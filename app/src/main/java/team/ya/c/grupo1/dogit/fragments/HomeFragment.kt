@@ -1,4 +1,4 @@
-package io.github.matirosen.dogit.fragments
+package team.ya.c.grupo1.dogit.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
