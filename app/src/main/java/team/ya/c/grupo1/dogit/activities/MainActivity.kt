@@ -5,7 +5,6 @@ import android.view.Menu
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -49,43 +48,72 @@ class MainActivity : AppCompatActivity() {
         binding.navViewMainActivity.setupWithNavController(navController)
         binding.toolbarMainActivity.setupWithNavController(navController, appBarConfiguration)
 
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            binding.txtMainActivityToolbarTitle.text = navController.currentDestination?.label
-            binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+        val drawerFragmentIds = mutableSetOf<Int>()
+        for (i in 0 until binding.navViewMainActivity.menu.size()) {
+            val item = binding.navViewMainActivity.menu.getItem(i)
+            drawerFragmentIds.add(item.itemId)
         }
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.txtMainActivityToolbarTitle.text = navController.currentDestination?.label
+            if (destination.id in drawerFragmentIds) {
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
+            } else {
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                }
+            }
+         }
 
         binding.toolbarMainActivity.setNavigationOnClickListener {
-            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
-                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
-            } else {
-                binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
-            }
+             when {
+                binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
+
+                navController.currentDestination?.id in drawerFragmentIds -> {
+                    navController.navigateUp()
+                }
+
+                else -> {
+                    binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
+                }
+             }
         }
 
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
-                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
-            }
-        }
-
-        onBackPressedDispatcher.addCallback(this) {
-            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
-                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
-            } else if (navController.currentDestination?.id != R.id.homeFragment){
-                navController.navigateUp()
-            } else {
-                finish()
-            }
-        }
+        overrideBackButton()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.drawer_nav_menu, menu)
         return true
+    }
+
+    fun hideBottomNavMenu() {
+        binding.bottomNavigationViewMainActivity.visibility = android.view.View.GONE
+    }
+
+    fun showBottomNavMenu() {
+        binding.bottomNavigationViewMainActivity.visibility = android.view.View.VISIBLE
+    }
+
+    private fun overrideBackButton() {
+        onBackPressedDispatcher.addCallback(this) {
+            when {
+                binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
+                navController.currentDestination?.id != R.id.homeFragment -> {
+                    navController.navigateUp()
+                }
+                else -> {
+                    finish()
+                }
+            }
+        }
     }
 }

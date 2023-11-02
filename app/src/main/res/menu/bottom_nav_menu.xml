@@ -16,4 +16,9 @@
         android:id="@id/adoptionFragment"
         android:icon="@drawable/icon_two_dog_pawprints"
         android:title="@string/adoption" />
+
+    <item
+        android:id="@id/publicationFragment"
+        android:icon="@drawable/icon_publication"
+        android:title="@string/publication" />
 </menu>
