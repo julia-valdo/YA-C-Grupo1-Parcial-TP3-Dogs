@@ -11,8 +11,8 @@
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/adoptionFragment"
-        android:name="team.ya.c.grupo1.dogit.fragments.AdoptionFragment"
-        android:label="@string/adoption"
-        tools:layout="@layout/fragment_adoption" />
+        android:id="@+id/favoritesFragment"
+        android:name="team.ya.c.grupo1.dogit.fragments.FavoritesFragment"
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>

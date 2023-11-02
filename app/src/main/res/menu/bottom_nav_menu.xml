@@ -8,7 +8,7 @@
         android:title="@string/home" />
 
     <item
-        android:id="@id/adoptionFragment"
-        android:icon="@drawable/icon_two_dog_pawprints"
-        android:title="@string/adoption" />
+        android:id="@id/favoritesFragment"
+        android:icon="@drawable/icon_bookmark"
+        android:title="@string/favorites" />
 </menu>
