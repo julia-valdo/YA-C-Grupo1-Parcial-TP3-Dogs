@@ -15,4 +15,15 @@
         android:name="team.ya.c.grupo1.dogit.fragments.FavoritesFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/configFragment"
+        android:name="team.ya.c.grupo1.dogit.fragments.ConfigFragment"
+        android:label="@string/config"
+        tools:layout="@layout/fragment_config" />
+    <fragment
+        android:id="@+id/adoptionFragment"
+        android:name="team.ya.c.grupo1.dogit.fragments.AdoptionFragment"
+        android:label="@string/adoption"
+        tools:layout="@layout/fragment_adoption" />
 </navigation>

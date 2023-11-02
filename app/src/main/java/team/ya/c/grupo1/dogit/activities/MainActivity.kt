@@ -2,8 +2,10 @@ package team.ya.c.grupo1.dogit.activities
 
 import android.os.Bundle
 import android.view.Menu
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -52,8 +54,33 @@ class MainActivity : AppCompatActivity() {
             binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
         }
 
+
         binding.toolbarMainActivity.setNavigationOnClickListener {
-            binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
+            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+            } else {
+                binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
+            }
+        }
+
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this) {
+            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+            } else if (navController.currentDestination?.id != R.id.homeFragment){
+                navController.navigateUp()
+            } else {
+                finish()
+            }
         }
     }
 

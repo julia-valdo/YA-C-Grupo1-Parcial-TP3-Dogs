@@ -10,22 +10,20 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationViewMainActivity"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/style_bottom_nav"
-        app:itemIconSize="28dp"
         app:itemIconTint="@drawable/style_nav_colored"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintTop_toTopOf="@+id/guidelineMainActivityHorizontal93"
+        app:labelVisibilityMode="auto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayoutMainActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/guidelineMainActivityHorizontal93"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewMainActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarMainActivity">
@@ -33,15 +31,10 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerViewMainActivity"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewMainActivity"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarMainActivity"
             app:navGraph="@navigation/main_nav" />
-
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navViewMainActivity"
@@ -49,8 +42,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
+            app:itemIconTint="@drawable/style_nav_colored"
+            app:itemTextColor="@drawable/style_nav_colored"
             app:headerLayout="@layout/drawer_main_nav_header"
-            app:itemShapeFillColor="@color/white"
             app:menu="@menu/drawer_nav_menu" />
     </androidx.drawerlayout.widget.DrawerLayout>
 
@@ -81,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="28sp"
+                android:textSize="@dimen/txt_main_title_size"
                 android:gravity="center_vertical"
                 android:textStyle="bold"/>
 
@@ -93,11 +87,12 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMainActivityHorizontal93"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline_93" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/globalLineDivider"
+        android:background="?attr/strokeColor"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationViewMainActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavigationViewMainActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

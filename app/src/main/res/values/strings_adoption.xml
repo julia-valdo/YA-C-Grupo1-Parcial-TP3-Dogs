@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="adoption">Adopción</string>
+    <string name="home">Home</string>
     <string name="favorites">Favoritos</string>
+    <string name="adoption">Adopción</string>
+    <string name="publication">Publicación</string>
+    <string name="config">Configuración</string>
+
 </resources>
