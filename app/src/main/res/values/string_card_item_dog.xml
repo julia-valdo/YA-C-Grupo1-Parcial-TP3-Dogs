@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cardItemDogName">Nombre</string>
+    <string name="cardItemDogRace">Raza</string>
+    <string name="cardItemDogSubRace">SubRaza</string>
+    <string name="cardItemDogAge">Edad</string>
+    <string name="cardItemDogSex">Macho o Hembra</string>
+    <string name="cardItemDogSlash">/</string>
+</resources>

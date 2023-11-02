@@ -11,5 +11,33 @@
     <dimen name="guideline_80">0.80</dimen>
     <dimen name="guideline_90">0.90</dimen>
 
+    <dimen name="guideline_5">0.05</dimen>
+    <dimen name="guideline_15">0.15</dimen>
     <dimen name="guideline_93">0.93</dimen>
+    <dimen name="guideline_95">0.95</dimen>
+
+    <!-- Global -->
+    <dimen name="globalLineDivider">2dp</dimen>
+
+    <!-- Text size -->
+    <dimen name="txt_main_title_size">30sp</dimen>
+    <dimen name="txt_secondary_title_size">22sp</dimen>
+    <dimen name="txt_button_size">18sp</dimen>
+    <dimen name="txt_input_size">18sp</dimen>
+    <dimen name="txt_paragraph_size">16sp</dimen>
+    <dimen name="txt_mini_size">14sp</dimen>
+
+    <!-- CardView -->
+    <dimen name="cardViewCornerRadius">30dp</dimen>
+    <dimen name="cardViewMargin">25dp</dimen>
+    <dimen name="cardViewItemsMargin">15dp</dimen>
+    <dimen name="cardViewWidth">340dp</dimen>
+    <dimen name="cardViewHeight">180dp</dimen>
+    <dimen name="cardViewtxtName">20dp</dimen>
+    <dimen name="cardViewtxt">15dp</dimen>
+    <dimen name="cardViewShadowRadius">5</dimen>
+
+    <!-- DrawerMainNavHeader -->
+    <dimen name="drawerMainNavHeaderProfilePictureSize">50dp</dimen>
+    <dimen name="drawerMainNavHeaderProfilePictureMargin">20dp</dimen>
 </resources>

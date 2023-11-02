@@ -1,8 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayoutDrawerMainNavHeader"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imgDrawerMainNavHeaderProfilePicture"
+            android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"
+            android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
+            android:layout_margin="@dimen/drawerMainNavHeaderProfilePictureMargin"
+            android:src="@drawable/img_avatar"
+            android:scaleType="centerCrop"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txtDrawerMainNavHeaderHello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Hola"
+                android:textSize="@dimen/txt_paragraph_size" />
+
+            <TextView
+                android:id="@+id/txtDrawerMainNavHeaderUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Martín"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="@dimen/txt_secondary_title_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="@dimen/drawerMainNavHeaderProfilePictureMargin"
+        android:background="?attr/strokeColor" />
+</LinearLayout>

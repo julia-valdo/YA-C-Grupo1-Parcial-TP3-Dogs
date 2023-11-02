@@ -3,12 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@id/homeFragment"
-        android:icon="@drawable/icon_home"
-        android:title="@string/home" />
-
-    <item
-        android:id="@id/adoptionFragment"
-        android:icon="@drawable/icon_two_dog_pawprints"
-        android:title="@string/adoption" />
+        android:id="@id/configFragment"
+        android:icon="@drawable/icon_configuration"
+        android:title="@string/config" />
 </menu>

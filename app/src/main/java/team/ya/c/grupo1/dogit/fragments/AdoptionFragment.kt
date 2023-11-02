@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import team.ya.c.grupo1.dogit.R
 
-
 class AdoptionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -16,4 +15,5 @@ class AdoptionFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_adoption, container, false)
     }
+
 }
