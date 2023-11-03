@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,6 +13,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.databinding.ActivityMainBinding
+import team.ya.c.grupo1.dogit.entities.ThemeProviderEntity
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         setupVariables()
         setupBottomNavMenu()
         setupNavigationView()
+
+        val theme = ThemeProviderEntity(this).getThemeFromPreferences()
+        AppCompatDelegate.setDefaultNightMode(theme)
     }
 
     private fun  setupVariables() {
