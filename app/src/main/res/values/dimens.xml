@@ -40,4 +40,12 @@
     <!-- DrawerMainNavHeader -->
     <dimen name="drawerMainNavHeaderProfilePictureSize">50dp</dimen>
     <dimen name="drawerMainNavHeaderProfilePictureMargin">20dp</dimen>
+
+    <!-- Profile -->
+    <dimen name="profileImgWidth">200dp</dimen>
+    <dimen name="profileImgHeight">200dp</dimen>
+    <dimen name="profileTextSizeName">35sp</dimen>
+    <dimen name="profileBtnWidth">150dp</dimen>
+    <dimen name="profileBtnMarginTop">15dp</dimen>
+
 </resources>

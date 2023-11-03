@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment">
@@ -11,79 +12,39 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_back" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="30dp"
-                    android:text="@string/profile_title"
-                    android:textSize="30sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            android:layout_marginTop="-300dp"
-            android:gravity="center">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/imgProfileCircular"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="30dp"
+                android:id="@+id/profileImg"
+                android:layout_width="@dimen/profileImgWidth"
+                android:layout_height="@dimen/profileImgHeight"
                 android:src="@drawable/img_profile"
                 app:civ_shadow="true"
                 app:civ_shadow_color="?attr/colorBackgroundFloating" />
 
             <!-- TODO: cambiar nombre del usuario por el real -->
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/profileTxtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Martin"
-                android:textSize="35sp"
-                />
+                android:textSize="@dimen/profileTextSizeName" />
 
             <Button
-                android:id="@+id/button"
-                android:layout_width="150dp"
-                android:background="@drawable/style_button_profile"
+                android:id="@+id/profileBtnAddPhoto"
+                android:layout_width="@dimen/profileBtnWidth"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_btn_uploadImage"
-                android:layout_marginTop="15dp"
-                tools:layout_editor_absoluteX="164dp"
-                tools:layout_editor_absoluteY="555dp"
-                android:backgroundTint="@color/purple"/>
+                android:layout_marginTop="@dimen/profileBtnMarginTop"
+                android:background="@drawable/style_button_profile"
+                android:backgroundTint="@color/purple"
+                android:text="@string/profile_btn_uploadImage" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
