@@ -1,40 +1,41 @@
 package team.ya.c.grupo1.dogit.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.paging.FirestorePagingAdapter
+import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.entities.DogEntity
 import team.ya.c.grupo1.dogit.holders.DogHolder
+import team.ya.c.grupo1.dogit.listeners.OnViewItemClickedListener
 
 class DogAdapter (
-    private val dogs: MutableList<DogEntity>,
-    private val context: Context
-) : RecyclerView.Adapter<DogHolder>() {
+    options : FirestorePagingOptions<DogEntity>,
+    private val onItemClick : OnViewItemClickedListener
+) : FirestorePagingAdapter<DogEntity, DogHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.card_item_dog, parent, false)
-        return DogHolder(view,context)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.card_item_dog, parent, false)
+
+        return DogHolder(view)
     }
 
-    override fun onBindViewHolder(holder: DogHolder, position: Int) {
-        val dog = dogs[position]
+    override fun onBindViewHolder(holder: DogHolder, position: Int, model: DogEntity) {
+        holder.setName(model.name)
+        holder.setRace(model.race)
+        holder.setSubRace(model.subrace)
+        holder.setAge(model.age)
+        holder.setSex(model.gender)
+        holder.setFavorite()
 
-        holder.bind(position, onClickDelete = { position ->
-            dogs.removeAt(position)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, dogs.size)
-        })
-        holder.setAge(dog.age.toString())
-        holder.setName(dog.adopterName)
-        holder.setImage(dog.images[0])
-        holder.setRace(dog.race)
-        holder.setSubRace(dog.subrace)
-        holder.setSex(dog.gender)
+        if (model.images.isNotEmpty()) {
+            holder.setImage(model.images[0])
+        }
+
+        holder.getContainer().setOnClickListener {
+            onItemClick.onViewItemDetail(model)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return dogs.size
-    }
 }

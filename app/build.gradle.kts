@@ -50,6 +50,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.paging:paging-runtime-ktx:3.2.1")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
@@ -59,14 +61,19 @@ dependencies {
 
     // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
+
+
 
     // images
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     ksp("com.github.bumptech.glide:ksp:4.16.0")
 
+    // preferences
+    implementation("androidx.preference:preference-ktx:1.2.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

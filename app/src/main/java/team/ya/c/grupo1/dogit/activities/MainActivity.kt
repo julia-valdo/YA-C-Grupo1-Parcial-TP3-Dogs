@@ -2,10 +2,11 @@ package team.ya.c.grupo1.dogit.activities
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,6 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.databinding.ActivityMainBinding
+import team.ya.c.grupo1.dogit.entities.ThemeProviderEntity
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         setupVariables()
         setupBottomNavMenu()
         setupNavigationView()
+
+        val theme = ThemeProviderEntity(this).getThemeFromPreferences()
+        AppCompatDelegate.setDefaultNightMode(theme)
     }
 
     private fun  setupVariables() {
@@ -49,43 +54,89 @@ class MainActivity : AppCompatActivity() {
         binding.navViewMainActivity.setupWithNavController(navController)
         binding.toolbarMainActivity.setupWithNavController(navController, appBarConfiguration)
 
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            binding.txtMainActivityToolbarTitle.text = navController.currentDestination?.label
-            binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+        val drawerFragmentIds = mutableSetOf<Int>()
+        for (i in 0 until binding.navViewMainActivity.menu.size()) {
+            val item = binding.navViewMainActivity.menu.getItem(i)
+            drawerFragmentIds.add(item.itemId)
         }
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.txtMainActivityToolbarTitle.text = navController.currentDestination?.label
+            if (destination.id in drawerFragmentIds) {
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
+            } else {
+                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                }
+            }
+         }
 
         binding.toolbarMainActivity.setNavigationOnClickListener {
-            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
-                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
-            } else {
-                binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
-            }
+             when {
+                binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
+
+                navController.currentDestination?.id in drawerFragmentIds -> {
+                    navController.navigateUp()
+                }
+
+                else -> {
+                    binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
+                }
+             }
         }
 
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
-                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+        binding.drawerLayoutMainActivity.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
             }
-        }
 
-        onBackPressedDispatcher.addCallback(this) {
-            if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
-                binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
-            } else if (navController.currentDestination?.id != R.id.homeFragment){
-                navController.navigateUp()
-            } else {
-                finish()
+            override fun onDrawerOpened(drawerView: View) {
             }
-        }
+
+            override fun onDrawerClosed(drawerView: View) {
+                if (navController.currentDestination?.id !in drawerFragmentIds) {
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+        })
+
+        overrideBackButton()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.drawer_nav_menu, menu)
         return true
+    }
+
+    fun hideBottomNavMenu() {
+        binding.bottomNavigationViewMainActivity.visibility = android.view.View.GONE
+    }
+
+    fun showBottomNavMenu() {
+        binding.bottomNavigationViewMainActivity.visibility = android.view.View.VISIBLE
+    }
+
+    private fun overrideBackButton() {
+        onBackPressedDispatcher.addCallback(this) {
+            when {
+                binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
+                navController.currentDestination?.id != R.id.homeFragment -> {
+                    navController.navigateUp()
+                }
+                else -> {
+                    finish()
+                }
+            }
+        }
     }
 }

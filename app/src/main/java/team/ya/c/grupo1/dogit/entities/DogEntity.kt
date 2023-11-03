@@ -20,6 +20,8 @@ data class DogEntity (var name: String, var race: String, var subrace: String, v
         parcel.readString()!!
     )
 
+    constructor() : this("", "", "", 0, "", "", 0.0, "", ArrayList(), "")
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeString(race)
