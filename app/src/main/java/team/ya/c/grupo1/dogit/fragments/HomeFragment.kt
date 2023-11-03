@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,8 +56,8 @@ class HomeFragment : Fragment(), OnViewItemClickedListener {
     override fun onViewItemDetail(item: Any) {
         val dog = if (item is DogEntity) item else return
 
-        //val action = HomeFragmentDirections.actionHomeFragmentToDogDetailFragment(dog)
-        //this.findNavController().navigate(action)
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(dog)
+        this.findNavController().navigate(action)
     }
 
     private fun setupVariables() {
