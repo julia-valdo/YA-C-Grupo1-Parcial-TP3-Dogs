@@ -29,12 +29,12 @@
 
     <!-- CardView -->
     <dimen name="cardViewCornerRadius">30dp</dimen>
-    <dimen name="cardViewMargin">25dp</dimen>
-    <dimen name="cardViewItemsMargin">15dp</dimen>
-    <dimen name="cardViewWidth">340dp</dimen>
-    <dimen name="cardViewHeight">180dp</dimen>
-    <dimen name="cardViewtxtName">20dp</dimen>
-    <dimen name="cardViewtxt">15dp</dimen>
+    <dimen name="cardViewMargin">10dp</dimen>
+    <dimen name="cardViewItemsMargin">10dp</dimen>
+    <dimen name="cardViewWidth">380dp</dimen>
+    <dimen name="cardViewHeight">240dp</dimen>
+    <dimen name="cardViewtxtName">30dp</dimen>
+    <dimen name="cardViewtxt">18dp</dimen>
     <dimen name="cardViewShadowRadius">5</dimen>
 
     <!-- DrawerMainNavHeader -->

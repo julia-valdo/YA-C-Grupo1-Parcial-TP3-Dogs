@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,15 +7,29 @@
     tools:context=".fragments.FavoritesFragment"
     android:orientation="horizontal">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineFavoritesVerticalLeft5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewFavorites"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guidelineFavoritesVerticalRight95"
+        app:layout_constraintStart_toStartOf="@id/guidelineFavoritesVerticalLeft5"
         app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineFavoritesVerticalRight95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline_95"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
