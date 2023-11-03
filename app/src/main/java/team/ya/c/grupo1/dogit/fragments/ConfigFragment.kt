@@ -14,6 +14,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import team.ya.c.grupo1.dogit.R
+import team.ya.c.grupo1.dogit.activities.MainActivity
 import team.ya.c.grupo1.dogit.entities.ThemeProviderEntity
 
 class ConfigFragment : PreferenceFragmentCompat() {
@@ -46,5 +47,15 @@ class ConfigFragment : PreferenceFragmentCompat() {
 
     override fun onStart() {
         super.onStart()
+
+        val activity = activity as MainActivity
+        activity.hideBottomNavMenu()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        val activity = activity as MainActivity
+        activity.showBottomNavMenu()
     }
 }
