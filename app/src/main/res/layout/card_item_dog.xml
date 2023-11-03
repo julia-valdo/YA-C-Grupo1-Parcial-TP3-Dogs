@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:src="@drawable/icon_follow" />
+                android:src="@drawable/icon_follow_filled" />
 
             <LinearLayout
                 android:layout_width="match_parent"

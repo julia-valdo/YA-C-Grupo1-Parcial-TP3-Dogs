@@ -2,6 +2,7 @@ package team.ya.c.grupo1.dogit.activities
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -88,6 +89,23 @@ class MainActivity : AppCompatActivity() {
                 }
              }
         }
+
+        binding.drawerLayoutMainActivity.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                if (navController.currentDestination?.id !in drawerFragmentIds) {
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+        })
 
         overrideBackButton()
     }

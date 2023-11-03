@@ -1,20 +1,127 @@
 package team.ya.c.grupo1.dogit.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.paging.PagingConfig
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.firestore.paging.FirestorePagingOptions
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import team.ya.c.grupo1.dogit.R
+import team.ya.c.grupo1.dogit.adapters.DogAdapter
+import team.ya.c.grupo1.dogit.databinding.FragmentHomeBinding
+import team.ya.c.grupo1.dogit.entities.DogEntity
+import team.ya.c.grupo1.dogit.listeners.OnViewItemClickedListener
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnViewItemClickedListener {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private val db = FirebaseFirestore.getInstance()
+
+
+    private lateinit var view : View
+    private lateinit var dogAdapter : DogAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate( inflater, container, false)
+        view = binding.root
+
+        return view
     }
 
+    override fun onStart() {
+        super.onStart()
+        setupVariables()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewItemDetail(item: Any) {
+        val dog = if (item is DogEntity) item else return
+
+        //val action = HomeFragmentDirections.actionHomeFragmentToDogDetailFragment(dog)
+        //this.findNavController().navigate(action)
+    }
+
+    private fun setupVariables() {
+        binding.progressBarHome.visibility = View.VISIBLE
+        setupRecyclerView()
+        setupSwipeRefreshSettings()
+    }
+
+    private fun setupRecyclerView() {
+        val query = db.collection("dogs")
+            .whereEqualTo("adopterName", "")
+
+        val config = PagingConfig(20,10,  false)
+
+        val options = FirestorePagingOptions.Builder<DogEntity>()
+            .setLifecycleOwner(this)
+            .setQuery(query, config, DogEntity::class.java)
+            .build()
+
+        setupRecyclerViewSettings(binding.recyclerHomeDogs)
+        dogAdapter = DogAdapter(options, this)
+
+        setupLoadStateSettings()
+
+        binding.recyclerHomeDogs.adapter = dogAdapter
+    }
+
+    private fun setupLoadStateSettings() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            dogAdapter.loadStateFlow.collectLatest { loadStates ->
+                when(loadStates.refresh){
+                    is LoadState.Loading -> {
+                        binding.progressBarHome.visibility = View.VISIBLE
+                    }
+                    is LoadState.NotLoading -> {
+                        binding.progressBarHome.visibility = View.GONE
+                    }
+                    is LoadState.Error -> {
+                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                when(loadStates.append){
+                    is LoadState.Loading -> {
+                    }
+                    is LoadState.NotLoading -> {
+                    }
+                    is LoadState.Error -> {
+                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setupSwipeRefreshSettings() {
+        binding.swipeRefreshHome.setOnRefreshListener {
+            dogAdapter.refresh()
+            binding.swipeRefreshHome.isRefreshing = false
+        }
+    }
+
+    private fun setupRecyclerViewSettings(recycler : RecyclerView) {
+        recycler.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(context)
+        recycler.layoutManager = linearLayoutManager
+    }
 }

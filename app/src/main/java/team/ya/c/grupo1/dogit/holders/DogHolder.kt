@@ -1,32 +1,37 @@
 package team.ya.c.grupo1.dogit.holders
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.auth.FirebaseAuth
 import team.ya.c.grupo1.dogit.R
 import javax.annotation.Nullable
 
-class DogHolder (v: View, private val context: Context) : RecyclerView.ViewHolder(v) {
+class DogHolder (v: View) : RecyclerView.ViewHolder(v) {
+
     private var view: View
+
     init {
         this.view = v
-    }
-
-    fun bind(position: Int, onClickDelete: (Int) -> Unit) {
-        val button = this.view.findViewById<ImageView>(R.id.btnCardItemDogFollow)
-        button.setOnClickListener {
-            onClickDelete(position)
-        }
     }
 
     fun setName(name: String) {
@@ -44,9 +49,9 @@ class DogHolder (v: View, private val context: Context) : RecyclerView.ViewHolde
         txtSubRace.text = subrace
     }
 
-    fun setAge(edad: String) {
+    fun setAge(edad: Int) {
         val txtAge = this.view.findViewById<TextView>(R.id.txtCardItemDogAge)
-        txtAge.text = edad
+        txtAge.text = edad.toString()
     }
 
     fun setSex(sex: String) {
@@ -58,7 +63,7 @@ class DogHolder (v: View, private val context: Context) : RecyclerView.ViewHolde
         val imgDog = this.view.findViewById<ImageView>(R.id.imgCardItemDog)
         val progressBar = this.view.findViewById<ProgressBar>(R.id.progressBarCardItemDog)
 
-        Glide.with(context)
+        Glide.with(view.context)
             .load(image)
             .listener(object : RequestListener<Drawable?> {
                 override fun onLoadFailed(
@@ -82,6 +87,20 @@ class DogHolder (v: View, private val context: Context) : RecyclerView.ViewHolde
                 }
             })
             .into(imgDog);
+    }
+
+    fun setFavorite() {
+        val user = FirebaseAuth.getInstance().currentUser
+        // TODO: if user tiene el perro en favoritos:
+        val isFavorite = true
+
+        val imgFavorite = this.view.findViewById<ImageView>(R.id.btnCardItemDogFollow)
+        if (isFavorite) {
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
+        } else {
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
+        }
+
     }
 
     fun getContainer() : View {

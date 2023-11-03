@@ -33,7 +33,7 @@ class FavoritesFragment : Fragment() {
 
         val linearLayoutManager = LinearLayoutManager(context)
 
-        rvDog.adapter = DogAdapter(dogs, requireContext())
+        //rvDog.adapter = DogAdapter(dogs, requireContext())
         rvDog.layoutManager = linearLayoutManager
 
         return view
