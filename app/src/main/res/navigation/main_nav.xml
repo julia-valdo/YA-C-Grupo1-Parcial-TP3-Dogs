@@ -9,7 +9,12 @@
         android:id="@+id/homeFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.FavoritesFragment"
@@ -36,4 +41,14 @@
         android:name="team.ya.c.grupo1.dogit.fragments.PublicationFragment"
         android:label="@string/publication"
         tools:layout="@layout/fragment_publication" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="team.ya.c.grupo1.dogit.fragments.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+
+        <argument
+            android:name="dog"
+            app:argType="team.ya.c.grupo1.dogit.entities.DogEntity" />
+    </fragment>
 </navigation>

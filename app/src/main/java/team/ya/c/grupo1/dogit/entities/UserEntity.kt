@@ -4,9 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.ArrayList
 
-class UserEntity(var firstName: String, var surname: String, var email: String,
+data class UserEntity(var firstName: String, var surname: String, var email: String,
                  var birthDate: String, var gender: String, var telephoneNumber: String,
-                 var address: String, var uuid: String, var dogs: ArrayList<String>) : Parcelable {
+                 var address: String, var uuid: String, var favoriteDogs: MutableList<DogEntity>, var adoptedDogs: MutableList<DogEntity>) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -17,9 +17,12 @@ class UserEntity(var firstName: String, var surname: String, var email: String,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.createStringArrayList()!!,
-        // TODO: acá se construiría la lista de DogEntity
+        parcel.createTypedArrayList(DogEntity.CREATOR) ?: mutableListOf<DogEntity>(),
+        parcel.createTypedArrayList(DogEntity.CREATOR) ?: mutableListOf<DogEntity>()
     )
+    constructor() : this("", "", "",
+                                    "", "", "",
+                                    "", "", mutableListOf<DogEntity>(), mutableListOf<DogEntity>())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(firstName)
@@ -30,7 +33,8 @@ class UserEntity(var firstName: String, var surname: String, var email: String,
         parcel.writeString(telephoneNumber)
         parcel.writeString(address)
         parcel.writeString(uuid)
-        // TODO: parcel.writeArray() ?
+        parcel.writeTypedList(favoriteDogs)
+        parcel.writeTypedList(adoptedDogs)
     }
 
     override fun describeContents(): Int {
