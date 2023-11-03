@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-
+        <string name="adoption_loading_dogs_failed">Hubo un error al cargar los perros que adoptaste!</string>
 </resources>
