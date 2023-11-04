@@ -97,7 +97,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener {
                         binding.progressBarHome.visibility = View.GONE
                     }
                     is LoadState.Error -> {
-                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, resources.getString(R.string.homeLoadingDogsFailed), Toast.LENGTH_SHORT).show()
                         binding.progressBarHome.visibility = View.GONE
                     }
                 }
@@ -110,7 +110,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener {
                         binding.progressBarHomeBottom.visibility = View.GONE
                     }
                     is LoadState.Error -> {
-                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, resources.getString(R.string.homeLoadingDogsFailed), Toast.LENGTH_SHORT).show()
                         binding.progressBarHomeBottom.visibility = View.GONE
                     }
                 }

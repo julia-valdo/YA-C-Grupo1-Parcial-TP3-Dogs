@@ -63,19 +63,45 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
     private fun setupVariables() {
         binding.progressBarAdoption.visibility = View.VISIBLE
         binding.progressBarAdoptionBottom.visibility = View.GONE
-        //setupRecyclerView()
+        setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
-        val query = FirebaseAuth.getInstance().currentUser?.let {
-            db.collection("users").document(it.uid).collection("adoptedDogs")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser.let { user ->
+            if (user != null) {
+                db.collection("users")
+                    .document(user.email!!)
+                    .get()
+                    .addOnSuccessListener { document ->
+                        if (document.contains("adoptedDogs")){
+                            val adoptedDogs = (document.get("adoptedDogs") as List<*>).filterIsInstance<String>()
+                            setupRecyclerView(adoptedDogs)
+                        } else {
+                            Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
+                            binding.progressBarAdoption.visibility = View.GONE
+                        }
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
+                        binding.progressBarAdoption.visibility = View.GONE
+                    }
+            } else{
+                Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
+                binding.progressBarAdoption.visibility = View.GONE
+            }
         }
+    }
+
+    private fun setupRecyclerView(adoptedDogs: List<String>) {
+        val query = db.collection("dogs")
+            .whereIn("id", adoptedDogs)
 
         val config = PagingConfig(20, 10, false)
 
         val options = FirestorePagingOptions.Builder<DogEntity>()
             .setLifecycleOwner(this)
-            .setQuery(query!!, config, DogEntity::class.java)
+            .setQuery(query, config, DogEntity::class.java)
             .build()
 
         setupRecyclerViewSettings(binding.recyclerAdoption)
@@ -103,7 +129,7 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
                         binding.progressBarAdoption.visibility = View.GONE
                     }
                     is LoadState.Error -> {
-                        Toast.makeText(context, resources.getString(R.string.adoption_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
                         binding.progressBarAdoption.visibility = View.GONE
                     }
                 }
@@ -116,7 +142,7 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
                         binding.progressBarAdoptionBottom.visibility = View.GONE
                     }
                     is LoadState.Error -> {
-                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, resources.getString(R.string.homeLoadingDogsFailed), Toast.LENGTH_SHORT).show()
                         binding.progressBarAdoptionBottom.visibility = View.GONE
                     }
                 }

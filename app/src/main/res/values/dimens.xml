@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Guidelines -->
-    <dimen name="guideline_10">0.10</dimen>
-    <dimen name="guideline_20">0.20</dimen>
-    <dimen name="guideline_30">0.30</dimen>
-    <dimen name="guideline_40">0.40</dimen>
-    <dimen name="guideline_50">0.50</dimen>
-    <dimen name="guideline_60">0.60</dimen>
-    <dimen name="guideline_70">0.70</dimen>
-    <dimen name="guideline_80">0.80</dimen>
-    <dimen name="guideline_90">0.90</dimen>
+    <dimen name="guideline10">0.10</dimen>
+    <dimen name="guideline20">0.20</dimen>
+    <dimen name="guideline30">0.30</dimen>
+    <dimen name="guideline40">0.40</dimen>
+    <dimen name="guideline50">0.50</dimen>
+    <dimen name="guideline60">0.60</dimen>
+    <dimen name="guideline70">0.70</dimen>
+    <dimen name="guideline80">0.80</dimen>
+    <dimen name="guideline90">0.90</dimen>
 
-    <dimen name="guideline_5">0.05</dimen>
-    <dimen name="guideline_15">0.15</dimen>
-    <dimen name="guideline_93">0.93</dimen>
-    <dimen name="guideline_95">0.95</dimen>
+    <dimen name="guideline5">0.05</dimen>
+    <dimen name="guideline15">0.15</dimen>
+    <dimen name="guideline93">0.93</dimen>
+    <dimen name="guideline95">0.95</dimen>
 
     <!-- Global -->
     <dimen name="globalLineDivider">2dp</dimen>
 
     <!-- Text size -->
-    <dimen name="txt_main_title_size">30sp</dimen>
-    <dimen name="txt_secondary_title_size">22sp</dimen>
-    <dimen name="txt_button_size">18sp</dimen>
-    <dimen name="txt_input_size">18sp</dimen>
-    <dimen name="txt_paragraph_size">16sp</dimen>
-    <dimen name="txt_mini_size">14sp</dimen>
+    <dimen name="txtMainTitleSize">30sp</dimen>
+    <dimen name="txtSecondaryTitleSize">22sp</dimen>
+    <dimen name="txtButtonSize">18sp</dimen>
+    <dimen name="txtInputSize">18sp</dimen>
+    <dimen name="txtParagraphSize">16sp</dimen>
+    <dimen name="txtMiniSize">14sp</dimen>
 
     <!-- CardView -->
     <dimen name="cardViewCornerRadius">30dp</dimen>

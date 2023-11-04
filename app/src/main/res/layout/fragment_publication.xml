@@ -37,7 +37,7 @@
                 android:inputType="text"
                 android:padding="@dimen/inputTxtPadding"
                 android:textColor="?android:attr/textColor"
-                android:textSize="@dimen/txt_input_size" />
+                android:textSize="@dimen/txtInputSize" />
 
             <Spinner
                 android:id="@+id/spinnerPublicationDogUbication"
@@ -67,7 +67,7 @@
                     android:inputType="numberDecimal"
                     android:padding="@dimen/inputTxtPadding"
                     android:textColor="?android:attr/textColor"
-                    android:textSize="@dimen/txt_input_size" />
+                    android:textSize="@dimen/txtInputSize" />
 
                 <EditText
                     android:id="@+id/editTxtPublicationDogWeight"
@@ -83,7 +83,7 @@
                     android:inputType="numberDecimal"
                     android:padding="@dimen/inputTxtPadding"
                     android:textColor="?android:attr/textColor"
-                    android:textSize="@dimen/txt_input_size" />
+                    android:textSize="@dimen/txtInputSize" />
             </LinearLayout>
 
             <Spinner
@@ -106,7 +106,7 @@
                 android:inputType="text"
                 android:padding="@dimen/inputTxtPadding"
                 android:textColor="?android:attr/textColor"
-                android:textSize="@dimen/txt_input_size" />
+                android:textSize="@dimen/txtInputSize" />
 
             <EditText
                 android:id="@+id/editTxtPublicationDogDescription"
@@ -120,7 +120,7 @@
                 android:inputType="text"
                 android:padding="@dimen/inputTxtPadding"
                 android:textColor="?android:attr/textColor"
-                android:textSize="@dimen/txt_input_size" />
+                android:textSize="@dimen/txtInputSize" />
 
             <Button
                 android:id="@+id/btnPublicationDogSave"
@@ -132,7 +132,7 @@
                 android:padding="@dimen/buttonTextPadding"
                 android:text="@string/publicationBtnSave"
                 android:textColor="@color/white"
-                android:textSize="@dimen/txt_button_size"
+                android:textSize="@dimen/txtButtonSize"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -145,20 +145,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_95" />
+        app:layout_constraintGuide_percent="@dimen/guideline95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
