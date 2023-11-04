@@ -11,6 +11,8 @@
         <item name="buttonTint">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/purple</item>
+        <item name="colorControlHighlight">@color/light_grey</item>
+        <item name="android:textColorSecondary">@color/dark_grey</item>
 
     </style>
 </resources>
