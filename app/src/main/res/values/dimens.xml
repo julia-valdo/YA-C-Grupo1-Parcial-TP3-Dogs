@@ -48,4 +48,16 @@
     <dimen name="profileBtnWidth">150dp</dimen>
     <dimen name="profileBtnMarginTop">15dp</dimen>
 
+    <!-- Forms -->
+    <dimen name="inputTxtPadding">10dp</dimen>
+    <dimen name="inputTxtHeight">50dp</dimen>
+    <dimen name="inputStartPadding">10dp</dimen>
+    <dimen name="inputEndPadding">10dp</dimen>
+    <dimen name="inputMaxWidth">488dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="buttonTextPadding">10dp</dimen>
+    <dimen name="dividerTopPadding">10dp</dimen>
+    <dimen name="dividerBottomPadding">10dp</dimen>
+
 </resources>
