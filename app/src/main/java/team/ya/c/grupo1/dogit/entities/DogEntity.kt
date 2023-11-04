@@ -3,9 +3,9 @@ package team.ya.c.grupo1.dogit.entities
 import android.os.Parcel
 import android.os.Parcelable
 
-data class DogEntity (var name: String, var race: String, var subrace: String, var age: Int, var gender: String,
-                      var description: String, var weight: Double, var location: String,
-                      var images: MutableList<String>, var adopterName: String) : Parcelable {
+data class DogEntity (var name: String, var race: String, var subrace: String, var age: Int,
+                      var gender: String, var description: String, var weight: Double, var location: String,
+                      var images: MutableList<String>, var adopterName: String, var id: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -17,10 +17,11 @@ data class DogEntity (var name: String, var race: String, var subrace: String, v
         parcel.readDouble(),
         parcel.readString()!!,
         parcel.createStringArrayList()!!,
+        parcel.readString()!!,
         parcel.readString()!!
     )
 
-    constructor() : this("", "", "", 0, "", "", 0.0, "", ArrayList(), "")
+    constructor() : this("", "", "", 0, "", "", 0.0, "", ArrayList(), "","")
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
@@ -34,6 +35,7 @@ data class DogEntity (var name: String, var race: String, var subrace: String, v
         parcel.writeString(location)
         parcel.writeList(images)
         parcel.writeString(adopterName)
+        parcel.writeString(id)
     }
 
     override fun describeContents(): Int {

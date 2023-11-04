@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardViewItemDog"
-    android:layout_width="@dimen/cardViewWidth"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/cardViewHeight"
     android:layout_margin="@dimen/cardViewMargin"
     app:cardCornerRadius="@dimen/cardViewCornerRadius">
@@ -18,7 +18,7 @@
 
     <ImageView
         android:id="@+id/imgCardItemDog"
-        android:layout_width="@dimen/cardViewWidth"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/cardViewHeight"
         android:scaleType="centerCrop"
         android:src="@drawable/img_default_dog" />

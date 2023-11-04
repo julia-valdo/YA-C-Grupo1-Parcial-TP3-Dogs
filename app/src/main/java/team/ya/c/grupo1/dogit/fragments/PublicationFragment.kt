@@ -5,56 +5,170 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
+import team.ya.c.grupo1.dogit.databinding.FragmentHomeBinding
+import team.ya.c.grupo1.dogit.databinding.FragmentPublicationBinding
+import team.ya.c.grupo1.dogit.entities.DogEntity
+import java.util.UUID
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PublicationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PublicationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding: FragmentPublicationBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var view : View
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_publication, container, false)
+        _binding = FragmentPublicationBinding.inflate(inflater, container, false)
+        view = binding.root
+        startSpinners()
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PublicationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PublicationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onStart() {
+        super.onStart()
+
+        binding.btnPublicationDogSave.setOnClickListener {
+            savePublication()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+    private fun makeAdapterSpinner(list :  MutableList<String>, hint : String): ArrayAdapter<String> {
+        list.add(0, hint)
+
+        val adapter = object : ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_activated_1, list){
+            override fun isEnabled(position: Int): Boolean {
+                return position != 0
+            }
+        }
+
+        return adapter
+    }
+
+    //TODO: agregar razas y subrazas al spinner correspondiente
+    private fun startSpinners(){
+        val provincesList = resources.getStringArray(R.array.provinces_array).toMutableList()
+        val provincesHint = resources.getString(R.string.publicationSelectLocation)
+        binding.spinnerPublicationDogUbication.adapter = makeAdapterSpinner(provincesList, provincesHint)
+
+        val genderList = resources.getStringArray(R.array.gender_array).toMutableList()
+        val genderHint = resources.getString(R.string.publicationSelectGender)
+        binding.spinnerPublicationDogGender.adapter = makeAdapterSpinner(genderList, genderHint)
+    }
+
+    private fun savePublication(){
+        val publication = createPublication() ?: return
+        savePublicationToDatabase(publication)
+    }
+
+    //TODO: poner nombre de usuario logueado en adopterName
+    //TODO: agregar raza y sub raza
+    //TODO: subir múltiples imágenes
+    //TODO: validar campos
+    private fun createPublication() : DogEntity?{
+        val adopterName = "Martin"
+        val name = binding.editTxtPublicationDogName.text.toString()
+        val location = binding.spinnerPublicationDogUbication.selectedItem.toString()
+        val age = binding.editTxtPublicationDogAge.text.toString().toIntOrNull() ?: 0
+        val weight = binding.editTxtPublicationDogWeight.text.toString().toDoubleOrNull() ?: 0.0
+        val gender = binding.spinnerPublicationDogGender.selectedItem.toString()
+        val images = mutableListOf<String>()
+        images.add(binding.editTxtPublicationDogPicture.text.toString())
+        val race = "Golden"
+        val subrace = "Canchero"
+        val description = binding.editTxtPublicationDogDescription.text.toString()
+        val id = UUID.randomUUID().toString()
+
+        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id)
+
+        return if (validateFields(dog)) dog else null
+    }
+
+    //TODO: validar todos los campos de URL de imágenes
+    private fun validateFields(publication: DogEntity) : Boolean{
+        val fieldsToCheck = listOf(
+            Pair(publication.name, resources.getString(R.string.publicationErrorName)),
+            Pair(publication.location, resources.getString(R.string.publicationErrorLocation)),
+            Pair(publication.age, resources.getString(R.string.publicationErrorAge)),
+            Pair(publication.weight, resources.getString(R.string.publicationErrorWeight)),
+            Pair(publication.gender, resources.getString(R.string.publicationErrorGender)),
+            Pair(publication.images[0], resources.getString(R.string.publicationErrorImages)),
+            Pair(publication.race, resources.getString(R.string.publicationErrorRace)),
+            Pair(publication.subrace, resources.getString(R.string.publicationErrorSubrace)),
+            Pair(publication.description, resources.getString(R.string.publicationErrorDescription))
+        )
+
+        for ((property, errorMessage) in fieldsToCheck){
+            if (property.toString().isNullOrEmpty() || property.toString().isBlank()){
+                Snackbar.make(view, errorMessage, Snackbar.LENGTH_LONG).show()
+                return false
+            }
+        }
+
+        if (publication.location == resources.getString(R.string.publicationSelectLocation)){
+            Snackbar.make(view, resources.getString(R.string.publicationErrorLocation), Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        if (publication.gender == resources.getString(R.string.publicationSelectGender)){
+            Snackbar.make(view, resources.getString(R.string.publicationErrorGender), Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        if (publication.age == 0){
+            Snackbar.make(view, resources.getString(R.string.publicationErrorAge), Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        if (publication.weight == 0.0){
+            Snackbar.make(view, resources.getString(R.string.publicationErrorWeight), Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        return true
+    }
+
+    private fun savePublicationToDatabase(publication: DogEntity){
+        val documentReference = db.collection("dogs").document(publication.id)
+
+        documentReference.set(publication)
+            .addOnSuccessListener {
+                safeAccessBinding {
+                    Toast.makeText(view.context, resources.getString(R.string.publicationSuccesfulMessage), Toast.LENGTH_LONG).show()
+                    view.findNavController().popBackStack()
+                }
+            }
+            .addOnFailureListener {
+                safeAccessBinding {
+                    Snackbar.make(view, resources.getString(R.string.publicationErrorMessage), Snackbar.LENGTH_LONG).show()
                 }
             }
     }
+
+    private fun safeAccessBinding(action: () -> Unit) {
+        if (_binding != null && context != null) {
+            action()
+        }
+    }
+
 }

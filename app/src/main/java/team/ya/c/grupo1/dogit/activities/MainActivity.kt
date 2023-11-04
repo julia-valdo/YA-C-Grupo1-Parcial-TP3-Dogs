@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.databinding.ActivityMainBinding
 import team.ya.c.grupo1.dogit.entities.ThemeProviderEntity
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //TODO: Ver manejo de errores
+        RxJavaPlugins.setErrorHandler { throwable: Throwable? -> }
 
         setupVariables()
         setupBottomNavMenu()

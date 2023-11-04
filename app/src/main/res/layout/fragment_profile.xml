@@ -42,7 +42,7 @@
                 android:layout_width="@dimen/profileBtnWidth"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/profileBtnMarginTop"
-                android:background="@drawable/style_button_profile"
+                android:background="@drawable/style_button"
                 android:backgroundTint="@color/purple"
                 android:text="@string/profile_btn_uploadImage" />
 
