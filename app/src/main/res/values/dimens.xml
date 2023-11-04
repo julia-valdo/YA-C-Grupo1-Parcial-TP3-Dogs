@@ -18,6 +18,8 @@
 
     <!-- Global -->
     <dimen name="globalLineDivider">2dp</dimen>
+    <dimen name="txtInputWidth">320dp</dimen>
+    <dimen name="txtInputHeight">50dp</dimen>
 
     <!-- Text size -->
     <dimen name="txt_main_title_size">30sp</dimen>
