@@ -25,11 +25,10 @@
                 android:id="@+id/profileImg"
                 android:layout_width="@dimen/profileImgWidth"
                 android:layout_height="@dimen/profileImgHeight"
-                android:src="@drawable/img_profile"
+                android:src="@drawable/img_avatar"
                 app:civ_shadow="true"
                 app:civ_shadow_color="?attr/colorBackgroundFloating" />
 
-            <!-- TODO: cambiar nombre del usuario por el real -->
             <TextView
                 android:id="@+id/profileTxtName"
                 android:layout_width="wrap_content"
@@ -44,7 +43,7 @@
                 android:layout_marginTop="@dimen/profileBtnMarginTop"
                 android:background="@drawable/style_button"
                 android:backgroundTint="@color/purple"
-                android:text="@string/profile_btn_uploadImage" />
+                android:text="@string/profileBtnUploadImage" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
