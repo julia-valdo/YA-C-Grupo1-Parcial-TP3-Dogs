@@ -71,6 +71,7 @@ class ProfileFragment : Fragment() {
                 binding.profileBtnSavePhoto.visibility = View.GONE
                 binding.profileBtnAddPhoto.visibility = View.VISIBLE
                 replaceData()
+                (activity as MainActivity).updateProfileImage()
                 Toast.makeText(view.context, resources.getString(R.string.profileUploadImageSuccess), Toast.LENGTH_LONG).show()
             }
             .addOnFailureListener {
