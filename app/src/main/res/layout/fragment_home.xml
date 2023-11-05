@@ -16,21 +16,70 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
         app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal5" />
 
+
+    <AutoCompleteTextView
+        android:id="@+id/AutoCompleteTextViewBreedSearch"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:hint="@string/home_search_filter"
+        android:textSize="15dp"
+        android:paddingStart="16dp"
+        android:background="@drawable/style_search_home"
+        app:layout_constraintBottom_toTopOf="@+id/textHomeFilterBreed"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textHomeFilterBreed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_filter_text"
+        android:textSize="@dimen/txt_secondary_title_size"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerFilterBreed"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/AutoCompleteTextViewBreedSearch" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFilterBreed"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal20"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/textHomeFilterBreed" />
+
+    <ImageButton
+        android:id="@+id/buttonSearchByBreed"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/style_button_profile"
+        android:gravity="center"
+        android:src="@drawable/search"
+        app:layout_constraintBottom_toTopOf="@+id/textHomeFilterBreed"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshHome"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal20"
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerHomeDogs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineHomeVertical5" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeHorizontal5"
@@ -38,6 +87,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="@dimen/guideline_5" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHomeHorizontal20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline_25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical5"
@@ -52,4 +107,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/guideline_95" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
