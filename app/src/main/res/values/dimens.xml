@@ -60,4 +60,9 @@
     <dimen name="dividerTopPadding">10dp</dimen>
     <dimen name="dividerBottomPadding">10dp</dimen>
 
+    <!-- Icons -->
+    <dimen name="iconAddWidth">50dp</dimen>
+    <dimen name="iconAddHeight">50dp</dimen>
+    <dimen name="marginLeftIcon">5dp</dimen>
+
 </resources>
