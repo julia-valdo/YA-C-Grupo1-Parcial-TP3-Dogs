@@ -27,10 +27,6 @@ class RegisterFragment : Fragment() {
     private lateinit var etEmail : EditText
     private lateinit var etPassword : EditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

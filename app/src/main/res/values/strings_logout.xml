@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="optionLogout">Cerrar sesión</string>
+    <string name="optionLogoutConfirmation">¿Estás seguro que deseas cerrar sesión?</string>
+    <string name="optionLogoutPositive">Sí</string>
+    <string name="optionLogoutNegative">No</string>
+    <string name="optionLogoutSuccess">Sesión cerrada correctamente</string>
+</resources>

@@ -8,12 +8,10 @@
     <string name="loginRegister">¿No tienes cuenta?</string>
     <string name="loginRegisterButton">Registrarse</string>
     <string name="loginForgotPassword">¿Olvidaste tu contraseña?</string>
-    <string name="loginResetPassword">Email de reseteo de contraseña enviado</string>
-    <string name="loginEmailNotVerified">Debe verificar su email para poder iniciar sesión</string>
-    <string name="loginVerifyEmail">Verificar email</string>
+    <string name="loginResetPassword">Se ha enviado un mail para restablecer su contraseña</string>
 
     <string name="loginInvalidCredentials">Credenciales invalidas</string>
     <string name="loginEmptyFields">Debe ingresar un mail y una contraseña</string>
     <string name="loginEmptyEmail">Indica un email</string>
-    <string name="loginResetPasswordError">No se encontro usuario con este correo</string>
+    <string name="loginResetPasswordError">No se encontró usuario con este correo</string>
 </resources>
