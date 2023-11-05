@@ -14,7 +14,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.activities.MainActivity
@@ -141,9 +140,8 @@ class PublicationFragment : Fragment() {
         val description = binding.editTxtPublicationDogDescription.text.toString()
         val id = UUID.randomUUID().toString()
         val adopterEmail = ""
-        val ownerEmail = FirebaseAuth.getInstance().currentUser?.email?: ""
 
-        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail, ownerEmail)
+        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail)
 
         return if (validateFields(dog)) dog else null
     }
