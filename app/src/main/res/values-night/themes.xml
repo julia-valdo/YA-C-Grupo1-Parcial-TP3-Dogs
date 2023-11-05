@@ -13,6 +13,7 @@
         <item name="colorControlActivated">@color/purple</item>
         <item name="colorControlHighlight">@color/light_grey</item>
         <item name="android:textColorSecondary">@color/dark_grey</item>
+        <item name="android:editTextColor">@color/dark_grey</item>
 
     </style>
 </resources>

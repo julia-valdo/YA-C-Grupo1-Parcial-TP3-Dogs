@@ -31,25 +31,33 @@
             android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarHomeBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeHorizontal5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_95" />
+        app:layout_constraintGuide_percent="@dimen/guideline95" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@
             android:layout_marginTop="14dp"
             android:text="@string/registerRegisterData"
             android:textColor="?attr/colorControlHighlight"
-            android:textSize="@dimen/txt_main_title_size"
+            android:textSize="@dimen/txtMainTitleSize"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
@@ -36,7 +36,7 @@
             android:inputType="text"
             android:padding="5dip"
             android:textColor="@color/black"
-            android:textSize="@dimen/txt_input_size"
+            android:textSize="@dimen/txtInputSize"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataTitle"/>
@@ -52,7 +52,7 @@
             android:inputType="text"
             android:padding="5dip"
             android:textColor="@color/black"
-            android:textSize="@dimen/txt_input_size"
+            android:textSize="@dimen/txtInputSize"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataName"/>
@@ -68,7 +68,7 @@
             android:hint="@string/registerPhone"
             android:padding="5dip"
             android:textColor="@color/black"
-            android:textSize="@dimen/txt_input_size"
+            android:textSize="@dimen/txtInputSize"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataSurname"/>
@@ -81,7 +81,7 @@
             android:backgroundTint="?attr/colorControlActivated"
             android:text="@string/registerRegisterButton"
             android:textColor="?android:solidColor"
-            android:textSize="@dimen/txt_button_size"
+            android:textSize="@dimen/txtButtonSize"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,21 +92,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="@dimen/guideline_20" />
+            app:layout_constraintGuide_percent="@dimen/guideline20" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRegisterVertical5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/guideline_5" />
+            app:layout_constraintGuide_percent="@dimen/guideline5" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRegisterVertical95"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/guideline_95" />
+            app:layout_constraintGuide_percent="@dimen/guideline95" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/registerRegister"
             android:textColor="?attr/colorControlHighlight"
-            android:textSize="@dimen/txt_main_title_size"
+            android:textSize="@dimen/txtMainTitleSize"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
@@ -33,7 +33,7 @@
             android:inputType="textEmailAddress"
             android:padding="10dip"
             android:textColor="@color/black"
-            android:textSize="@dimen/txt_input_size"
+            android:textSize="@dimen/txtInputSize"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
@@ -49,7 +49,7 @@
             android:inputType="textPassword"
             android:padding="10dip"
             android:textColor="@color/black"
-            android:textSize="@dimen/txt_input_size"
+            android:textSize="@dimen/txtInputSize"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
             app:layout_constraintTop_toBottomOf="@+id/editTxtRegisterEmail" />
@@ -62,7 +62,7 @@
             android:backgroundTint="?attr/colorControlActivated"
             android:text="@string/registerContinue"
             android:textColor="?android:solidColor"
-            android:textSize="@dimen/txt_button_size"
+            android:textSize="@dimen/txtButtonSize"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
             app:layout_constraintHorizontal_bias="0.498"
@@ -76,21 +76,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="@dimen/guideline_20" />
+            app:layout_constraintGuide_percent="@dimen/guideline20" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRegisterVertical5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/guideline_5" />
+            app:layout_constraintGuide_percent="@dimen/guideline5" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRegisterVertical95"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/guideline_95" />
+            app:layout_constraintGuide_percent="@dimen/guideline95" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

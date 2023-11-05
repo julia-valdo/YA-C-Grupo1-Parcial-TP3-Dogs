@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewFavorites"
@@ -30,6 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_95"/>
+        app:layout_constraintGuide_percent="@dimen/guideline95"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

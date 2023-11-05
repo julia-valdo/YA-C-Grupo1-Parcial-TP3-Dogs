@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home_loading_dogs_failed">Hubo un error al cargar los perros!</string>
+    <string name="homeLoadingDogsFailed">Hubo un error al cargar los perros!</string>
 </resources>
