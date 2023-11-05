@@ -3,6 +3,7 @@ package team.ya.c.grupo1.dogit.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,6 +13,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.mikhaellopez.circularimageview.CircularImageView
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.databinding.ActivityMainBinding
@@ -55,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationView(){
+        setupNavigationViewHeaderVariables()
         binding.navViewMainActivity.setupWithNavController(navController)
         binding.toolbarMainActivity.setupWithNavController(navController, appBarConfiguration)
 
@@ -66,18 +74,20 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.txtMainActivityToolbarTitle.text = navController.currentDestination?.label
-            if (destination.id in drawerFragmentIds) {
+
+            if (destination.id in drawerFragmentIds || destination.id == R.id.detailsFragment) {
                 binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
             } else {
                 binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+
                 if (binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START)) {
                     binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
                 }
             }
-         }
+        }
 
         binding.toolbarMainActivity.setNavigationOnClickListener {
-             when {
+            when {
                 binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
                     binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
                     binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
@@ -87,11 +97,15 @@ class MainActivity : AppCompatActivity() {
                     navController.navigateUp()
                 }
 
+                navController.currentDestination?.id == R.id.detailsFragment -> {
+                    navController.navigateUp()
+                }
+
                 else -> {
                     binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
                     binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
                 }
-             }
+            }
         }
 
         binding.drawerLayoutMainActivity.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
@@ -114,17 +128,56 @@ class MainActivity : AppCompatActivity() {
         overrideBackButton()
     }
 
+    private fun setupNavigationViewHeaderVariables(){
+        val currentUser = FirebaseAuth.getInstance().currentUser?: return
+
+        FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(currentUser.email!!)
+            .get()
+            .addOnSuccessListener {
+                safeActivityCall {
+                    val name = "${it.getString("firstName")} ${it.getString("surname")}"
+                    val profileImage = it.getString("profileImage")
+
+                    val headerView = binding.navViewMainActivity.getHeaderView(0)
+                    val txtUserName = headerView.findViewById<TextView>(R.id.txtDrawerMainNavHeaderUserName)
+                    txtUserName.text = name
+
+                    val imgProfileImage = headerView.findViewById<CircularImageView>(R.id.imgDrawerMainNavHeaderProfilePicture)
+
+                    if (profileImage == "") {
+                        imgProfileImage.setImageResource(R.drawable.img_avatar)
+                        return@safeActivityCall
+                    }
+
+
+                    Glide.with(this)
+                        .load(profileImage)
+                        .placeholder(R.drawable.img_avatar)
+                        .error(R.drawable.img_avatar)
+                        .into(imgProfileImage)
+                }
+            }
+    }
+
+    private fun safeActivityCall(action: () -> Unit) {
+        if (!isFinishing && !isDestroyed) {
+            action()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.drawer_nav_menu, menu)
         return true
     }
 
     fun hideBottomNavMenu() {
-        binding.bottomNavigationViewMainActivity.visibility = android.view.View.GONE
+        binding.bottomNavigationViewMainActivity.visibility = View.GONE
     }
 
     fun showBottomNavMenu() {
-        binding.bottomNavigationViewMainActivity.visibility = android.view.View.VISIBLE
+        binding.bottomNavigationViewMainActivity.visibility = View.VISIBLE
     }
 
     private fun overrideBackButton() {
@@ -134,9 +187,11 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
                     binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
                 }
+
                 navController.currentDestination?.id != R.id.homeFragment -> {
                     navController.navigateUp()
                 }
+
                 else -> {
                     finish()
                 }
