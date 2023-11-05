@@ -64,45 +64,14 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
         binding.progressBarAdoption.visibility = View.VISIBLE
         binding.progressBarAdoptionBottom.visibility = View.GONE
         setupRecyclerView()
+        setupSwipeRefreshSettings()
     }
 
     private fun setupRecyclerView() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser.let { user ->
-            if (user != null) {
-                db.collection("users")
-                    .document(user.email!!)
-                    .get()
-                    .addOnSuccessListener { document ->
-                        if (document.contains("adoptedDogs")){
-                            val adoptedDogs = document.get("adoptedDogs") as List<*>
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email?: return
 
-                            if (adoptedDogs.isEmpty()) {
-                                binding.progressBarAdoption.visibility = View.GONE
-                                Toast.makeText(context, resources.getString(R.string.adoptionListIsEmpty), Toast.LENGTH_SHORT).show()
-                                return@addOnSuccessListener
-                            }
-
-                            setupRecyclerView(adoptedDogs.filterIsInstance<String>())
-                        } else {
-                            Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
-                            binding.progressBarAdoption.visibility = View.GONE
-                        }
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
-                        binding.progressBarAdoption.visibility = View.GONE
-                    }
-            } else{
-                Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
-                binding.progressBarAdoption.visibility = View.GONE
-            }
-        }
-    }
-
-    private fun setupRecyclerView(adoptedDogs: List<String>) {
         val query = db.collection("dogs")
-            .whereIn("id", adoptedDogs)
+            .whereEqualTo("adopterEmail", userEmail)
 
         val config = PagingConfig(20, 10, false)
 
@@ -134,6 +103,9 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
                     }
                     is LoadState.NotLoading -> {
                         binding.progressBarAdoption.visibility = View.GONE
+                        if (dogAdapter.itemCount == 0) {
+                            Toast.makeText(context, resources.getString(R.string.adoptionListIsEmpty), Toast.LENGTH_SHORT).show()
+                        }
                     }
                     is LoadState.Error -> {
                         Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
@@ -157,4 +129,10 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
         }
     }
 
+    private fun setupSwipeRefreshSettings() {
+        binding.swipeRefreshAdoption.setOnRefreshListener {
+            dogAdapter.refresh()
+            binding.swipeRefreshAdoption.isRefreshing = false
+        }
+    }
 }

@@ -1,10 +1,13 @@
 package team.ya.c.grupo1.dogit.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
@@ -123,6 +126,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.navViewMainActivity.menu.findItem(R.id.drawerNavMenuLogout).setOnMenuItemClickListener {
+            confirmLogout()
+            true
+        }
+
         overrideBackButton()
     }
 
@@ -194,5 +202,33 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun logout(){
+        FirebaseAuth.getInstance().signOut()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+
+        Toast.makeText(this, resources.getString(R.string.optionLogoutSuccess), Toast.LENGTH_SHORT).show()
+        this.finish()
+    }
+
+    private fun confirmLogout(){
+        val alertDialogBuilder = AlertDialog.Builder(this)
+
+        alertDialogBuilder.setTitle(resources.getString(R.string.optionLogout))
+        alertDialogBuilder.setMessage(resources.getString(R.string.optionLogoutConfirmation))
+
+        alertDialogBuilder.setPositiveButton(resources.getString(R.string.optionLogoutPositive)) { _, _ ->
+            logout()
+        }
+
+        alertDialogBuilder.setNegativeButton(resources.getString(R.string.optionLogoutNegative)){
+                _, _ ->
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 }
