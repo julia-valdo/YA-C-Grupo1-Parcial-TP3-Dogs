@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PublicationFragment">
 
-    <!--TODO: agregar spinners con razas y sub razas-->
-
     <ScrollView
         android:id="@+id/scrollViewPublication"
         android:layout_width="0dp"

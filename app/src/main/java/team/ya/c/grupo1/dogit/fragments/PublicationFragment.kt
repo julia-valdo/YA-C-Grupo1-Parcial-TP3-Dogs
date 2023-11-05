@@ -2,6 +2,7 @@ package team.ya.c.grupo1.dogit.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,15 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
-import team.ya.c.grupo1.dogit.activities.MainActivity
-import team.ya.c.grupo1.dogit.databinding.FragmentHomeBinding
 import team.ya.c.grupo1.dogit.databinding.FragmentPublicationBinding
 import team.ya.c.grupo1.dogit.entities.DogEntity
+import java.util.Date
 import java.util.UUID
 
 class PublicationFragment : Fragment() {
@@ -86,6 +86,20 @@ class PublicationFragment : Fragment() {
         linearLayoutToAdd.visibility = View.VISIBLE
     }
 
+    @SuppressLint("DiscouragedApi")
+    private fun addImgAddPhoto(index: Int) {
+        val imgId = resources.getIdentifier("imgPublicationDogAddPhoto$index", "id", requireActivity().packageName)
+        val imgToRemove = view.findViewById<ImageView>(imgId)
+        imgToRemove.visibility = View.VISIBLE
+    }
+
+    @SuppressLint("DiscouragedApi")
+    private fun removeEditTextPhoto(index: Int) {
+        val linearLayoutId = resources.getIdentifier("linearLayoutPublicationDogPhoto$index", "id", requireActivity().packageName)
+        val linearLayoutToAdd = view.findViewById<LinearLayout>(linearLayoutId)
+        linearLayoutToAdd.visibility = View.GONE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -136,12 +150,19 @@ class PublicationFragment : Fragment() {
         val gender = binding.spinnerPublicationDogGender.selectedItem.toString()
         val images = getPhotosFromEditText()
         val race = binding.spinnerPublicationDogRace.selectedItem.toString()
-        val subrace = binding.spinnerPublicationDogSubrace.selectedItem.toString()
+        var subrace = binding.spinnerPublicationDogSubrace.selectedItem.toString()
         val description = binding.editTxtPublicationDogDescription.text.toString()
         val id = UUID.randomUUID().toString()
         val adopterEmail = ""
+        val ownerEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
+        val publicationDate = Date()
 
-        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail)
+        if (subrace == resources.getString(R.string.publicationSelectSubrace)){
+            subrace = ""
+        }
+
+        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images,
+            adopterName, id, mutableListOf<String>(), adopterEmail, ownerEmail, publicationDate)
 
         return if (validateFields(dog)) dog else null
     }
@@ -200,11 +221,6 @@ class PublicationFragment : Fragment() {
             return false
         }
 
-        if (publication.subrace == resources.getString(R.string.publicationSelectSubrace)){
-            Toast.makeText(view.context, resources.getString(R.string.publicationErrorSubrace), Toast.LENGTH_LONG).show()
-            return false
-        }
-
         if (publication.age == 0 || publication.age > 30){
             Toast.makeText(view.context, resources.getString(R.string.publicationErrorAge), Toast.LENGTH_LONG).show()
             return false
@@ -225,7 +241,7 @@ class PublicationFragment : Fragment() {
             .addOnSuccessListener {
                 safeAccessBinding {
                     Toast.makeText(view.context, resources.getString(R.string.publicationSuccesfulMessage), Toast.LENGTH_LONG).show()
-                    view.findNavController().popBackStack()
+                    emptyFields()
                 }
             }
             .addOnFailureListener {
@@ -233,6 +249,31 @@ class PublicationFragment : Fragment() {
                     Snackbar.make(view, resources.getString(R.string.publicationErrorMessage), Snackbar.LENGTH_LONG).show()
                 }
             }
+    }
+
+    private fun emptyFields() {
+        binding.editTxtPublicationDogName.text = Editable.Factory.getInstance().newEditable("")
+        binding.spinnerPublicationDogUbication.setSelection(0)
+        binding.editTxtPublicationDogAge.text = Editable.Factory.getInstance().newEditable("")
+        binding.editTxtPublicationDogWeight.text = Editable.Factory.getInstance().newEditable("")
+        binding.spinnerPublicationDogGender.setSelection(0)
+        binding.spinnerPublicationDogRace.setSelection(0)
+        binding.spinnerPublicationDogSubrace.setSelection(0)
+        binding.editTxtPublicationDogDescription.text = Editable.Factory.getInstance().newEditable("")
+        binding.editTxtPublicationDogPhoto1.text = Editable.Factory.getInstance().newEditable("")
+        binding.editTxtPublicationDogPhoto2.text = Editable.Factory.getInstance().newEditable("")
+        binding.editTxtPublicationDogPhoto3.text = Editable.Factory.getInstance().newEditable("")
+        binding.editTxtPublicationDogPhoto4.text = Editable.Factory.getInstance().newEditable("")
+        binding.editTxtPublicationDogPhoto5.text = Editable.Factory.getInstance().newEditable("")
+
+        removeEditTextPhoto(2)
+        removeEditTextPhoto(3)
+        removeEditTextPhoto(4)
+        removeEditTextPhoto(5)
+        removeImgAddPhoto(2)
+        removeImgAddPhoto(3)
+        removeImgAddPhoto(4)
+        addImgAddPhoto(1)
     }
 
     private fun safeAccessBinding(action: () -> Unit) {
