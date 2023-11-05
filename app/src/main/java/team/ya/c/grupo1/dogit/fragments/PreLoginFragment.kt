@@ -47,7 +47,7 @@ class PreLoginFragment : Fragment() {
 
     private fun checkUser() {
         val currentUser = FirebaseAuth.getInstance().currentUser
-        if(currentUser != null && currentUser.isEmailVerified) {
+        if(currentUser != null) {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
