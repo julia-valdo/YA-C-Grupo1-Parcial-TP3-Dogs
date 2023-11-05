@@ -6,7 +6,7 @@
     <string name="loginSubmitButton">Iniciar sesión</string>
 
     <string name="loginRegister">¿No tienes cuenta?</string>
-    <string name="loginRegister_button">Registrarse</string>
+    <string name="loginRegisterButton">Registrarse</string>
     <string name="loginForgotPassword">¿Olvidaste tu contraseña?</string>
     <string name="loginResetPassword">Email de reseteo de contraseña enviado</string>
     <string name="loginEmailNotVerified">Debe verificar su email para poder iniciar sesión</string>

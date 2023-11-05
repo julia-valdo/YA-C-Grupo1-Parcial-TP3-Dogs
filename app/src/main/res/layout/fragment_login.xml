@@ -1,16 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayoutLogin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragments.LoginFragment">
 
-    <TextView
-        android:id="@+id/textViewLoginTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loginTitle"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="97dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/textViewLoginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginTitle"
+            android:textColor="?attr/colorControlHighlight"
+            android:textSize="@dimen/txtMainTitleSize"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLoginVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLoginVertical5"
+            app:layout_constraintTop_toTopOf="@+id/guidelineLoginHorizontal20"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/editTxtLoginEmail"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_marginTop="48dp"
+            android:padding="10dip"
+            android:hint="@string/loginEmail"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/style_edittext"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLoginTitle" />
+
+        <EditText
+            android:id="@+id/editTxtLoginPassword"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_marginTop="15dp"
+            android:padding="10dip"
+            android:hint="@string/loginPassword"
+            android:inputType="textPassword"
+            android:background="@drawable/style_edittext"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTxtLoginEmail" />
+
+        <Button
+            android:id="@+id/btnLoginLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="?attr/colorControlActivated"
+            android:text="@string/loginSubmitButton"
+            android:textColor="?android:solidColor"
+            android:textSize="@dimen/txtButtonSize"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTxtLoginPassword" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLoginLogin"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/txtLoginRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="@string/loginRegister"
+                android:textColor="?android:textColor"
+                android:textSize="@dimen/txtParagraphSize" />
+
+            <TextView
+                android:id="@+id/btnTxtLoginRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="?attr/buttonTint"
+                android:gravity="center"
+                android:text="@string/loginRegisterButton"
+                android:textColor="?android:textColor"
+                android:textSize="@dimen/txtParagraphSize" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtLoginForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginForgotPassword"
+            android:textColor="?android:textColor"
+            android:textSize="@dimen/txtParagraphSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutLogin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLoginHorizontal20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="@dimen/guideline20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLoginVertical5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLoginVertical95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/guideline95" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
