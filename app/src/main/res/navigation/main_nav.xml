@@ -10,41 +10,59 @@
         android:name="team.ya.c.grupo1.dogit.fragments.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" >
+
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment"
             app:popUpTo="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.FavoritesFragment"
         android:label="@string/favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+
+        <action
+            android:id="@+id/action_favoritesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:popUpTo="@id/favoritesFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/configFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.ConfigFragment"
         android:label="@string/config"
         tools:layout="@layout/fragment_config" />
+
     <fragment
         android:id="@+id/adoptionFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.AdoptionFragment"
         android:label="@string/adoption"
-        tools:layout="@layout/fragment_adoption" />
+        tools:layout="@layout/fragment_adoption" >
+
+        <action
+            android:id="@+id/action_adoptionFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:popUpTo="@id/adoptionFragment"/>
+    </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/publicationFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.PublicationFragment"
         android:label="@string/publication"
         tools:layout="@layout/fragment_publication" />
+
     <fragment
         android:id="@+id/detailsFragment"
         android:name="team.ya.c.grupo1.dogit.fragments.DetailsFragment"
-        android:label="fragment_details"
+        android:label="@string/details"
         tools:layout="@layout/fragment_details" >
 
         <argument

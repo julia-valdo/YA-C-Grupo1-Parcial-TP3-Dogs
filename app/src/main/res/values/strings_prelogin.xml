@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Prelogin_header">Adopción de Perritos</string>
-    <string name="Prelogin_description">Make your life more happy with us to have a little new friends</string>
-    <string name="Prelogin_getStarted">Get Started</string>
+    <string name="prelogin_header">Adopción de Perritos</string>
+    <string name="prelogin_description">Make your life more happy with us to have a little new friends</string>
+    <string name="prelogin_getStarted">Get Started</string>
 </resources>

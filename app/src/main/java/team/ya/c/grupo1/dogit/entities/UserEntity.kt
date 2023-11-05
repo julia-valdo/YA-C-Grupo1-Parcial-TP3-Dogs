@@ -5,8 +5,8 @@ import android.os.Parcelable
 import java.util.ArrayList
 
 data class UserEntity(var firstName: String, var surname: String, var email: String,
-                 var birthDate: String, var gender: String, var telephoneNumber: String,
-                 var address: String, var uuid: String, var favoriteDogs: MutableList<DogEntity>, var adoptedDogs: MutableList<DogEntity>) : Parcelable {
+                    var profileImage: String, var telephoneNumber: String, var uuid: String,
+                    var favoriteDogs: MutableList<String>, var adoptedDogs: MutableList<String>) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -15,26 +15,22 @@ data class UserEntity(var firstName: String, var surname: String, var email: Str
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.createTypedArrayList(DogEntity.CREATOR) ?: mutableListOf<DogEntity>(),
-        parcel.createTypedArrayList(DogEntity.CREATOR) ?: mutableListOf<DogEntity>()
+        parcel.createStringArrayList()!!,
+        parcel.createStringArrayList()!!
     )
     constructor() : this("", "", "",
-                                    "", "", "",
-                                    "", "", mutableListOf<DogEntity>(), mutableListOf<DogEntity>())
+                        "", "", "",
+                        mutableListOf<String>(), mutableListOf<String>())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(firstName)
         parcel.writeString(surname)
         parcel.writeString(email)
-        parcel.writeString(birthDate)
-        parcel.writeString(gender)
+        parcel.writeString(profileImage)
         parcel.writeString(telephoneNumber)
-        parcel.writeString(address)
         parcel.writeString(uuid)
-        parcel.writeTypedList(favoriteDogs)
-        parcel.writeTypedList(adoptedDogs)
+        parcel.writeStringList(favoriteDogs)
+        parcel.writeStringList(adoptedDogs)
     }
 
     override fun describeContents(): Int {
