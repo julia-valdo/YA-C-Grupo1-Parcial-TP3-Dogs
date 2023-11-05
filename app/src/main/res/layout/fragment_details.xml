@@ -11,7 +11,7 @@
         android:id="@+id/imgDetailsDog1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         tools:src="@tools:sample/avatars" />
