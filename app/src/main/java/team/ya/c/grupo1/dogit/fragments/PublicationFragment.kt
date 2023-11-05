@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.databinding.FragmentPublicationBinding
 import team.ya.c.grupo1.dogit.entities.DogEntity
+import java.util.Date
 import java.util.UUID
 
 class PublicationFragment : Fragment() {
@@ -154,12 +155,14 @@ class PublicationFragment : Fragment() {
         val id = UUID.randomUUID().toString()
         val adopterEmail = ""
         val ownerEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
+        val publicationDate = Date()
 
         if (subrace == resources.getString(R.string.publicationSelectSubrace)){
             subrace = ""
         }
 
-        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail, ownerEmail)
+        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images,
+            adopterName, id, mutableListOf<String>(), adopterEmail, ownerEmail, publicationDate)
 
         return if (validateFields(dog)) dog else null
     }

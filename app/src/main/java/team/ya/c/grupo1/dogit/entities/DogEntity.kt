@@ -2,10 +2,14 @@ package team.ya.c.grupo1.dogit.entities
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.Date
 
 data class DogEntity (var name: String, var race: String, var subrace: String, var age: Int,
                       var gender: String, var description: String, var weight: Double, var location: String,
-                      var images: MutableList<String>, var adopterName: String, var id: String, var followers: MutableList<String>, var adopterEmail: String, var ownerEmail: String) : Parcelable {
+                      var images: MutableList<String>, var adopterName: String, var id: String,
+                      var followers: MutableList<String>, var adopterEmail: String, var ownerEmail: String,
+                        var publicationDate: Date
+) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -21,10 +25,11 @@ data class DogEntity (var name: String, var race: String, var subrace: String, v
         parcel.readString()!!,
         parcel.createStringArrayList()!!,
         parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString()!!,
+        Date(parcel.readLong())
     )
 
-    constructor() : this("", "", "", 0, "", "", 0.0, "", ArrayList(), "","",ArrayList(),"", "")
+    constructor() : this("", "", "", 0, "", "", 0.0, "", ArrayList(), "","",ArrayList(),"", "", Date())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
@@ -42,6 +47,7 @@ data class DogEntity (var name: String, var race: String, var subrace: String, v
         parcel.writeList(followers)
         parcel.writeString(adopterEmail)
         parcel.writeString(ownerEmail)
+        parcel.writeLong(publicationDate.time)
     }
 
     override fun describeContents(): Int {
