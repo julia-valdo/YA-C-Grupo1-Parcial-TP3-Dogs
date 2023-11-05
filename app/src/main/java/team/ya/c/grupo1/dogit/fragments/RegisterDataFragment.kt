@@ -96,7 +96,8 @@ class RegisterDataFragment : Fragment() {
                             "surname" to user.surname,
                             "email" to email,
                             "telephoneNumber" to user.telephoneNumber,
-                            "uuid" to user.uuid
+                            "uuid" to user.uuid,
+                            "profileImage" to ""
                         ))
                     findNavController().navigate(R.id.action_registerDataFragment_to_loginFragment)
                 }
