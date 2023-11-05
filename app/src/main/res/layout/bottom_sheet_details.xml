@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/bottomSheetDetailsMargin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,20 +45,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtDetailsBottomSheetName"
-                        android:text="Nombre"/>
-                    <TextView
+                        android:text="Nombre"
+                        android:textSize="@dimen/txtSecondaryTitleSize"/>
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txtDetailsBottomSheetLocation"
-                        android:text="ubicacion"/>
-
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_location_on_24"
+                            android:layout_marginRight="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtDetailsBottomSheetLocation"
+                            android:text="ubicacion"/>
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <include layout="@layout/info_box"
                             android:id="@+id/infoBoxDetailsBottomSheetGender"/>
-                        <include layout="@layout/info_box"
+                            <include layout="@layout/info_box"
                             android:id="@+id/infoBoxDetailsBottomSheetWeight"/>
 
                     </LinearLayout>
@@ -68,6 +78,8 @@
                     android:layout_height="wrap_content"
                     android:text="Edad"
                     android:layout_weight="1"
+                    android:layout_marginTop="@dimen/bottomSheetDetailsTxtMarginTop"
+                    android:textSize="@dimen/txtParagraphSize"
                     android:id="@+id/txtDetailsBottomSheetAge"/>
 
             </LinearLayout>
@@ -78,27 +90,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="dueño"
-                    android:layout_weight="2"
+                    android:layout_weight="10"
+                    android:textSize="@dimen/txtParagraphSize"
                     android:id="@+id/txtDetailsBottomSheetOwner"/>
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="icono celular"
+                    android:src="@drawable/baseline_local_phone_24"
                     android:layout_weight="1"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="descripcion"
-                android:id="@+id/txtDetailsBottomSheetDescription"/>
+                android:id="@+id/txtDetailsBottomSheetDescription"
+                android:textColor="@color/grey"/>
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:text="Adoptame :((("
+                android:text="Adoptar"
                 android:layout_below="@+id/llBottomSheetDetail"
-                android:id="@+id/btnBottomSheetDetailsAdopt"/>
+                android:id="@+id/btnBottomSheetDetailsAdopt"
+                android:textColor="@color/white"
+                android:background="@drawable/style_button"/>
 
         </LinearLayout>
     </ScrollView>

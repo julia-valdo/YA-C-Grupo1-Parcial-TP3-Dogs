@@ -67,4 +67,10 @@
     <dimen name="iconAddHeight">50dp</dimen>
     <dimen name="marginLeftIcon">5dp</dimen>
 
+    <!-- BottomSheet -->
+    <dimen name="bottomSheetDetailsHeight">300dp</dimen>
+    <dimen name="bottomSheetDetailsWidth">match_parent</dimen>
+    <dimen name="bottomSheetDetailsMargin">18dp</dimen>
+    <dimen name="bottomSheetDetailsInfoBoxMarginLeft">18dp</dimen>
+    <dimen name="bottomSheetDetailsTxtMarginTop">15dp</dimen>
 </resources>

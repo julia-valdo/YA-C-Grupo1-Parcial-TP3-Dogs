@@ -56,7 +56,9 @@ class DetailsFragment : Fragment() {
         binding.DetailsBottomSheet.txtDetailsBottomSheetDescription.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.description
         binding.DetailsBottomSheet.txtDetailsBottomSheetLocation.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.location
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.weight.toString()
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxLabel.text = "Weight"
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.gender
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = "Sex"
 
         loadImage()
     }
