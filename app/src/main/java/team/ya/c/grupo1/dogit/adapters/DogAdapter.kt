@@ -33,9 +33,8 @@ class DogAdapter (
             holder.setImage(model.images[0])
         }
 
-        holder.getContainer().setOnClickListener {
+        holder.getImgContainer().setOnClickListener {
             onItemClick.onViewItemDetail(model)
         }
     }
-
 }
