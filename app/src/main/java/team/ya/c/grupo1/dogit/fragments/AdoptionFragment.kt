@@ -75,8 +75,15 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
                     .get()
                     .addOnSuccessListener { document ->
                         if (document.contains("adoptedDogs")){
-                            val adoptedDogs = (document.get("adoptedDogs") as List<*>).filterIsInstance<String>()
-                            setupRecyclerView(adoptedDogs)
+                            val adoptedDogs = document.get("adoptedDogs") as List<*>
+
+                            if (adoptedDogs.isEmpty()) {
+                                binding.progressBarAdoption.visibility = View.GONE
+                                Toast.makeText(context, resources.getString(R.string.adoptionListIsEmpty), Toast.LENGTH_SHORT).show()
+                                return@addOnSuccessListener
+                            }
+
+                            setupRecyclerView(adoptedDogs.filterIsInstance<String>())
                         } else {
                             Toast.makeText(context, resources.getString(R.string.adoptionLoadingDogsFailed), Toast.LENGTH_SHORT).show()
                             binding.progressBarAdoption.visibility = View.GONE
