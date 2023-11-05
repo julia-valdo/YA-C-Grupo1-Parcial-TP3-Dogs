@@ -64,6 +64,7 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
         binding.progressBarAdoption.visibility = View.VISIBLE
         binding.progressBarAdoptionBottom.visibility = View.GONE
         setupRecyclerView()
+        setupSwipeRefreshSettings()
     }
 
     private fun setupRecyclerView() {
@@ -125,6 +126,13 @@ class AdoptionFragment : Fragment(), OnViewItemClickedListener {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupSwipeRefreshSettings() {
+        binding.swipeRefreshAdoption.setOnRefreshListener {
+            dogAdapter.refresh()
+            binding.swipeRefreshAdoption.isRefreshing = false
         }
     }
 }
