@@ -136,8 +136,9 @@ class PublicationFragment : Fragment() {
         val subrace = binding.spinnerPublicationDogSubrace.selectedItem.toString()
         val description = binding.editTxtPublicationDogDescription.text.toString()
         val id = UUID.randomUUID().toString()
+        val adopterEmail = ""
 
-        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id)
+        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail)
 
         return if (validateFields(dog)) dog else null
     }

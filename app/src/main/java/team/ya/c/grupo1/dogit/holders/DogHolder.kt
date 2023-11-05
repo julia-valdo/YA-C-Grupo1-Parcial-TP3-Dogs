@@ -15,8 +15,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
-import team.ya.c.grupo1.dogit.listeners.OnViewItemClickedListener
 import javax.annotation.Nullable
 
 class DogHolder (v: View) : RecyclerView.ViewHolder(v) {
@@ -82,18 +82,34 @@ class DogHolder (v: View) : RecyclerView.ViewHolder(v) {
             .into(imgDog);
     }
 
-    fun setFavorite() {
-        val user = FirebaseAuth.getInstance().currentUser
-        // TODO: if user tiene el perro en favoritos:
-        val isFavorite = true
+    fun setFavorite(followers: MutableList<String>, idDog: String) {
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email?:return
 
         val imgFavorite = this.view.findViewById<ImageView>(R.id.btnCardItemDogFollow)
-        if (isFavorite) {
+        if(followers.contains(userEmail))
             imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
-        } else {
+        else
             imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
-        }
 
+        imgFavorite.setOnClickListener {
+            if (followers.contains(userEmail)) {
+                Toast.makeText(view.context, "Se ha eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
+                followers.remove(userEmail)
+            } else {
+                Toast.makeText(view.context, "Se ha añadido a favoritos", Toast.LENGTH_SHORT).show()
+                imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
+                followers.add(userEmail!!)
+            }
+            updateDogFollowers(followers, idDog)
+        }
+    }
+
+    private fun updateDogFollowers(followers: MutableList<String>, idDog: String) {
+        FirebaseFirestore.getInstance()
+            .collection("dogs")
+            .document(idDog)
+            .update("followers", followers)
     }
 
     fun getImgContainer() : View {
