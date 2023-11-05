@@ -16,8 +16,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.mikhaellopez.circularimageview.CircularImageView
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import team.ya.c.grupo1.dogit.R
@@ -129,11 +127,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationViewHeaderVariables(){
-        val currentUser = FirebaseAuth.getInstance().currentUser?: return
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email?: return
 
         FirebaseFirestore.getInstance()
             .collection("users")
-            .document(currentUser.email!!)
+            .document(userEmail)
             .get()
             .addOnSuccessListener {
                 safeActivityCall {
@@ -150,7 +148,6 @@ class MainActivity : AppCompatActivity() {
                         imgProfileImage.setImageResource(R.drawable.img_avatar)
                         return@safeActivityCall
                     }
-
 
                     Glide.with(this)
                         .load(profileImage)
