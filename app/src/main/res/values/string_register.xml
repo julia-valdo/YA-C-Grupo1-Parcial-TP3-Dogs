@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="registerRegister">Registrate</string>
+    <string name="registerRegisterData">Rellená tus datos</string>
+    <string name="registerName">Nombre</string>
+    <string name="registerLastname">Apellido</string>
+    <string name="registerEmail">Correo electrónico</string>
+    <string name="registerPhone">Teléfono</string>
+    <string name="registerPassword">Contraseña</string>
+    <string name="registerConfirmPassword">Confirmar contraseña</string>
+    <string name="registerRegisterButton">Registrarse</string>
+    <string name="registerContinue">Continuar</string>
+    <string name="registerEmailSent">Email de verificación enviado</string>
+
+    <!-- Error management -->
+    <string name="registerNameError">Ingrese su nombre</string>
+    <string name="registerSurnameError">Ingrese su apellido</string>
+    <string name="registerPhoneError">Ingrese su número de teléfono</string>
+    <string name="registerPhoneFormatError">El número de teléfono debe tener 10 cáracteres</string>
+    <string name="registerGenericError">Error, algo salió mal :(</string>
+    <string name="registerEmailSentError">Error al enviar mensaje de validación</string>
+    <string name="registerWrongFormat">Email o contraseña con formato inválido. Recuerde que la contraseña debe ser alfanumérica</string>
+</resources>

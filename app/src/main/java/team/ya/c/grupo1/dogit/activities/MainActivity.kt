@@ -82,28 +82,28 @@ class MainActivity : AppCompatActivity() {
                     binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
                 }
             }
-         }
+        }
 
         binding.toolbarMainActivity.setNavigationOnClickListener {
-             when {
-                 binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
-                     binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
-                     binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
-                 }
+            when {
+                binding.drawerLayoutMainActivity.isDrawerOpen(GravityCompat.START) -> {
+                    binding.drawerLayoutMainActivity.closeDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_hambuger_menu)
+                }
 
-                 navController.currentDestination?.id in drawerFragmentIds -> {
-                     navController.navigateUp()
-                 }
+                navController.currentDestination?.id in drawerFragmentIds -> {
+                    navController.navigateUp()
+                }
 
-                 navController.currentDestination?.id == R.id.detailsFragment -> {
-                     navController.navigateUp()
-                 }
+                navController.currentDestination?.id == R.id.detailsFragment -> {
+                    navController.navigateUp()
+                }
 
-                 else -> {
-                     binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
-                     binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
-                 }
-             }
+                else -> {
+                    binding.drawerLayoutMainActivity.openDrawer(GravityCompat.START)
+                    binding.toolbarMainActivity.setNavigationIcon(R.drawable.icon_back)
+                }
+            }
         }
 
         binding.drawerLayoutMainActivity.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
