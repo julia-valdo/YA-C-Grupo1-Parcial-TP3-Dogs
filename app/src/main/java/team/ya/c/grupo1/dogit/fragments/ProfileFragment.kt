@@ -67,12 +67,14 @@ class ProfileFragment : Fragment() {
 
         userRef.update(data)
             .addOnSuccessListener {
-                binding.editTxtPublicationDogName.visibility = View.GONE
-                binding.profileBtnSavePhoto.visibility = View.GONE
-                binding.profileBtnAddPhoto.visibility = View.VISIBLE
-                replaceData()
-                (activity as MainActivity).updateProfileImage()
-                Toast.makeText(view.context, resources.getString(R.string.profileUploadImageSuccess), Toast.LENGTH_LONG).show()
+                safeAccessBinding {
+                    binding.editTxtPublicationDogName.visibility = View.GONE
+                    binding.profileBtnSavePhoto.visibility = View.GONE
+                    binding.profileBtnAddPhoto.visibility = View.VISIBLE
+                    replaceData()
+                    (activity as MainActivity).updateProfileImage()
+                    Toast.makeText(view.context, resources.getString(R.string.profileUploadImageSuccess), Toast.LENGTH_LONG).show()
+                }
             }
             .addOnFailureListener {
                 Toast.makeText(view.context, resources.getString(R.string.profileUploadImageError), Toast.LENGTH_LONG).show()
@@ -94,7 +96,7 @@ class ProfileFragment : Fragment() {
             .document(userEmail)
             .get()
             .addOnSuccessListener {
-                safeActivityCall {
+                safeAccessBinding {
                     binding.profileTxtName.text = it.getString("firstName")
                     val profileImage = it.getString("profileImage")
 
@@ -107,15 +109,12 @@ class ProfileFragment : Fragment() {
                             .error(R.drawable.img_avatar)
                             .into(binding.profileImg)
                     }
-
                 }
             }
     }
 
-    private fun safeActivityCall(action: () -> Unit) {
-       val activity = requireActivity() as MainActivity
-
-        if (!activity.isFinishing && !activity.isDestroyed) {
+    private fun safeAccessBinding(action: () -> Unit) {
+        if (_binding != null && context != null) {
             action()
         }
     }
