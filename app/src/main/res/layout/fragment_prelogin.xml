@@ -55,14 +55,13 @@
         android:textSize="@dimen/txtButtonSize"
         android:textStyle="bold"
         android:drawablePadding="10dp"
-        android:padding="10dp"
-        android:background="@drawable/style_button_prelogin"
+        android:padding="@dimen/buttonTextPadding"
+        android:background="@drawable/style_button"
         android:textColor="?android:solidColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPreloginMain"
-        app:layout_constraintVertical_bias="0.734" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPreloginMain" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinePreloginHorizontal60"

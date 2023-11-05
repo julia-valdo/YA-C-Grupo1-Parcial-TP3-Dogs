@@ -58,9 +58,7 @@ class RegisterDataFragment : Fragment() {
             email,
             "",
             binding.txtRegisterDataPhone.text.toString(),
-            "",
-            mutableListOf(),
-            mutableListOf()
+            ""
         )
     }
 

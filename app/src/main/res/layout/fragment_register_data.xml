@@ -83,6 +83,8 @@
             android:textColor="?android:solidColor"
             android:textSize="@dimen/txtButtonSize"
             android:textStyle="bold"
+            android:padding="@dimen/buttonTextPadding"
+            android:background="@drawable/style_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataPhone" />
