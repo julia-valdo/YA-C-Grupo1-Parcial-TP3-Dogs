@@ -11,14 +11,12 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
-import team.ya.c.grupo1.dogit.activities.MainActivity
-import team.ya.c.grupo1.dogit.databinding.FragmentHomeBinding
 import team.ya.c.grupo1.dogit.databinding.FragmentPublicationBinding
 import team.ya.c.grupo1.dogit.entities.DogEntity
 import java.util.UUID
@@ -155,12 +153,13 @@ class PublicationFragment : Fragment() {
         val description = binding.editTxtPublicationDogDescription.text.toString()
         val id = UUID.randomUUID().toString()
         val adopterEmail = ""
+        val ownerEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
 
         if (subrace == resources.getString(R.string.publicationSelectSubrace)){
             subrace = ""
         }
 
-        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail)
+        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images, adopterName, id, mutableListOf<String>(), adopterEmail, ownerEmail)
 
         return if (validateFields(dog)) dog else null
     }
