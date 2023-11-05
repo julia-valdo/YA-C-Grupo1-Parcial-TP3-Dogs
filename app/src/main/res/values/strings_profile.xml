@@ -2,5 +2,10 @@
 <resources>
 
     <string name="profileBtnUploadImage">Subir Foto</string>
+    <string name="profileBtnUploadImageSave">Guardar cambios</string>
+    <string name="profileTextEditProfileImage">URL de la imagen</string>
+    <string name="profileUploadImageSuccess">¡Imagen actualizada con éxito!</string>
+    <string name="profileUploadImageError">Error al actualizar la imagen</string>
+    <string name="profileCompleteEditTextError">¡Debes completar el campo de imagen!</string>
 
 </resources>
