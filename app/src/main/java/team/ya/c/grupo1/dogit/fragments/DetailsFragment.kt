@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.activities.MainActivity
@@ -21,6 +25,7 @@ class DetailsFragment : Fragment() {
     private lateinit var bottomSheetBehavior : BottomSheetBehavior<View>
     private var imgIndex : Int = 0
     private var cantImg : Int = 0
+    private lateinit var adoptBtn : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +67,12 @@ class DetailsFragment : Fragment() {
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = "Sex"
 
         loadImages()
+
+        adoptBtn = view.findViewById(R.id.btnBottomSheetDetailsAdopt)
+
+        if (DetailsFragmentArgs.fromBundle(requireArguments()).dog.adopterEmail != "") {
+            adoptBtn.visibility = View.GONE
+        }
     }
 
     private fun prepareBottomSheet(){
@@ -158,7 +169,38 @@ class DetailsFragment : Fragment() {
                 changeImage()
             }
         }
+
+        adoptBtn.setOnClickListener {
+            adoptDog()
+        }
     }
+
+    private fun adoptDog(){
+        val dog = DetailsFragmentArgs.fromBundle(requireArguments()).dog
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email?: return
+
+        val db = FirebaseFirestore.getInstance()
+        val query = db.collection("users").document(userEmail)
+
+        query.get()
+            .addOnSuccessListener {
+                val documentUser = it.data ?: return@addOnSuccessListener
+
+                val name = documentUser["firstName"].toString() + " " + documentUser["surname"].toString()
+                dog.adopterName = name
+                db.collection("dogs").document(dog.id).update("adopterName", dog.adopterName)
+                db.collection("dogs").document(dog.id).update("adopterEmail", userEmail)
+
+                val text = resources.getString(R.string.detailsDogAdopted).replace("{dogName}", dog.name)
+                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
+
+                adoptBtn.visibility = View.GONE
+            }
+            .addOnFailureListener {
+                Toast.makeText(activity, resources.getString(R.string.detailsDogAdoptedFailed), Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun changeImage(){
         try{
             Glide.with(view.context)

@@ -18,7 +18,7 @@
             android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
             android:layout_margin="@dimen/drawerMainNavHeaderProfilePictureMargin"
             android:src="@drawable/img_avatar"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:layout_width="match_parent"
