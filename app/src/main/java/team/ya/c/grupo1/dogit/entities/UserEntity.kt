@@ -5,8 +5,7 @@ import android.os.Parcelable
 import java.util.ArrayList
 
 data class UserEntity(var firstName: String, var surname: String, var email: String,
-                    var profileImage: String, var telephoneNumber: String, var uuid: String,
-                    var favoriteDogs: MutableList<String>, var adoptedDogs: MutableList<String>) : Parcelable {
+                    var profileImage: String, var telephoneNumber: String, var uuid: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -14,13 +13,10 @@ data class UserEntity(var firstName: String, var surname: String, var email: Str
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.createStringArrayList()!!,
-        parcel.createStringArrayList()!!
+        parcel.readString()!!
     )
     constructor() : this("", "", "",
-                        "", "", "",
-                        mutableListOf<String>(), mutableListOf<String>())
+                        "", "", "")
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(firstName)
@@ -29,8 +25,6 @@ data class UserEntity(var firstName: String, var surname: String, var email: Str
         parcel.writeString(profileImage)
         parcel.writeString(telephoneNumber)
         parcel.writeString(uuid)
-        parcel.writeStringList(favoriteDogs)
-        parcel.writeStringList(adoptedDogs)
     }
 
     override fun describeContents(): Int {
