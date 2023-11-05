@@ -11,4 +11,10 @@
         android:id="@id/configFragment"
         android:icon="@drawable/icon_configuration"
         android:title="@string/config" />
+
+    <item
+        android:id="@+id/drawerNavMenuLogout"
+        android:icon="@drawable/icon_logout"
+        android:title="@string/logout"
+        android:itemTextAppearance="@color/purple" />
 </menu>
