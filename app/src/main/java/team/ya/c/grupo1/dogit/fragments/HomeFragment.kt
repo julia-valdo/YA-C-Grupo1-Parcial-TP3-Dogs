@@ -74,6 +74,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
 
     private fun setupVariables() {
         binding.progressBarHome.visibility = View.VISIBLE
+        binding.progressBarHomeBottom.visibility = View.GONE
         setupRecyclerView()
         setupRecyclerFilterBreed()
         setupSwipeRefreshSettings()
@@ -111,17 +112,21 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                         binding.progressBarHome.visibility = View.GONE
                     }
                     is LoadState.Error -> {
-                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, resources.getString(R.string.homeLoadingDogsFailed), Toast.LENGTH_SHORT).show()
+                        binding.progressBarHome.visibility = View.GONE
                     }
                 }
 
                 when(loadStates.append){
                     is LoadState.Loading -> {
+                        binding.progressBarHomeBottom.visibility = View.VISIBLE
                     }
                     is LoadState.NotLoading -> {
+                        binding.progressBarHomeBottom.visibility = View.GONE
                     }
                     is LoadState.Error -> {
-                        Toast.makeText(context, resources.getString(R.string.home_loading_dogs_failed), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, resources.getString(R.string.homeLoadingDogsFailed), Toast.LENGTH_SHORT).show()
+                        binding.progressBarHomeBottom.visibility = View.GONE
                     }
                 }
             }

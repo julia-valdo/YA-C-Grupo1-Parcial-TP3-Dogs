@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentRegisterData"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.RegisterDataFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutRegisterData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtRegisterDataTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="@string/registerRegisterData"
+            android:textColor="?attr/colorControlHighlight"
+            android:textSize="@dimen/txtMainTitleSize"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineRegisterHorizontal20" />
+
+        <EditText
+            android:id="@+id/txtRegisterDataName"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_weight="1"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/registerName"
+            android:inputType="text"
+            android:padding="5dip"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataTitle"/>
+
+        <EditText
+            android:id="@+id/txtRegisterDataSurname"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/registerLastname"
+            android:inputType="text"
+            android:padding="5dip"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataName"/>
+
+        <EditText
+            android:id="@+id/txtRegisterDataPhone"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/style_edittext"
+            android:inputType="phone"
+            android:hint="@string/registerPhone"
+            android:padding="5dip"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataSurname"/>
+
+        <Button
+            android:id="@+id/btnRegisterDataRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="?attr/colorControlActivated"
+            android:text="@string/registerRegisterButton"
+            android:textColor="?android:solidColor"
+            android:textSize="@dimen/txtButtonSize"
+            android:textStyle="bold"
+            android:padding="@dimen/buttonTextPadding"
+            android:background="@drawable/style_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRegisterDataPhone" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterHorizontal20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="@dimen/guideline20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterVertical5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterVertical95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/guideline95" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

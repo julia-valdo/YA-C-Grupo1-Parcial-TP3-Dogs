@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home_loading_dogs_failed">Hubo un error al cargar los perros!</string>
-    <string name="home_filter_text">Filtros</string>
-    <string name="home_search_filter">Buscador</string>
+    <string name="homeFilterText">Filtros</string>
+    <string name="homeSearchFilter">Buscador</string>
+    <string name="homeLoadingDogsFailed">Hubo un error al cargar los perros!</string>
 </resources>

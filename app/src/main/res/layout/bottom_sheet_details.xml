@@ -1,64 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_sheet_details"
     android:background="@drawable/bottom_sheet_details_bg"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="50dp">
-
+    app:behavior_peekHeight="30dp"
+    app:layout_constrainedHeight="true"
+    android:maxHeight="500dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/horizontal_line_bottom_sheet"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/imgBottomSheetDetailsHorizontalLine"
+        android:layout_width="150dp"
+        android:paddingTop="1dp"
+        android:layout_height="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/baseline_horizontal_rule_24"
-        />
+        android:src="@drawable/bottom_sheet_details_line"
+        android:tint="?attr/colorControlHighlight"/>
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="Bottom Sheet"
-        android:textAlignment="center"
-        android:id="@+id/header_bottom_sheet"
-        android:textSize="25sp"
-        android:background="@color/grey"
-        android:layout_below="@+id/horizontal_line_bottom_sheet"/>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/header_bottom_sheet"
-        android:layout_marginTop="30dp"
-        android:gravity="center">
-
-        <TextView
+        android:layout_below="@+id/imgBottomSheetDetailsHorizontalLine">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="input1"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="input2"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"/>
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adoptame :((("
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:id="@+id/llBottomSheetDetail">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtDetailsBottomSheetName"
+                        android:text="Nombre"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtDetailsBottomSheetLocation"
+                        android:text="ubicacion"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <include layout="@layout/info_box"
+                            android:id="@+id/infoBoxDetailsBottomSheetGender"/>
+                        <include layout="@layout/info_box"
+                            android:id="@+id/infoBoxDetailsBottomSheetWeight"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edad"
+                    android:layout_weight="1"
+                    android:id="@+id/txtDetailsBottomSheetAge"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dueño"
+                    android:layout_weight="2"
+                    android:id="@+id/txtDetailsBottomSheetOwner"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="icono celular"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="descripcion"
+                android:id="@+id/txtDetailsBottomSheetDescription"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:text="Adoptame :((("
+                android:layout_below="@+id/llBottomSheetDetail"
+                android:id="@+id/btnBottomSheetDetailsAdopt"/>
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

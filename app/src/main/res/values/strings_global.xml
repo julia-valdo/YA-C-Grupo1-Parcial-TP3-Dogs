@@ -6,4 +6,6 @@
     <string name="publication">Publicación</string>
     <string name="config">Configuración</string>
     <string name="profile">Perfil</string>
+    <string name="details">Detalles</string>
+    <string name="logout">Cerrar sesión</string>
 </resources>

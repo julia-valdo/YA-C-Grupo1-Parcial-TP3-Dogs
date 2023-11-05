@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="profileBtnUploadImage">Subir Foto</string>
-
+    <string name="drawerMainNavHeaderHello">Hola</string>
 </resources>

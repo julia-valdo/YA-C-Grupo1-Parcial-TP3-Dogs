@@ -18,7 +18,7 @@
             android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
             android:layout_margin="@dimen/drawerMainNavHeaderProfilePictureMargin"
             android:src="@drawable/img_avatar"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,17 +30,16 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="Hola"
-                android:textSize="@dimen/txt_paragraph_size" />
+                android:text="@string/drawerMainNavHeaderHello"
+                android:textSize="@dimen/txtParagraphSize" />
 
             <TextView
                 android:id="@+id/txtDrawerMainNavHeaderUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Martín"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:textSize="@dimen/txt_secondary_title_size" />
+                android:textSize="@dimen/txtSecondaryTitleSize" />
         </LinearLayout>
     </LinearLayout>
 

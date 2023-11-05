@@ -21,7 +21,7 @@
         android:id="@+id/AutoCompleteTextViewBreedSearch"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:hint="@string/home_search_filter"
+        android:hint="@string/homeSearchFilter"
         android:textSize="15dp"
         android:paddingStart="16dp"
         android:background="@drawable/style_search_home"
@@ -35,8 +35,8 @@
         android:id="@+id/textHomeFilterBreed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/home_filter_text"
-        android:textSize="@dimen/txt_secondary_title_size"
+        android:text="@string/homeFilterText"
+        android:textSize="@dimen/txtSecondaryTitleSize"
         app:layout_constraintBottom_toTopOf="@+id/recyclerFilterBreed"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
         app:layout_constraintTop_toBottomOf="@+id/AutoCompleteTextViewBreedSearch" />
@@ -57,7 +57,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:background="@drawable/style_button_profile"
+        android:background="@drawable/style_button"
         android:gravity="center"
         android:src="@drawable/search"
         app:layout_constraintBottom_toTopOf="@+id/textHomeFilterBreed"
@@ -71,8 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal20"
-        >
+        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal20">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerHomeDogs"
@@ -81,33 +80,42 @@
             app:layout_constraintTop_toBottomOf="@+id/guidelineHomeVertical5" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarHomeBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5" />
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeHorizontal5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeHorizontal20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline_25" />
+        app:layout_constraintGuide_percent="@dimen/guideline25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_5" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline_95" />
-
+        app:layout_constraintGuide_percent="@dimen/guideline95" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

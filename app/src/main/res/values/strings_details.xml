@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detailsDogAdopted">Felicitaciones por adoptar a {dogName}</string>
+    <string name="detailsDogAdoptedFailed">Ahora {dogName} es parte de tu familia</string>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="publicationDogName">Nombre de la mascota</string>
+    <string name="publicationDogUbication">Ubicación</string>
+    <string name="publicationDogAge">Edad</string>
+    <string name="publicationDogWeight">Peso</string>
+    <string name="publicationDogGender">Sexo</string>
+    <string name="publicationDogPicture1">URL para imagen 1</string>
+    <string name="publicationDogPicture2">URL para imagen 2</string>
+    <string name="publicationDogPicture3">URL para imagen 3</string>
+    <string name="publicationDogPicture4">URL para imagen 4</string>
+    <string name="publicationDogPicture5">URL para imagen 5</string>
+    <string name="publicationDogDescription">Descripción</string>
+    <string name="publicationBtnSave">Guardar</string>
+    <string name="publicationSelectLocation">Ubicación</string>
+    <string name="publicationSelectGender">Sexo</string>
+    <string name="publicationSelectRace">Raza</string>
+    <string name="publicationSelectSubrace">Sub raza</string>
+    <string name="publicationSuccesfulMessage">¡Publicación creada con éxito!</string>
+    <string name="publicationErrorMessage">¡Hubo un error al crear la publicación!</string>
+
+    <string name="publicationErrorName">¡Debes ingresar un nombre!</string>
+    <string name="publicationErrorLocation">¡Debes ingresar una locación!</string>
+    <string name="publicationErrorAge">¡Debes ingresar una edad válida!</string>
+    <string name="publicationErrorWeight">¡Debes ingresar un peso válido!</string>
+    <string name="publicationErrorGender">¡Debes ingresar un género!</string>
+    <string name="publicationErrorImages">¡Debes completar los campos de imagenes!</string>
+    <string name="publicationErrorRace">¡Debes ingresar la raza!</string>
+    <string name="publicationErrorSubrace">¡Debes ingresar la subraza!</string>
+    <string name="publicationErrorDescription">¡Debes ingresar una descripción!</string>
+
+</resources>

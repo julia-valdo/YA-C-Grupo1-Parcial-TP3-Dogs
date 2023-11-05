@@ -2,16 +2,18 @@ package team.ya.c.grupo1.dogit.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.entities.DogEntity
+import team.ya.c.grupo1.dogit.fragments.HomeFragment
 import team.ya.c.grupo1.dogit.holders.DogHolder
 import team.ya.c.grupo1.dogit.listeners.OnViewItemClickedListener
 
-class DogAdapter (
-    options : FirestorePagingOptions<DogEntity>,
-    private val onItemClick : OnViewItemClickedListener
+class DogAdapter(
+    options: FirestorePagingOptions<DogEntity>,
+    private val onItemClick: OnViewItemClickedListener
 ) : FirestorePagingAdapter<DogEntity, DogHolder>(options) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogHolder {
@@ -27,15 +29,14 @@ class DogAdapter (
         holder.setSubRace(model.subrace)
         holder.setAge(model.age)
         holder.setSex(model.gender)
-        holder.setFavorite()
+        holder.setFavorite(model.followers, model.id)
 
         if (model.images.isNotEmpty()) {
             holder.setImage(model.images[0])
         }
 
-        holder.getContainer().setOnClickListener {
+        holder.getImgContainer().setOnClickListener {
             onItemClick.onViewItemDetail(model)
         }
     }
-
 }
