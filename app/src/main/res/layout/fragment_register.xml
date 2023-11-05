@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayoutRegister"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.RegisterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtRegisterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registerRegister"
+            android:textColor="?attr/colorControlHighlight"
+            android:textSize="@dimen/txtMainTitleSize"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toTopOf="@+id/guidelineRegisterHorizontal20" />
+
+        <EditText
+            android:id="@+id/editTxtRegisterEmail"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/loginEmail"
+            android:inputType="textEmailAddress"
+            android:padding="10dip"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/txtRegisterTitle" />
+
+        <EditText
+            android:id="@+id/editTxtRegisterPassword"
+            android:layout_width="@dimen/txtInputWidth"
+            android:layout_height="@dimen/txtInputHeight"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/style_edittext"
+            android:hint="@string/loginPassword"
+            android:inputType="textPassword"
+            android:padding="10dip"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtInputSize"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/editTxtRegisterEmail" />
+
+        <Button
+            android:id="@+id/btnRegisterContinue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="?attr/colorControlActivated"
+            android:text="@string/registerContinue"
+            android:textColor="?android:solidColor"
+            android:textSize="@dimen/txtButtonSize"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRegisterVertical95"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/guidelineRegisterVertical5"
+            app:layout_constraintTop_toBottomOf="@+id/editTxtRegisterPassword" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterHorizontal20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="@dimen/guideline20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterVertical5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRegisterVertical95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/guideline95" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

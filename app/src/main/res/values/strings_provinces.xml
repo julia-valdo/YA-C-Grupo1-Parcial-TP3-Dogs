@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="provinces_array">
+    <string-array name="provincesArray">
         <item>Buenos Aires</item>
         <item>Ciudad Autónoma de Buenos Aires</item>
         <item>Catamarca</item>

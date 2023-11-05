@@ -1,5 +1,6 @@
 package team.ya.c.grupo1.dogit.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -35,7 +36,7 @@ class PublicationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPublicationBinding.inflate(inflater, container, false)
         view = binding.root
         startSpinners()
@@ -71,12 +72,14 @@ class PublicationFragment : Fragment() {
         }
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun removeImgAddPhoto(index: Int) {
         val imgId = resources.getIdentifier("imgPublicationDogAddPhoto$index", "id", requireActivity().packageName)
         val imgToRemove = view.findViewById<ImageView>(imgId)
         imgToRemove.visibility = View.GONE
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun addEditTextPhoto(index: Int) {
         val linearLayoutId = resources.getIdentifier("linearLayoutPublicationDogPhoto$index", "id", requireActivity().packageName)
         val linearLayoutToAdd = view.findViewById<LinearLayout>(linearLayoutId)
@@ -102,19 +105,19 @@ class PublicationFragment : Fragment() {
 
     //TODO: agregar razas y subrazas traidos desde retrofit
     private fun startSpinners(){
-        val provincesList = resources.getStringArray(R.array.provinces_array).toMutableList()
+        val provincesList = resources.getStringArray(R.array.provincesArray).toMutableList()
         val provincesHint = resources.getString(R.string.publicationSelectLocation)
         binding.spinnerPublicationDogUbication.adapter = makeAdapterSpinner(provincesList, provincesHint)
 
-        val genderList = resources.getStringArray(R.array.gender_array).toMutableList()
+        val genderList = resources.getStringArray(R.array.genderArray).toMutableList()
         val genderHint = resources.getString(R.string.publicationSelectGender)
         binding.spinnerPublicationDogGender.adapter = makeAdapterSpinner(genderList, genderHint)
 
-        val raceList = resources.getStringArray(R.array.gender_array).toMutableList()
+        val raceList = resources.getStringArray(R.array.genderArray).toMutableList()
         val raceHint = resources.getString(R.string.publicationSelectRace)
         binding.spinnerPublicationDogRace.adapter = makeAdapterSpinner(raceList, raceHint)
 
-        val subraceList = resources.getStringArray(R.array.gender_array).toMutableList()
+        val subraceList = resources.getStringArray(R.array.genderArray).toMutableList()
         val subraceHint = resources.getString(R.string.publicationSelectSubrace)
         binding.spinnerPublicationDogSubrace.adapter = makeAdapterSpinner(subraceList, subraceHint)
     }
@@ -169,14 +172,14 @@ class PublicationFragment : Fragment() {
         )
 
         for ((property, errorMessage) in fieldsToCheck){
-            if (property.toString().isNullOrEmpty() || property.toString().isBlank()){
+            if (property.toString().isEmpty() || property.toString().isBlank()){
                 Toast.makeText(view.context, errorMessage, Toast.LENGTH_LONG).show()
                 return false
             }
         }
 
         for(image in publication.images) {
-            if (image.isNullOrEmpty() || image.isBlank()){
+            if (image.isEmpty() || image.isBlank()){
                 Toast.makeText(view.context, resources.getString(R.string.publicationErrorImages), Toast.LENGTH_LONG).show()
                 return false
             }
