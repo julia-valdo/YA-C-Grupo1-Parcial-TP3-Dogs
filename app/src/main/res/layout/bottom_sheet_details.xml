@@ -67,7 +67,7 @@
 
                         <include layout="@layout/info_box"
                             android:id="@+id/infoBoxDetailsBottomSheetGender"/>
-                            <include layout="@layout/info_box"
+                        <include layout="@layout/info_box"
                             android:id="@+id/infoBoxDetailsBottomSheetWeight"/>
 
                     </LinearLayout>
@@ -86,13 +86,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imgBottomSheetDetailsProfilePicture"
+                    android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"
+                    android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
+                    android:layout_marginRight="@dimen/drawerMainNavHeaderProfilePictureMargin"
+                    android:src="@drawable/img_avatar"
+                    android:scaleType="centerCrop"/>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="dueño"
-                    android:layout_weight="10"
-                    android:textSize="@dimen/txtParagraphSize"
-                    android:id="@+id/txtDetailsBottomSheetOwner"/>
+                    android:orientation="vertical"
+                    android:layout_weight="10">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dueño"
+                        android:textColor="@color/grey"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dueño"
+                        android:textSize="@dimen/txtParagraphSize"
+                        android:id="@+id/txtDetailsBottomSheetOwner"/>
+                </LinearLayout>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

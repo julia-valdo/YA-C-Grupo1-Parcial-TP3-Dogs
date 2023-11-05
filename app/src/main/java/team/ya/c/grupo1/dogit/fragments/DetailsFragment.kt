@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.firestore.FirebaseFirestore
 import team.ya.c.grupo1.dogit.R
 import team.ya.c.grupo1.dogit.activities.MainActivity
 import team.ya.c.grupo1.dogit.databinding.FragmentDetailsBinding
@@ -60,7 +61,7 @@ class DetailsFragment : Fragment() {
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.gender
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = "Sex"
 
-        loadImage()
+        loadImages()
     }
 
     private fun prepareBottomSheet(){
@@ -84,7 +85,7 @@ class DetailsFragment : Fragment() {
             }
         })
     }
-    private fun loadImage(){
+    private fun loadImages(){
         try{
             Glide.with(view.context)
                 .load(DetailsFragmentArgs.fromBundle(requireArguments()).dog.images[0])
@@ -99,6 +100,42 @@ class DetailsFragment : Fragment() {
             binding.imgDetailsDog1.setOnClickListener{
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
+        }
+        try {
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(DetailsFragmentArgs.fromBundle(requireArguments()).dog.adopterEmail)
+                .get()
+                .addOnSuccessListener {
+                    safeActivityCall {
+                        val profileImage = it.getString("profileImage")
+
+                        if (profileImage == "") {
+                            binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(R.drawable.img_avatar)
+                        } else {
+
+                            Glide.with(view.context)
+                                .load(profileImage)
+                                .placeholder(R.drawable.img_avatar)
+                                .error(R.drawable.img_avatar)
+                                .into(binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture)
+
+                            binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(
+                                R.drawable.img_avatar
+                            )
+                        }
+                    }
+                }
+            } catch (e: Exception){
+                binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(R.drawable.img_avatar)
+            }
+    }
+
+    private fun safeActivityCall(action: () -> Unit) {
+        val activity = requireActivity() as MainActivity
+
+        if (!activity.isFinishing && !activity.isDestroyed) {
+            action()
         }
     }
 
