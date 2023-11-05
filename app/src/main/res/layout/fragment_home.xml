@@ -25,59 +25,66 @@
         android:textSize="15dp"
         android:paddingStart="16dp"
         android:background="@drawable/style_search_home"
-        app:layout_constraintBottom_toTopOf="@+id/textHomeFilterBreed"
+        android:layout_marginTop="@dimen/marginTop30"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal14"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textHomeFilterBreed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/homeFilterText"
-        android:textSize="@dimen/txtSecondaryTitleSize"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerFilterBreed"
-        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toBottomOf="@+id/AutoCompleteTextViewBreedSearch" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFilterBreed"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal20"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toBottomOf="@+id/textHomeFilterBreed" />
 
     <ImageButton
         android:id="@+id/buttonSearchByBreed"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/marginTop20"
         android:background="@drawable/style_button"
         android:gravity="center"
         android:src="@drawable/search"
-        app:layout_constraintBottom_toTopOf="@+id/textHomeFilterBreed"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal14"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textHomeFilterBreed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/homeFilterText"
+        android:textColor="@color/dark_grey"
+        android:layout_marginTop="@dimen/marginTop20"
+        android:textSize="@dimen/txtSecondaryTitleSize"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerFilterBreed"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHomeHorizontal14" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFilterBreed"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/marginTop10"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal25"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/textHomeFilterBreed" />
+
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshHome"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/marginTop10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal20">
+        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal25">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerHomeDogs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/guidelineHomeVertical5" />
+            app:layout_constraintTop_toBottomOf="@+id/swipeRefreshHome"
+          />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
@@ -88,16 +95,21 @@
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHomeHorizontal14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline14" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeHorizontal5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         app:layout_constraintGuide_percent="@dimen/guideline5" />
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHomeHorizontal20"
+        android:id="@+id/guidelineHomeHorizontal25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

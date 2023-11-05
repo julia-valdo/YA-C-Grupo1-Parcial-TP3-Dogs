@@ -14,8 +14,9 @@
 
 
     <dimen name="guideline5">0.05</dimen>
+    <dimen name="guideline14">0.14</dimen>
     <dimen name="guideline15">0.15</dimen>
-    <dimen name="guideline25">0.15</dimen>
+    <dimen name="guideline25">0.25</dimen>
     <dimen name="guideline93">0.93</dimen>
     <dimen name="guideline95">0.95</dimen>
 
@@ -72,6 +73,10 @@
     <dimen name="dividerTopPadding">10dp</dimen>
     <dimen name="dividerBottomPadding">10dp</dimen>
 
+    <!-- Margin -->
+    <dimen name="marginTop30">30dp</dimen>
+    <dimen name="marginTop20">20dp</dimen>
+    <dimen name="marginTop10">10dp</dimen>
     <!-- Icons -->
     <dimen name="iconAddWidth">50dp</dimen>
     <dimen name="iconAddHeight">50dp</dimen>
