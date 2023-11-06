@@ -50,7 +50,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/bottomSheetDetailsSmallMargin"
+                        android:layout_marginVertical="@dimen/bottomSheetDetailsMargin"
                         android:gravity="center_vertical">
                         <ImageView
                             android:layout_width="wrap_content"
@@ -74,32 +74,44 @@
 
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="@dimen/bottomSheetDetailsMargin">
-                    <TextView
+                    android:orientation="vertical">
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/detailsAgeLabel"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/txtParagraphSize"/>
-                    <TextView
+                        android:layout_gravity="end"
+                        android:gravity="right"
+                        android:layout_margin="@dimen/bottomSheetDetailsMargin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="@dimen/cardViewMargin"
+                            android:text="@string/detailsAgeLabel"
+                            android:textSize="@dimen/txtParagraphSize"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detailsAge"
+                            android:textSize="@dimen/txtParagraphSize"
+                            android:id="@+id/txtDetailsBottomSheetAge"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/btnBottomSheetDetailsFollow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/detailsAge"
-                        android:layout_weight="4"
-                        android:textSize="@dimen/txtParagraphSize"
-                        android:id="@+id/txtDetailsBottomSheetAge"/>
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_follow">
+                    </ImageView>
                 </LinearLayout>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="@dimen/bottomSheetDetailsMargin">
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/imgBottomSheetDetailsProfilePicture"
                     android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"

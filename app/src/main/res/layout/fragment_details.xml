@@ -11,29 +11,26 @@
         android:id="@+id/imgDetailsDog1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/horizontalGuidelineDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuidelineDetailsPrevius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuidelineDetailsNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="@dimen/guideline95" />
 
     <ImageButton
         android:id="@+id/btnDetailsPrevious"
@@ -42,8 +39,10 @@
         android:background="@drawable/btn_img_details"
         android:padding="@dimen/detailsArrowButtonPadding"
         android:src="@drawable/bottom_sheet_details_arrow"
+        android:layout_marginBottom="@dimen/cardViewMargin"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintStart_toStartOf="@id/verticalGuidelineDetailsPrevius"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalGuidelineDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/verticalGuidelineDetailsPrevius" />
 
     <ImageButton
         android:id="@+id/btnDetailsNext"
@@ -53,10 +52,20 @@
         android:padding="@dimen/detailsArrowButtonPadding"
         android:rotation="180"
         android:src="@drawable/bottom_sheet_details_arrow"
+        android:layout_marginBottom="@dimen/cardViewMargin"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="@id/verticalGuidelineDetailsNext"
-        app:layout_constraintTop_toTopOf="@+id/horizontalGuidelineDetails" />
+        app:layout_constraintTop_toTopOf="@+id/verticalGuidelineDetailsNext" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuidelineDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline50" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
