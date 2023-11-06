@@ -86,7 +86,14 @@
 
     <!-- BottomSheet -->
     <dimen name="bottomSheetDetailsHeight">300dp</dimen>
-    <dimen name="bottomSheetDetailsMargin">18dp</dimen>
+    <dimen name="bottomSheetDetailsMarginHorizontal">18dp</dimen>
     <dimen name="bottomSheetDetailsInfoBoxMarginLeft">18dp</dimen>
-    <dimen name="bottomSheetDetailsTxtMarginTop">15dp</dimen>
+    <dimen name="bottomSheetDetailsMargin">15dp</dimen>
+    <dimen name="bottomSheetDetailsSmallMargin">5dp</dimen>
+    <dimen name="bottomSheetDetailsBigMargin">30dp</dimen>
+    <dimen name="bottomSheetDetailsLineHeight">30dp</dimen>
+    <dimen name="bottomSheetDetailsLineWidth">150dp</dimen>
+
+    <!-- Details -->
+    <dimen name="detailsArrowButtonPadding">10dp</dimen>
 </resources>

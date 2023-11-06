@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -47,6 +48,34 @@ class DetailsFragment : Fragment() {
         super.onStart()
         val activity = activity as MainActivity
         activity.hideBottomNavMenu()
+
+        this.view.findViewById<ImageView>(R.id.btnBottomSheetDetailsFollow).setOnClickListener {
+            addToFavorites()
+        }
+    }
+
+    private fun addToFavorites() {
+        val dog = DetailsFragmentArgs.fromBundle(requireArguments()).dog
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email?: return
+
+        val imgFavorite = this.view.findViewById<ImageView>(R.id.btnBottomSheetDetailsFollow)
+        if (dog.followers.contains(userEmail)) {
+            Toast.makeText(view.context, "Se ha eliminado de favoritos", Toast.LENGTH_SHORT).show()
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
+            dog.followers.remove(userEmail)
+        } else {
+            Toast.makeText(view.context, "Se ha añadido a favoritos", Toast.LENGTH_SHORT).show()
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
+            dog.followers.add(userEmail!!)
+        }
+        updateDogFollowers(dog.followers, dog.id)
+    }
+
+    private fun updateDogFollowers(followers: MutableList<String>, idDog: String) {
+        FirebaseFirestore.getInstance()
+            .collection("dogs")
+            .document(idDog)
+            .update("followers", followers)
     }
 
     override fun onStop() {
@@ -64,11 +93,12 @@ class DetailsFragment : Fragment() {
         binding.DetailsBottomSheet.txtDetailsBottomSheetAge.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.age.toString()
         binding.DetailsBottomSheet.txtDetailsBottomSheetDescription.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.description
         binding.DetailsBottomSheet.txtDetailsBottomSheetLocation.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.location
-        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.weight.toString()
-        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxLabel.text = "Weight"
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.weight.toString() + resources.getString(R.string.detailsWeightSign)
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxLabel.text = resources.getString(R.string.detailsWeight)
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.gender
-        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = "Sex"
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = resources.getString(R.string.detailsGender)
         binding.DetailsBottomSheet.txtDetailsBottomSheetOwner.text = ownerName
+        setFavorite(DetailsFragmentArgs.fromBundle(requireArguments()).dog.followers)
 
         loadImages()
 
@@ -77,6 +107,16 @@ class DetailsFragment : Fragment() {
         if (DetailsFragmentArgs.fromBundle(requireArguments()).dog.adopterEmail != "") {
             adoptBtn.visibility = View.GONE
         }
+    }
+
+    private fun setFavorite(followers: MutableList<String>) {
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email?:return
+
+        val imgFavorite = this.view.findViewById<ImageView>(R.id.btnBottomSheetDetailsFollow)
+        if(followers.contains(userEmail))
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
+        else
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
     }
 
     private fun prepareBottomSheet(){
