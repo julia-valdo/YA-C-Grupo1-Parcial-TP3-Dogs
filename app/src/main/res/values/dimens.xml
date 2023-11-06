@@ -59,6 +59,7 @@
     <dimen name="profileTextSizeName">35sp</dimen>
     <dimen name="profileBtnWidth">150dp</dimen>
     <dimen name="profileBtnMarginTop">15dp</dimen>
+    <dimen name="profileTextEditMarginTop">15dp</dimen>
     <dimen name="profileLinearLayoutMarginBottom">80dp</dimen>
 
     <!-- Forms -->

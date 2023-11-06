@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -30,7 +29,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import team.ya.c.grupo1.dogit.apiInterface.ApiService
 import team.ya.c.grupo1.dogit.listeners.OnFilterItemClickedListener
-import java.io.StringReader
 
 
 class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedListener {
@@ -134,9 +132,11 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     }
 
     private fun setupSwipeRefreshSettings() {
-        binding.swipeRefreshHome.setOnRefreshListener {
-            dogAdapter.refresh()
-            binding.swipeRefreshHome.isRefreshing = false
+        safeAccessBinding {
+            binding.swipeRefreshHome.setOnRefreshListener {
+                dogAdapter.refresh()
+                binding.swipeRefreshHome.isRefreshing = false
+            }
         }
     }
 
@@ -213,7 +213,13 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
       recycler.layoutManager = linearLayoutManager
   }
     private fun safeActivityCall(action: () -> Unit) {
-        if (!requireActivity().isFinishing && !requireActivity().isDestroyed) {
+        if (!requireActivity().isFinishing && !requireActivity().isDestroyed ) {
+            action()
+        }
+    }
+
+    private fun safeAccessBinding(action: () -> Unit) {
+        if (_binding != null && context != null) {
             action()
         }
     }

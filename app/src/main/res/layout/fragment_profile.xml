@@ -38,6 +38,21 @@
                 android:text="Martin"
                 android:textSize="@dimen/profileTextSizeName" />
 
+            <EditText
+                android:id="@+id/editTxtPublicationDogName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:autofillHints=""
+                android:background="@drawable/style_edittext"
+                android:hint="@string/profileTextEditProfileImage"
+                android:inputType="text"
+                android:padding="@dimen/inputTxtPadding"
+                android:layout_marginTop="@dimen/profileTextEditMarginTop"
+                android:textColor="?android:attr/textColor"
+                android:textSize="@dimen/txtInputSize"
+                android:visibility="gone"/>
+
             <Button
                 android:id="@+id/profileBtnAddPhoto"
                 android:layout_width="@dimen/profileBtnWidth"
@@ -46,6 +61,16 @@
                 android:background="@drawable/style_button"
                 android:backgroundTint="@color/purple"
                 android:text="@string/profileBtnUploadImage" />
+
+            <Button
+                android:id="@+id/profileBtnSavePhoto"
+                android:layout_width="@dimen/profileBtnWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profileBtnMarginTop"
+                android:background="@drawable/style_button"
+                android:backgroundTint="@color/purple"
+                android:text="@string/profileBtnUploadImageSave"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

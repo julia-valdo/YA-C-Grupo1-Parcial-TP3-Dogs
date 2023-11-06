@@ -231,4 +231,8 @@ class MainActivity : AppCompatActivity() {
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
+
+    fun updateProfileImage(){
+        setupNavigationViewHeaderVariables()
+    }
 }
