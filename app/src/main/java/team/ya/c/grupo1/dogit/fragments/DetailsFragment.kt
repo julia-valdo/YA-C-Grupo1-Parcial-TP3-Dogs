@@ -64,10 +64,10 @@ class DetailsFragment : Fragment() {
         binding.DetailsBottomSheet.txtDetailsBottomSheetAge.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.age.toString()
         binding.DetailsBottomSheet.txtDetailsBottomSheetDescription.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.description
         binding.DetailsBottomSheet.txtDetailsBottomSheetLocation.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.location
-        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.weight.toString()
-        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxLabel.text = "Weight"
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.weight.toString() + resources.getString(R.string.detailsWeightSign)
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxLabel.text = resources.getString(R.string.detailsWeight)
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.gender
-        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = "Sex"
+        binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = resources.getString(R.string.detailsGender)
         binding.DetailsBottomSheet.txtDetailsBottomSheetOwner.text = ownerName
 
         loadImages()

@@ -12,44 +12,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
         tools:src="@tools:sample/avatars" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuidelineDetails"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
-        <include layout="@layout/bottom_sheet_details"
-            android:id="@+id/DetailsBottomSheet"/>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineDetailsPrevius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineDetailsNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <ImageButton
         android:id="@+id/btnDetailsPrevious"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_img_details"
+        android:padding="@dimen/detailsArrowButtonPadding"
         android:src="@drawable/bottom_sheet_details_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="220dp"
-        android:layout_marginLeft="15dp"
-        android:padding="10dp"
-        android:background="@drawable/btn_img_details"/>
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineDetailsPrevius"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalGuidelineDetails" />
 
     <ImageButton
         android:id="@+id/btnDetailsNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_img_details"
+        android:padding="@dimen/detailsArrowButtonPadding"
         android:rotation="180"
         android:src="@drawable/bottom_sheet_details_arrow"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineDetailsNext"
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuidelineDetails" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="220dp"
-        android:layout_marginRight="15dp"
-        android:padding="10dp"
-        android:background="@drawable/btn_img_details"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/horizontalGuidelineDetails">
+
+        <include
+            android:id="@+id/DetailsBottomSheet"
+            layout="@layout/bottom_sheet_details" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

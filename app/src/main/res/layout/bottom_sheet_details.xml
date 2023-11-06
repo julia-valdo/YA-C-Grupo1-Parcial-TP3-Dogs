@@ -2,17 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_details_bg"
     app:behavior_hideable="false"
     app:behavior_peekHeight="30dp"
+    app:behavior_draggable="false"
     app:layout_constrainedHeight="true"
+
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgBottomSheetDetailsHorizontalLine"
-        android:layout_width="150dp"
-        android:paddingTop="1dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/bottomSheetDetailsLineWidth"
+        android:layout_height="@dimen/bottomSheetDetailsLineHeight"
         android:layout_centerHorizontal="true"
         android:src="@drawable/bottom_sheet_details_line"
         android:tint="?attr/colorControlHighlight"/>
@@ -26,12 +27,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginHorizontal="@dimen/bottomSheetDetailsMargin">
+            android:layout_marginHorizontal="@dimen/bottomSheetDetailsMarginHorizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/bottomSheetDetailsMargin"
                 android:orientation="horizontal"
                 android:id="@+id/llBottomSheetDetail">
 
@@ -44,23 +45,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtDetailsBottomSheetName"
-                        android:text="Nombre"
+                        android:text="@string/detailsName"
                         android:textSize="@dimen/txtSecondaryTitleSize"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="5dp"
+                        android:layout_marginVertical="@dimen/bottomSheetDetailsSmallMargin"
                         android:gravity="center_vertical">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/baseline_location_on_24"
-                            android:layout_marginRight="5dp"/>
+                            android:layout_marginEnd="@dimen/bottomSheetDetailsSmallMargin"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/txtDetailsBottomSheetLocation"
-                            android:text="ubicacion"/>
+                            android:text="@string/detailsLocation"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -78,17 +79,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginTop="@dimen/bottomSheetDetailsTxtMarginTop">
+                    android:layout_marginTop="@dimen/bottomSheetDetailsMargin">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Años:"
+                        android:text="@string/detailsAgeLabel"
                         android:layout_weight="1"
                         android:textSize="@dimen/txtParagraphSize"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Edad"
+                        android:text="@string/detailsAge"
                         android:layout_weight="4"
                         android:textSize="@dimen/txtParagraphSize"
                         android:id="@+id/txtDetailsBottomSheetAge"/>
@@ -97,28 +98,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginVertical="10dp">
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/imgBottomSheetDetailsProfilePicture"
                     android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"
                     android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
-                    android:layout_marginRight="@dimen/drawerMainNavHeaderProfilePictureMargin"
+                    android:layout_marginEnd="@dimen/drawerMainNavHeaderProfilePictureMargin"
                     android:src="@drawable/img_avatar"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    app:civ_border_color="?attr/colorControlActivated"
+                    app:civ_border_width="2dp"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="10">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="dueño"
+                        android:text="@string/detailsOwner"
                         android:textColor="@color/grey"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="dueño"
+                        android:text="@string/detailsOwner"
                         android:textSize="@dimen/txtParagraphSize"
                         android:id="@+id/txtDetailsBottomSheetOwner"/>
                 </LinearLayout>
@@ -126,25 +130,24 @@
                     android:id="@+id/btnBottomSheetDetailsCall"
                     android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"
                     android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
-                    android:padding="5dp"
+                    android:padding="@dimen/bottomSheetDetailsSmallMargin"
                     android:src="@drawable/baseline_local_phone_24"
                     android:background="@drawable/phone_bg"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="descripcion"
+                android:text="@string/detailsDescription"
                 android:id="@+id/txtDetailsBottomSheetDescription"
                 android:textColor="@color/grey"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
-                android:text="Adoptar"
-                android:layout_below="@+id/llBottomSheetDetail"
+                android:layout_marginTop="@dimen/bottomSheetDetailsBigMargin"
+                android:layout_marginBottom="@dimen/bottomSheetDetailsMargin"
+                android:text="@string/detailsAdoptBtn"
                 android:id="@+id/btnBottomSheetDetailsAdopt"
-                android:textColor="@color/white"
+                android:textColor="?android:attr/solidColor"
                 android:background="@drawable/style_button"/>
 
         </LinearLayout>
