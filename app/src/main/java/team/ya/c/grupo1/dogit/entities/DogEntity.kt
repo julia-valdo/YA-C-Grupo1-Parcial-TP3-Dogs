@@ -4,11 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.Date
 
-data class DogEntity (var name: String, var race: String, var subrace: String, var age: Int,
+data class DogEntity (var name: String, var breed: String, var subBreed: String, var age: Int,
                       var gender: String, var description: String, var weight: Double, var location: String,
                       var images: MutableList<String>, var adopterName: String, var id: String,
                       var followers: MutableList<String>, var adopterEmail: String, var ownerEmail: String,
-                        var publicationDate: Date
+                      var publicationDate: Date
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -33,8 +33,8 @@ data class DogEntity (var name: String, var race: String, var subrace: String, v
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
-        parcel.writeString(race)
-        parcel.writeString(subrace)
+        parcel.writeString(breed)
+        parcel.writeString(subBreed)
         parcel.writeInt(age)
         parcel.writeString(description)
         parcel.writeString(gender)

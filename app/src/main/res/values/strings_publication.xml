@@ -15,8 +15,8 @@
     <string name="publicationBtnSave">Guardar</string>
     <string name="publicationSelectLocation">Ubicación</string>
     <string name="publicationSelectGender">Sexo</string>
-    <string name="publicationSelectRace">Raza</string>
-    <string name="publicationSelectSubrace">Sub raza</string>
+    <string name="publicationSelectBreed">Raza</string>
+    <string name="publicationSelectSubBreed">Sub-raza</string>
     <string name="publicationSuccesfulMessage">¡Publicación creada con éxito!</string>
     <string name="publicationErrorMessage">¡Hubo un error al crear la publicación!</string>
 
@@ -26,8 +26,8 @@
     <string name="publicationErrorWeight">¡Debes ingresar un peso válido!</string>
     <string name="publicationErrorGender">¡Debes ingresar un género!</string>
     <string name="publicationErrorImages">¡Debes completar los campos de imagenes!</string>
-    <string name="publicationErrorRace">¡Debes ingresar la raza!</string>
-    <string name="publicationErrorSubrace">¡Debes ingresar la subraza!</string>
+    <string name="publicationErrorBreed">¡Debes ingresar la raza!</string>
+    <string name="publicationErrorSubBreed">¡Debes ingresar la subraza!</string>
     <string name="publicationErrorDescription">¡Debes ingresar una descripción!</string>
 
 </resources>

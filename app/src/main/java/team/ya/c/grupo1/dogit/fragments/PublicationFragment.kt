@@ -7,16 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
-import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import team.ya.c.grupo1.dogit.R
+import team.ya.c.grupo1.dogit.apiInterface.ApiService
 import team.ya.c.grupo1.dogit.databinding.FragmentPublicationBinding
 import team.ya.c.grupo1.dogit.entities.DogEntity
 import java.util.Date
@@ -28,10 +35,7 @@ class PublicationFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var view : View
     private val db = FirebaseFirestore.getInstance()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var breedMap = mutableMapOf<String, List<String>>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +43,22 @@ class PublicationFragment : Fragment() {
     ): View {
         _binding = FragmentPublicationBinding.inflate(inflater, container, false)
         view = binding.root
-        startSpinners()
 
         return view
     }
 
     override fun onStart() {
         super.onStart()
+        setupButtons()
+        startBreedMap()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupButtons(){
         binding.btnPublicationDogSave.setOnClickListener {
             savePublication()
         }
@@ -69,6 +81,23 @@ class PublicationFragment : Fragment() {
         binding.imgPublicationDogAddPhoto4.setOnClickListener {
             addEditTextPhoto(5)
             removeImgAddPhoto(4)
+        }
+    }
+
+    private fun startBreedMap(){
+        binding.scrollViewPublication.visibility = View.GONE
+        binding.progressBarPublication.visibility = View.VISIBLE
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val call = getRetrofit().create(ApiService::class.java).getDogsAllBreed("api/breeds/list/all")
+            val dogs = call.body()
+            breedMap = dogs?.dogBreeds?.toMutableMap()?: mutableMapOf()
+
+            requireActivity().runOnUiThread{
+                startSpinners()
+                binding.scrollViewPublication.visibility = View.VISIBLE
+                binding.progressBarPublication.visibility = View.GONE
+            }
         }
     }
 
@@ -100,40 +129,66 @@ class PublicationFragment : Fragment() {
         linearLayoutToAdd.visibility = View.GONE
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun startSpinners(){
+        val provincesList = resources.getStringArray(R.array.provincesArray).toMutableList()
+        val provincesHint = resources.getString(R.string.publicationSelectLocation)
+        provincesList.add(0, provincesHint)
+        binding.spinnerPublicationDogUbication.adapter = makeAdapterSpinner(provincesList)
+
+        val genderList = resources.getStringArray(R.array.genderArray).toMutableList()
+        val genderHint = resources.getString(R.string.publicationSelectGender)
+        genderList.add(0, genderHint)
+        binding.spinnerPublicationDogGender.adapter = makeAdapterSpinner(genderList)
+
+        val breedList = breedMap.keys.toMutableList()
+        val breedHint = resources.getString(R.string.publicationSelectBreed)
+        breedList.add(0, breedHint)
+        binding.spinnerPublicationDogBreed.adapter = makeAdapterSpinner(breedList)
+
+        binding.spinnerPublicationDogBreed.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
+                val breedSelected = binding.spinnerPublicationDogBreed.selectedItem.toString()
+                val subBreedList = breedMap[breedSelected]?.toMutableList() ?: mutableListOf()
+                val subBreedHint = resources.getString(R.string.publicationSelectSubBreed)
+                subBreedList.add(0, subBreedHint)
+                binding.spinnerPublicationDogSubBreed.adapter = makeAdapterSpinner(subBreedList)
+
+                binding.spinnerPublicationDogSubBreed.isEnabled = subBreedList.size > 1
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
     }
 
-    private fun makeAdapterSpinner(list :  MutableList<String>, hint : String): ArrayAdapter<String> {
-        list.add(0, hint)
-
+    private fun makeAdapterSpinner(list : MutableList<String>): ArrayAdapter<String> {
         val adapter = object : ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_activated_1, list){
+
             override fun isEnabled(position: Int): Boolean {
                 return position != 0
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+
+                if (position == 0) {
+                    (view as TextView).setTextColor(resources.getColor(R.color.grey, null))
+                    view.setBackgroundColor(0)
+                }
+                return view
             }
         }
 
         return adapter
     }
 
-    //TODO: agregar razas y subrazas traidos desde retrofit
-    private fun startSpinners(){
-        val provincesList = resources.getStringArray(R.array.provincesArray).toMutableList()
-        val provincesHint = resources.getString(R.string.publicationSelectLocation)
-        binding.spinnerPublicationDogUbication.adapter = makeAdapterSpinner(provincesList, provincesHint)
-
-        val genderList = resources.getStringArray(R.array.genderArray).toMutableList()
-        val genderHint = resources.getString(R.string.publicationSelectGender)
-        binding.spinnerPublicationDogGender.adapter = makeAdapterSpinner(genderList, genderHint)
-
-        val raceList = resources.getStringArray(R.array.genderArray).toMutableList()
-        val raceHint = resources.getString(R.string.publicationSelectRace)
-        binding.spinnerPublicationDogRace.adapter = makeAdapterSpinner(raceList, raceHint)
-
-        val subraceList = resources.getStringArray(R.array.genderArray).toMutableList()
-        val subraceHint = resources.getString(R.string.publicationSelectSubrace)
-        binding.spinnerPublicationDogSubrace.adapter = makeAdapterSpinner(subraceList, subraceHint)
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://dog.ceo/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     private fun savePublication(){
@@ -149,19 +204,19 @@ class PublicationFragment : Fragment() {
         val weight = binding.editTxtPublicationDogWeight.text.toString().toDoubleOrNull() ?: 0.0
         val gender = binding.spinnerPublicationDogGender.selectedItem.toString()
         val images = getPhotosFromEditText()
-        val race = binding.spinnerPublicationDogRace.selectedItem.toString()
-        var subrace = binding.spinnerPublicationDogSubrace.selectedItem.toString()
+        val breed = binding.spinnerPublicationDogBreed.selectedItem.toString()
+        var subBreed = binding.spinnerPublicationDogSubBreed.selectedItem.toString()
         val description = binding.editTxtPublicationDogDescription.text.toString()
         val id = UUID.randomUUID().toString()
         val adopterEmail = ""
         val ownerEmail = FirebaseAuth.getInstance().currentUser?.email ?: ""
         val publicationDate = Date()
 
-        if (subrace == resources.getString(R.string.publicationSelectSubrace)){
-            subrace = ""
+        if (subBreed == resources.getString(R.string.publicationSelectSubBreed)){
+            subBreed = ""
         }
 
-        val dog = DogEntity(name, race, subrace, age, gender, description, weight, location, images,
+        val dog = DogEntity(name, breed, subBreed, age, gender, description, weight, location, images,
             adopterName, id, mutableListOf<String>(), adopterEmail, ownerEmail, publicationDate)
 
         return if (validateFields(dog)) dog else null
@@ -216,8 +271,8 @@ class PublicationFragment : Fragment() {
             return false
         }
 
-        if (publication.race == resources.getString(R.string.publicationSelectRace)){
-            Toast.makeText(view.context, resources.getString(R.string.publicationErrorRace), Toast.LENGTH_LONG).show()
+        if (publication.breed == resources.getString(R.string.publicationSelectBreed)){
+            Toast.makeText(view.context, resources.getString(R.string.publicationErrorBreed), Toast.LENGTH_LONG).show()
             return false
         }
 
@@ -257,8 +312,8 @@ class PublicationFragment : Fragment() {
         binding.editTxtPublicationDogAge.text = Editable.Factory.getInstance().newEditable("")
         binding.editTxtPublicationDogWeight.text = Editable.Factory.getInstance().newEditable("")
         binding.spinnerPublicationDogGender.setSelection(0)
-        binding.spinnerPublicationDogRace.setSelection(0)
-        binding.spinnerPublicationDogSubrace.setSelection(0)
+        binding.spinnerPublicationDogBreed.setSelection(0)
+        binding.spinnerPublicationDogSubBreed.setSelection(0)
         binding.editTxtPublicationDogDescription.text = Editable.Factory.getInstance().newEditable("")
         binding.editTxtPublicationDogPhoto1.text = Editable.Factory.getInstance().newEditable("")
         binding.editTxtPublicationDogPhoto2.text = Editable.Factory.getInstance().newEditable("")
