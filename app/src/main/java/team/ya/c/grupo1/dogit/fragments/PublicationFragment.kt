@@ -1,6 +1,7 @@
 package team.ya.c.grupo1.dogit.fragments
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.size
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -155,6 +157,12 @@ class PublicationFragment : Fragment() {
                 binding.spinnerPublicationDogSubBreed.adapter = makeAdapterSpinner(subBreedList)
 
                 binding.spinnerPublicationDogSubBreed.isEnabled = subBreedList.size > 1
+
+                binding.spinnerPublicationDogSubBreed.visibility =
+                    if (binding.spinnerPublicationDogBreed.selectedItemPosition != 0
+                        && subBreedList.size <= 1) View.GONE
+                    else View.VISIBLE
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -164,18 +172,28 @@ class PublicationFragment : Fragment() {
     }
 
     private fun makeAdapterSpinner(list : MutableList<String>): ArrayAdapter<String> {
-        val adapter = object : ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_activated_1, list){
+        var defaultTextColor: ColorStateList? = null
+        var defaultBackgroundTintList: ColorStateList? = null
 
+        val adapter = object : ArrayAdapter<String>(view.context, android.R.layout.simple_list_item_activated_1, list){
             override fun isEnabled(position: Int): Boolean {
                 return position != 0
             }
 
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val view = super.getDropDownView(position, convertView, parent)
+                val view = super.getDropDownView(position, convertView, parent) as TextView
 
                 if (position == 0) {
-                    (view as TextView).setTextColor(resources.getColor(R.color.grey, null))
+                    if (defaultBackgroundTintList == null && defaultTextColor == null) {
+                        defaultTextColor = view.textColors
+                        defaultBackgroundTintList = view.backgroundTintList
+                    }
+
+                    view.setTextColor(resources.getColor(R.color.grey, null))
                     view.setBackgroundColor(0)
+                } else {
+                    view.setTextColor(defaultTextColor)
+                    view.backgroundTintList = defaultBackgroundTintList
                 }
                 return view
             }
