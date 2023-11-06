@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import team.ya.c.grupo1.dogit.R
-class DogBreedHolder (v: View) : RecyclerView.ViewHolder(v) {
+class DogFilterHolder (v: View) : RecyclerView.ViewHolder(v) {
 
     private var view: View
 
@@ -14,7 +14,7 @@ class DogBreedHolder (v: View) : RecyclerView.ViewHolder(v) {
     }
 
     fun bind(breed: String) {
-        val txtBreed = this.view.findViewById<TextView>(R.id.txtCardItemBreedDog)
+        val txtBreed = this.view.findViewById<TextView>(R.id.txtCardItemFilterDog)
         txtBreed.text =  breed;
     }
     fun getCardLayout() : CardView {

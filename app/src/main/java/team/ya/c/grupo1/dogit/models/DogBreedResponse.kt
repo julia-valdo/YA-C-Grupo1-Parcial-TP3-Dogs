@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class DogBreedResponse(
     @SerializedName("status") var status:String,
-    @SerializedName("message") var dogBreeds:List<String>)
+    @SerializedName("message") var dogBreeds: Map<String, List<String>>)
 
