@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import team.ya.c.grupo1.dogit.databinding.FragmentProfileBinding
@@ -37,7 +38,47 @@ class ProfileFragment : Fragment() {
         val activity = activity as MainActivity
         activity.hideBottomNavMenu()
 
+        binding.profileBtnAddPhoto.setOnClickListener {
+            binding.editTxtPublicationDogName.visibility = View.VISIBLE
+            binding.profileBtnSavePhoto.visibility = View.VISIBLE
+            binding.profileBtnAddPhoto.visibility = View.GONE
+        }
+
+        binding.profileBtnSavePhoto.setOnClickListener {
+            val urlPhoto = binding.editTxtPublicationDogName.text.toString()
+
+            if (urlPhoto.isEmpty() || urlPhoto.isBlank()){
+                Toast.makeText(view.context, resources.getString(R.string.profileCompleteEditTextError), Toast.LENGTH_LONG).show()
+            } else {
+                updatePhoto(urlPhoto)
+            }
+        }
+
         replaceData()
+    }
+
+    private fun updatePhoto(urlPhoto: String) {
+        val userEmail = FirebaseAuth.getInstance().currentUser?.email ?: return
+
+        val userRef = FirebaseFirestore.getInstance().collection("users").document(userEmail)
+        val data = hashMapOf<String, Any>(
+            "profileImage" to urlPhoto
+        )
+
+        userRef.update(data)
+            .addOnSuccessListener {
+                safeAccessBinding {
+                    binding.editTxtPublicationDogName.visibility = View.GONE
+                    binding.profileBtnSavePhoto.visibility = View.GONE
+                    binding.profileBtnAddPhoto.visibility = View.VISIBLE
+                    replaceData()
+                    (activity as MainActivity).updateProfileImage()
+                    Toast.makeText(view.context, resources.getString(R.string.profileUploadImageSuccess), Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(view.context, resources.getString(R.string.profileUploadImageError), Toast.LENGTH_LONG).show()
+            }
     }
 
     override fun onStop() {
@@ -55,7 +96,7 @@ class ProfileFragment : Fragment() {
             .document(userEmail)
             .get()
             .addOnSuccessListener {
-                safeActivityCall {
+                safeAccessBinding {
                     binding.profileTxtName.text = it.getString("firstName")
                     val profileImage = it.getString("profileImage")
 
@@ -68,15 +109,12 @@ class ProfileFragment : Fragment() {
                             .error(R.drawable.img_avatar)
                             .into(binding.profileImg)
                     }
-
                 }
             }
     }
 
-    private fun safeActivityCall(action: () -> Unit) {
-       val activity = requireActivity() as MainActivity
-
-        if (!activity.isFinishing && !activity.isDestroyed) {
+    private fun safeAccessBinding(action: () -> Unit) {
+        if (_binding != null && context != null) {
             action()
         }
     }

@@ -7,7 +7,6 @@
     app:behavior_hideable="false"
     app:behavior_peekHeight="30dp"
     app:layout_constrainedHeight="true"
-    android:maxHeight="500dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgBottomSheetDetailsHorizontalLine"
@@ -26,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/bottomSheetDetailsMargin">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,13 +44,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtDetailsBottomSheetName"
-                        android:text="Nombre"/>
-                    <TextView
+                        android:text="Nombre"
+                        android:textSize="@dimen/txtSecondaryTitleSize"/>
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtDetailsBottomSheetLocation"
-                        android:text="ubicacion"/>
-
+                        android:layout_marginVertical="5dp"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_location_on_24"
+                            android:layout_marginRight="5dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtDetailsBottomSheetLocation"
+                            android:text="ubicacion"/>
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -63,42 +74,78 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edad"
                     android:layout_weight="1"
-                    android:id="@+id/txtDetailsBottomSheetAge"/>
-
+                    android:layout_marginTop="@dimen/bottomSheetDetailsTxtMarginTop">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Años:"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/txtParagraphSize"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edad"
+                        android:layout_weight="4"
+                        android:textSize="@dimen/txtParagraphSize"
+                        android:id="@+id/txtDetailsBottomSheetAge"/>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imgBottomSheetDetailsProfilePicture"
+                    android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"
+                    android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
+                    android:layout_marginRight="@dimen/drawerMainNavHeaderProfilePictureMargin"
+                    android:src="@drawable/img_avatar"
+                    android:scaleType="centerCrop"/>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="dueño"
-                    android:layout_weight="2"
-                    android:id="@+id/txtDetailsBottomSheetOwner"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="icono celular"
-                    android:layout_weight="1"/>
+                    android:orientation="vertical"
+                    android:layout_weight="10">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dueño"
+                        android:textColor="@color/grey"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="dueño"
+                        android:textSize="@dimen/txtParagraphSize"
+                        android:id="@+id/txtDetailsBottomSheetOwner"/>
+                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/btnBottomSheetDetailsCall"
+                    android:layout_width="@dimen/drawerMainNavHeaderProfilePictureSize"
+                    android:layout_height="@dimen/drawerMainNavHeaderProfilePictureSize"
+                    android:padding="5dp"
+                    android:src="@drawable/baseline_local_phone_24"
+                    android:background="@drawable/phone_bg"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="descripcion"
-                android:id="@+id/txtDetailsBottomSheetDescription"/>
+                android:id="@+id/txtDetailsBottomSheetDescription"
+                android:textColor="@color/grey"/>
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:text="Adoptame :((("
+                android:text="Adoptar"
                 android:layout_below="@+id/llBottomSheetDetail"
-                android:id="@+id/btnBottomSheetDetailsAdopt"/>
+                android:id="@+id/btnBottomSheetDetailsAdopt"
+                android:textColor="@color/white"
+                android:background="@drawable/style_button"/>
 
         </LinearLayout>
     </ScrollView>

@@ -11,7 +11,7 @@
         android:id="@+id/imgDetailsDog1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         tools:src="@tools:sample/avatars" />
@@ -34,9 +34,9 @@
         android:src="@drawable/bottom_sheet_details_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="220dp"
         android:layout_marginLeft="15dp"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="@drawable/btn_img_details"/>
 
     <ImageButton
@@ -47,9 +47,9 @@
         android:src="@drawable/bottom_sheet_details_arrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="220dp"
         android:layout_marginRight="15dp"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="@drawable/btn_img_details"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

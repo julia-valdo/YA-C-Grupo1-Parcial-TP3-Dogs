@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="50dp"
-    android:layout_height="50dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/bottomSheetDetailsInfoBoxMarginLeft">
     <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/info_box_bg"
         android:orientation="vertical"
         android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="hola"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="hola"
-            android:id="@+id/txtInfoBoxContent"/>
+            android:id="@+id/txtInfoBoxContent"
+            android:textSize="@dimen/txtParagraphSize"
+            android:textColor="#827397"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hola"
+            android:id="@+id/txtInfoBoxLabel"
+            android:textColor="@color/light_grey"/>
     </LinearLayout>
 
 </RelativeLayout>

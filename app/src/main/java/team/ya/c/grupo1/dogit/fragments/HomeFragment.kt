@@ -31,9 +31,9 @@ import team.ya.c.grupo1.dogit.listeners.OnViewItemClickedListener
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import team.ya.c.grupo1.dogit.apiInterface.ApiService
-import team.ya.c.grupo1.dogit.holders.DogFilterHolder
 import team.ya.c.grupo1.dogit.listeners.OnFilterItemClickedListener
 import kotlin.coroutines.resume
+
 
 
 class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedListener {
@@ -140,9 +140,11 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     }
 
     private fun setupSwipeRefreshSettings() {
-        binding.swipeRefreshHome.setOnRefreshListener {
-            dogAdapter.refresh()
-            binding.swipeRefreshHome.isRefreshing = false
+        safeAccessBinding {
+            binding.swipeRefreshHome.setOnRefreshListener {
+                dogAdapter.refresh()
+                binding.swipeRefreshHome.isRefreshing = false
+            }
         }
     }
 
@@ -348,7 +350,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
         binding.recyclerHomeDogs.adapter = dogAdapter
     }
     private fun safeActivityCall(action: () -> Unit) {
-        if (!requireActivity().isFinishing && !requireActivity().isDestroyed) {
+        if (!requireActivity().isFinishing && !requireActivity().isDestroyed ) {
             action()
         }
     }
