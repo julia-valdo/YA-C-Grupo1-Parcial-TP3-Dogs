@@ -1,5 +1,7 @@
 package team.ya.c.grupo1.dogit.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,7 +28,9 @@ class DetailsFragment : Fragment() {
     private var imgIndex : Int = 0
     private var cantImg : Int = 0
     private lateinit var adoptBtn : Button
-
+    private var ownerName : String? = null
+    private var ownerPhone : String? = null
+    private var profileImage : String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,9 +38,8 @@ class DetailsFragment : Fragment() {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         view = binding.root
 
-        replaceData()
-        setUpButtons()
-        prepareBottomSheet()
+        getOwnerData()
+
 
         return view
     }
@@ -65,6 +68,7 @@ class DetailsFragment : Fragment() {
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetWeight.txtInfoBoxLabel.text = "Weight"
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxContent.text = DetailsFragmentArgs.fromBundle(requireArguments()).dog.gender
         binding.DetailsBottomSheet.infoBoxDetailsBottomSheetGender.txtInfoBoxLabel.text = "Sex"
+        binding.DetailsBottomSheet.txtDetailsBottomSheetOwner.text = ownerName
 
         loadImages()
 
@@ -112,36 +116,18 @@ class DetailsFragment : Fragment() {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
-        try {
-            FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(DetailsFragmentArgs.fromBundle(requireArguments()).dog.adopterEmail)
-                .get()
-                .addOnSuccessListener {
-                    safeActivityCall {
-                        val profileImage = it.getString("profileImage")
 
-                        if (profileImage == "") {
-                            binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(R.drawable.img_avatar)
-                        } else {
+        try{
+            Glide.with(view.context)
+                .load(profileImage)
+                .placeholder(R.drawable.img_avatar)
+                .error(R.drawable.img_avatar)
+                .into(binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture)
+        } catch (e: Exception){
+            binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(R.drawable.img_avatar)
+        }
 
-                            Glide.with(view.context)
-                                .load(profileImage)
-                                .placeholder(R.drawable.img_avatar)
-                                .error(R.drawable.img_avatar)
-                                .into(binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture)
-
-                            binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(
-                                R.drawable.img_avatar
-                            )
-                        }
-                    }
-                }
-            } catch (e: Exception){
-                binding.DetailsBottomSheet.imgBottomSheetDetailsProfilePicture.setImageResource(R.drawable.img_avatar)
-            }
     }
-
     private fun safeActivityCall(action: () -> Unit) {
         val activity = requireActivity() as MainActivity
 
@@ -170,11 +156,53 @@ class DetailsFragment : Fragment() {
             }
         }
 
+        binding.DetailsBottomSheet.btnBottomSheetDetailsCall.setOnClickListener {
+            callOwnerPhone()
+        }
+
         adoptBtn.setOnClickListener {
             adoptDog()
         }
     }
 
+    private fun callOwnerPhone(){
+        startActivity( Uri.parse("tel:${ownerPhone}").let { number ->
+            Intent(Intent.ACTION_DIAL, number)
+        })
+    }
+
+    private fun getOwnerData(){
+        try{
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(DetailsFragmentArgs.fromBundle(requireArguments()).dog.ownerEmail)
+                .get()
+                .addOnSuccessListener {
+                    safeActivityCall {
+                        ownerName = it.getString("firstName") + " " + it.getString("surname")
+                        ownerPhone = it.getString("telephoneNumber")
+                        profileImage = it.getString("profileImage")
+                        replaceData()
+                        setUpButtons()
+                        prepareBottomSheet()
+                    }
+                }.addOnFailureListener{
+                    profileImage = ""
+                    ownerName = ""
+                    ownerPhone = ""
+                    replaceData()
+                    setUpButtons()
+                    prepareBottomSheet()
+                }
+        } catch (e: Exception){
+            profileImage = ""
+            ownerName = ""
+            ownerPhone = ""
+            replaceData()
+            setUpButtons()
+            prepareBottomSheet()
+        }
+    }
     private fun adoptDog(){
         val dog = DetailsFragmentArgs.fromBundle(requireArguments()).dog
         val userEmail = FirebaseAuth.getInstance().currentUser?.email?: return
