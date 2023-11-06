@@ -5,39 +5,39 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import team.ya.c.grupo1.dogit.R
-import team.ya.c.grupo1.dogit.holders.DogBreedHolder
 import androidx.core.content.ContextCompat
+import team.ya.c.grupo1.dogit.holders.DogFilterHolder
 import team.ya.c.grupo1.dogit.listeners.OnFilterItemClickedListener
 
 
 
-class DogBreedAdapter (
-    private val dogBreedList:List<String>,
+class DogFilterAdapter (
+    private val dogFilterList:List<String>,
     private val onItemClick : OnFilterItemClickedListener
-) : RecyclerView.Adapter<DogBreedHolder>(){
-    private val dogBreedFilteredList:MutableList<String> = mutableListOf()
+) : RecyclerView.Adapter<DogFilterHolder>(){
+    private val dogListToFilter:MutableList<String> = mutableListOf()
     private val defaultItemBackgroundColor: Int = R.color.defaultItemColorBreedFilter
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogBreedHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogFilterHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_item_breed_dog, parent, false)
-        return DogBreedHolder(view)
+            .inflate(R.layout.card_item_filter_dog, parent, false)
+        return DogFilterHolder(view)
     }
 
-    override fun getItemCount() = dogBreedList.size
+    override fun getItemCount() = dogFilterList.size
 
-    override fun onBindViewHolder(holder: DogBreedHolder, @SuppressLint("RecyclerView") position: Int) {
-        val breed = dogBreedList[position]
+    override fun onBindViewHolder(holder: DogFilterHolder, @SuppressLint("RecyclerView") position: Int) {
+        val breed = dogFilterList[position]
         holder.bind(breed)
 
         holder.getCardLayout().setOnClickListener {
-            if(dogBreedFilteredList.contains(breed)){
+            if(dogListToFilter.contains(breed)){
                 holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, defaultItemBackgroundColor))
-                dogBreedFilteredList.remove(breed)
+                dogListToFilter.remove(breed)
             }else{
                 holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selectedItemColorBreedFilter))
-                dogBreedFilteredList.add(breed)
+                dogListToFilter.add(breed)
             }
-            onItemClick.onFilterItemSelected(dogBreedFilteredList)
+            onItemClick.onFilterItemSelected(dogListToFilter)
         }
     }
 

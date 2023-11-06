@@ -4,10 +4,11 @@
     android:id="@+id/cardViewItemBreedDog"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/cardViewBreedFilterHeight"
-    android:layout_marginRight="@dimen/cardViewBreedFilterMarginRight"
+    app:cardUseCompatPadding="true"
+
     app:cardCornerRadius="@dimen/cardViewBreedFilterCornerRadius">
     <LinearLayout
-        android:id="@+id/linearCardViewItemBreedDog"
+        android:id="@+id/linearCardViewItemFilterDog"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -20,7 +21,7 @@
             />
 
         <TextView
-            android:id="@+id/txtCardItemBreedDog"
+            android:id="@+id/txtCardItemFilterDog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:shadowColor="@color/black"

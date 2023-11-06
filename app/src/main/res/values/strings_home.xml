@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="homeFilterText">Filtros</string>
+    <string name="homeMoreFilterText">más Filtros</string>
     <string name="homeSearchFilter">Buscador</string>
     <string name="homeLoadingDogsFailed">Hubo un error al cargar los perros!</string>
+    <string name="homeMenuFilterByDate">Fecha de Publicación</string>
+    <string name="homeMenuFilterByLocation">Ubicación</string>
+    <string name="homeMenuFilterByBreed">Raza</string>
 </resources>
