@@ -14,27 +14,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal5" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal14" />
 
     <RelativeLayout
-        android:id="@+id/linearLayoutSearchByBreed"
+        android:id="@+id/relativeLayoutSearchByBreed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal14"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5">
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toTopOf="parent">
 
         <AutoCompleteTextView
             android:id="@+id/AutoCompleteTextViewBreedSearch"
             android:layout_width="match_parent"
             android:layout_height="@dimen/homeHeight50"
+            android:background="@drawable/style_search_home"
             android:hint="@string/homeSearchFilter"
-            android:textSize="@dimen/txtInputSize"
             android:paddingHorizontal="@dimen/inputTxtPadding"
             android:textColor="@color/purple"
-            android:background="@drawable/style_search_home" />
+            android:textSize="@dimen/txtInputSize" />
 
         <ImageButton
             android:id="@+id/buttonSearchByBreed"
@@ -45,31 +46,34 @@
             android:src="@drawable/search" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textHomeFilterBreed"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayoutHomeFilters"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginTop20"
-        android:text="@string/homeFilterText"
-        android:textColor="@color/dark_grey"
-        android:textSize="@dimen/txtSecondaryTitleSize"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerFilter"
-        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHomeHorizontal14" />
-
-    <TextView
-        android:id="@+id/textHomeMoreFilters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/homeMoreFilterText"
-        android:textColor="@color/purple"
-        android:textSize="@dimen/txtMiniSize"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerFilter"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintStart_toEndOf="@+id/textHomeFilterBreed"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineHomeHorizontal14" />
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal14">
+
+        <TextView
+            android:id="@+id/textHomeFilterBreed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/homeFilterText"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/txtSecondaryTitleSize" />
+
+        <TextView
+            android:id="@+id/textHomeMoreFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/homeMoreFilterText"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/txtMiniSize" />
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFilter"
@@ -79,7 +83,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toBottomOf="@+id/textHomeFilterBreed" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutHomeFilters" />
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -113,12 +117,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="@dimen/guideline14" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHomeHorizontal5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical5"
@@ -133,12 +131,5 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="@dimen/guideline95" />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHomeVertical93"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline93" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,7 +38,6 @@ import team.ya.c.grupo1.dogit.listeners.OnFilterItemClickedListener
 import kotlin.coroutines.resume
 
 
-
 class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedListener {
 
     private var _binding: FragmentHomeBinding? = null
@@ -55,6 +54,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     private lateinit var subBreeds: MutableList<String>
     private val filterMap = mutableMapOf<String, MutableList<Filter>>()
     private var orderByDate : Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,11 +69,13 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
         super.onStart()
         setupVariables()
     }
+
     override fun onPause() {
         super.onPause()
         filterMap.clear()
         dogAdapter.stopListening()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -85,40 +87,51 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
         val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(dog)
         this.findNavController().navigate(action)
     }
+
     private fun setupVariables() {
         binding.progressBarHome.visibility = View.VISIBLE
         binding.progressBarHomeBottom.visibility = View.GONE
         setupRecyclerView()
         setupSwipeRefreshSettings()
         setupRecyclerFilterLocation()
+
         loadBreedsAndSubBreeds{
             setupAutocompleteTextView()
             setupRecyclerFilterBreed()
             setupBreedFilter()
         }
+
+        binding.AutoCompleteTextViewBreedSearch.text.clear()
+
         binding.buttonSearchByBreed.setOnClickListener {
             searchByBreedFilter()
         }
+
         binding.textHomeMoreFilters.setOnClickListener{
             searchByOtherFilters()
         }
     }
+
     private fun setupAutocompleteTextView(){
         val combinedList = mutableListOf<String>()
         combinedList.addAll(breeds)
         combinedList.addAll(subBreeds)
+
         adapterAutocomplete = ArrayAdapter<String>(requireContext(), android.R.layout.simple_dropdown_item_1line, combinedList)
         binding.AutoCompleteTextViewBreedSearch.setAdapter(adapterAutocomplete)
     }
+
     private fun setupRecyclerView() {
         val query = db.collection("dogs")
             .whereEqualTo("adopterName", "")
+
         val config = PagingConfig(20,10,  false)
 
         val options = FirestorePagingOptions.Builder<DogEntity>()
             .setLifecycleOwner(this)
             .setQuery(query, config, DogEntity::class.java)
             .build()
+
         setupRecyclerViewSettings(binding.recyclerHomeDogs)
         dogAdapter = DogAdapter(options, this)
         setupLoadStateSettings()
@@ -129,24 +142,29 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     private fun applyFilters(){
         var query = db.collection("dogs")
             .whereEqualTo("adopterName", "")
+
         for (filter in filterMap.values.flatten()){
             query = query.where(filter)
         }
-        val queryDirection = if (orderByDate){
-            Query.Direction.ASCENDING
-        } else {
-            Query.Direction.DESCENDING
-        }
+
+        val queryDirection =
+            if (orderByDate) Query.Direction.ASCENDING
+            else Query.Direction.DESCENDING
+
+
         query = query.orderBy("publicationDate", queryDirection)
         val config = PagingConfig(20,10,  false)
+
         val options = FirestorePagingOptions.Builder<DogEntity>()
             .setLifecycleOwner(this)
             .setQuery(query, config, DogEntity::class.java)
             .build()
+
         dogAdapter.updateOptions(options)
         binding.recyclerHomeDogs.adapter = dogAdapter
         dogAdapter.refresh()
     }
+
     private fun setupLoadStateSettings() {
         viewLifecycleOwner.lifecycleScope.launch {
             dogAdapter.loadStateFlow.collectLatest { loadStates ->
@@ -192,12 +210,12 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
         setupRecyclerViewSettings(binding.recyclerFilter,true)
         binding.recyclerFilter.adapter = dogBreedFilterAdapter
     }
+
     private fun setupRecyclerViewSettings(recycler : RecyclerView, isHorizontal : Boolean = false) {
         recycler.setHasFixedSize(true)
         val linearLayoutManager = if (isHorizontal) LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) else LinearLayoutManager(context)
         recycler.layoutManager = linearLayoutManager
     }
-
 
     private fun setupRecyclerFilterLocation() {
         dogLocationFilterAdapter = DogFilterAdapter(filterLocations, this)
@@ -230,12 +248,14 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
             }
         }
     }
+
     private fun getRetrofit(): Retrofit{
         return Retrofit.Builder()
             .baseUrl("https://dog.ceo/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
     private fun loadBreedsAndSubBreeds(action: () -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java).getDogsAllBreed("api/breeds/list/all")
@@ -265,11 +285,10 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                 .addOnSuccessListener { documents ->
                     val dogBreedsAux = mutableListOf<String>()
                     for (document in documents) {
-                        val breed = document.getString("breed").toString()
-                        if (breed != null) {
-                            if(breed.contains(breed) && !dogBreedsAux.contains(breed)){
-                                dogBreedsAux.add(breed)
-                            }
+                        val breed = document.getString("breed")?: continue
+
+                        if(breed.contains(breed) && !dogBreedsAux.contains(breed)){
+                            dogBreedsAux.add(breed)
                         }
                     }
                     cont.resume(dogBreedsAux)
@@ -322,6 +341,8 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                     applyFilters()
                     setupRecyclerFilterLocation()
                     setupRecyclerFilterBreed()
+                    binding.AutoCompleteTextViewBreedSearch.text.clear()
+
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false
@@ -338,6 +359,12 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                 filterMap["searchBreed"]?.clear()
             }
         } else{
+            if (!breeds.contains(searchBreed) && !subBreeds.contains(searchBreed)){
+                binding.AutoCompleteTextViewBreedSearch.text.clear()
+                Toast.makeText(context, resources.getString(R.string.homeFilterBreedNotFound), Toast.LENGTH_SHORT).show()
+                return
+            }
+
             if (!filterMap.containsKey("searchBreed")) {
                 filterMap["searchBreed"] = mutableListOf()
             }

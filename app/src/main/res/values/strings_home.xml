@@ -10,4 +10,5 @@
     <string name="homeMenuFilterByBreed">Raza</string>
     <string name="homeFilterLoadLocationsError">Hubo un error al cargar las localidades!</string>
     <string name="homeFilterLoadBreedsError">Hubo un error al cargar las razas!</string>
+    <string name="homeFilterBreedNotFound">No existe una raza o sub-raza llamada así!</string>
 </resources>
