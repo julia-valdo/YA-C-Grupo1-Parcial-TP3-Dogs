@@ -118,4 +118,9 @@ class ProfileFragment : Fragment() {
             action()
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

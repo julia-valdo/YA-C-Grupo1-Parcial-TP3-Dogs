@@ -5,8 +5,8 @@
 
     <string name="detailsName">Nombre</string>
     <string name="detailsWeight">Peso</string>
-    <string name="detailsWeightSign">kg</string>
-    <string name="detailsGender">Sex</string>
+    <string name="detailsWeightSign">{dogWeight} kg</string>
+    <string name="detailsGender">Sexo</string>
     <string name="detailsAge">Edad</string>
     <string name="detailsAgeLabel">Años</string>
     <string name="detailsOwner">Dueño</string>

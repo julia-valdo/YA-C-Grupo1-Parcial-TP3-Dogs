@@ -44,8 +44,8 @@
     <dimen name="cardViewItemsMargin">10dp</dimen>
     <dimen name="cardViewWidth">380dp</dimen>
     <dimen name="cardViewHeight">240dp</dimen>
-    <dimen name="cardViewTxtName">30dp</dimen>
-    <dimen name="cardViewTxt">18dp</dimen>
+    <dimen name="cardViewTxtName">30sp</dimen>
+    <dimen name="cardViewTxt">18sp</dimen>
     <dimen name="cardViewShadowRadius">5</dimen>
 
     <!-- CardViewFilter -->

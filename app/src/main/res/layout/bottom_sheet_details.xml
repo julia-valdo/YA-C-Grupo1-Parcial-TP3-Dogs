@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_details_bg"
@@ -37,7 +38,7 @@
                 android:id="@+id/llBottomSheetDetail">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1">
@@ -82,12 +83,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:gravity="right"
-                        android:layout_margin="@dimen/bottomSheetDetailsMargin">
+                        android:gravity="end"
+                        android:layout_margin="@dimen/bottomSheetDetailsMargin"
+                        tools:ignore="RtlHardcoded">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingRight="@dimen/cardViewMargin"
+                            android:paddingEnd="@dimen/cardViewMargin"
+                            android:paddingStart="0dp"
                             android:text="@string/detailsAgeLabel"
                             android:textSize="@dimen/txtParagraphSize"/>
                         <TextView
