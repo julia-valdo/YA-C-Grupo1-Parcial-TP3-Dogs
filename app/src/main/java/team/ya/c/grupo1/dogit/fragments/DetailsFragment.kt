@@ -59,18 +59,16 @@ class DetailsFragment : Fragment() {
         val userEmail = FirebaseAuth.getInstance().currentUser?.email?: return
 
         val imgFavorite = this.view.findViewById<ImageView>(R.id.btnBottomSheetDetailsFollow)
-        imgFavorite.setOnClickListener {
-            if (dog.followers.contains(userEmail)) {
-                Toast.makeText(view.context, "Se ha eliminado de favoritos", Toast.LENGTH_SHORT).show()
-                imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
-                dog.followers.remove(userEmail)
-            } else {
-                Toast.makeText(view.context, "Se ha añadido a favoritos", Toast.LENGTH_SHORT).show()
-                imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
-                dog.followers.add(userEmail!!)
-            }
-            updateDogFollowers(dog.followers, dog.id)
+        if (dog.followers.contains(userEmail)) {
+            Toast.makeText(view.context, "Se ha eliminado de favoritos", Toast.LENGTH_SHORT).show()
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow))
+            dog.followers.remove(userEmail)
+        } else {
+            Toast.makeText(view.context, "Se ha añadido a favoritos", Toast.LENGTH_SHORT).show()
+            imgFavorite.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.icon_follow_filled))
+            dog.followers.add(userEmail!!)
         }
+        updateDogFollowers(dog.followers, dog.id)
     }
 
     private fun updateDogFollowers(followers: MutableList<String>, idDog: String) {

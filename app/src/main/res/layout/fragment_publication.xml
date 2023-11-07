@@ -37,32 +37,21 @@
                 android:textColor="?android:attr/textColor"
                 android:textSize="@dimen/txtInputSize" />
 
-            <LinearLayout
-                android:id="@+id/linearLayoutPublicationDogRaceAndSubrace"
+            <Spinner
+                android:id="@+id/spinnerPublicationDogBreed"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_edittext" />
 
-                <Spinner
-                    android:id="@+id/spinnerPublicationDogRace"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="@dimen/inputTxtHeight"
-                    android:layout_marginTop="@dimen/dividerTopPadding"
-                    android:layout_marginBottom="@dimen/dividerBottomPadding"
-                    android:layout_marginEnd="@dimen/inputEndPadding"
-                    android:background="@drawable/style_edittext" />
-
-                <Spinner
-                    android:id="@+id/spinnerPublicationDogSubrace"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="@dimen/inputTxtHeight"
-                    android:layout_marginTop="@dimen/dividerTopPadding"
-                    android:layout_marginBottom="@dimen/dividerBottomPadding"
-                    android:layout_marginStart="@dimen/inputStartPadding"
-                    android:background="@drawable/style_edittext" />
-            </LinearLayout>
+            <Spinner
+                android:id="@+id/spinnerPublicationDogSubBreed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_edittext" />
 
             <Spinner
                 android:id="@+id/spinnerPublicationDogUbication"
@@ -260,28 +249,28 @@
                     app:tint="?attr/buttonTint"/>
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayoutPublicationDogPhoto5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/editTxtPublicationDogPhoto5"
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogPhoto5"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/inputTxtHeight"
-                android:layout_marginTop="@dimen/dividerTopPadding"
-                android:layout_marginBottom="@dimen/dividerBottomPadding"
-                android:autofillHints=""
-                android:background="@drawable/style_edittext"
-                android:hint="@string/publicationDogPicture5"
-                android:inputType="text"
-                android:padding="@dimen/inputTxtPadding"
-                android:textColor="?android:attr/textColor"
-                android:textSize="@dimen/txtInputSize" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogPhoto5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogPicture5"
+                    android:inputType="text"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnPublicationDogSave"
@@ -300,6 +289,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/guidelineProjectCreationHorizontal90" />
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBarPublication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeHorizontal5"

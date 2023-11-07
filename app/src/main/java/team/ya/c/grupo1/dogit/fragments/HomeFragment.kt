@@ -82,12 +82,13 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
         setupRecyclerFilterBreed()
         setupSwipeRefreshSettings()
         binding.buttonSearchByBreed.setOnClickListener {
-            searchByBreed()
+            searchByBreedFilter()
         }
         binding.textHomeMoreFilters.setOnClickListener{
-            popupMenuFilters()
+            searchByOtherFilters()
         }
     }
+
     private fun setupRecyclerView() {
         val query = db.collection("dogs")
             .whereEqualTo("adopterName", "")
@@ -101,9 +102,12 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
 
         setupRecyclerViewSettings(binding.recyclerHomeDogs)
         dogAdapter = DogAdapter(options, this)
+
         setupLoadStateSettings()
+
         binding.recyclerHomeDogs.adapter = dogAdapter
     }
+
     private fun setupLoadStateSettings() {
         viewLifecycleOwner.lifecycleScope.launch {
             dogAdapter.loadStateFlow.collectLatest { loadStates ->
@@ -135,6 +139,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
             }
         }
     }
+
     private fun setupSwipeRefreshSettings() {
         safeAccessBinding {
             binding.swipeRefreshHome.setOnRefreshListener {
@@ -143,17 +148,28 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
             }
         }
     }
+
+    private fun getRetrofit(): Retrofit{
+
+        return Retrofit.Builder()
+            .baseUrl("https://dog.ceo/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     private fun setupRecyclerFilterBreed() {
         dogFilterAdapter = DogFilterAdapter(dogBreeds, this)
         setupRecyclerViewSettings(binding.recyclerFilter,true)
         binding.recyclerFilter.adapter = dogFilterAdapter
-        getAllBreed()
+        searchAllBreed()
     }
+
     private fun setupRecyclerFilterLocation() {
         dogFilterAdapter = DogFilterAdapter(filterLocations, this)
         binding.recyclerFilter.adapter = dogFilterAdapter
         setupLocationFilter()
     }
+
     private fun setupBreedFilter(){
         viewLifecycleOwner.lifecycleScope.launch {
             try {
@@ -166,6 +182,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
             }
         }
     }
+
     private fun setupLocationFilter(){
         viewLifecycleOwner.lifecycleScope.launch {
             try {
@@ -178,16 +195,19 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
             }
         }
     }
+
     private fun setupRecyclerViewSettings(recycler : RecyclerView, isHorizontal : Boolean = false) {
         recycler.setHasFixedSize(true)
         val linearLayoutManager = if (isHorizontal) LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) else LinearLayoutManager(context)
         recycler.layoutManager = linearLayoutManager
     }
-    private fun getAllBreed(){
+
+    private fun searchAllBreed(){
         val combinedList = mutableListOf<String>()
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(ApiService::class.java).getDogsAllBreed("api/breeds/list/all")
             val dogs = call.body()
+
             safeActivityCall {
                 requireActivity().runOnUiThread{
                     safeAccessBinding{
@@ -214,76 +234,8 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                 }
             }
         }
-
     }
-    private fun searchByBreed(){
-        dogAdapter.stopListening()
-        val searchBreed = binding.AutoCompleteTextViewBreedSearch.text.toString()
 
-        val query = db.collection("dogs")
-            .whereEqualTo("adopterName","")
-            .whereEqualTo("breed",searchBreed)
-
-        val config = PagingConfig(20,10,  false)
-
-        val options = FirestorePagingOptions.Builder<DogEntity>()
-            .setLifecycleOwner(this)
-            .setQuery(query, config, DogEntity::class.java)
-            .build()
-
-        dogAdapter.updateOptions(options)
-        dogAdapter.startListening()
-        binding.recyclerHomeDogs.adapter = dogAdapter
-    }
-    private fun popupMenuFilters(){
-        val popupMenu = PopupMenu(context, binding.textHomeMoreFilters)
-        popupMenu.menuInflater.inflate(R.menu.filters_menu, popupMenu.menu)
-
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.getByBreed -> {
-                    setupRecyclerFilterBreed()
-                    locationSelected = false
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.getByDate -> {
-                    filterByDate()
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.getByLocation -> {
-                    setupRecyclerFilterLocation()
-                    locationSelected = true
-                    return@setOnMenuItemClickListener true
-                }
-
-                else -> return@setOnMenuItemClickListener false
-            }
-        }
-        popupMenu.show()
-    }
-    private fun filterByDate(){
-        dogAdapter.stopListening()
-        val query = db.collection("dogs")
-            .whereEqualTo("adopterName","")
-            .orderBy("publicationDate", Query.Direction.DESCENDING)
-
-        val config = PagingConfig(20,10,  false)
-
-        val options = FirestorePagingOptions.Builder<DogEntity>()
-            .setLifecycleOwner(this)
-            .setQuery(query, config, DogEntity::class.java)
-            .build()
-
-        dogAdapter.updateOptions(options)
-        dogAdapter.startListening()
-        binding.recyclerHomeDogs.adapter = dogAdapter
-    }
-    private fun getRetrofit(): Retrofit{
-        return Retrofit.Builder()
-            .baseUrl("https://dog.ceo/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
     private suspend fun fetchBreedDogs(): List<String>{
         return suspendCancellableCoroutine {
                 cont ->
@@ -304,6 +256,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                 }
         }
     }
+
     private suspend fun fetchLocationsDogs(): List<String>{
         return suspendCancellableCoroutine {
                 cont ->
@@ -324,17 +277,45 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                 }
         }
     }
-    override fun onFilterItemSelected(item: MutableList<String>) {
-        dogAdapter.stopListening()
-        var query = db.collection("dogs")
-            .whereEqualTo("adopterName","")
-        if (item.size > 0){
-            if (locationSelected){
-                query = query.whereIn("location",item)
-            }else{
-                query = query.whereIn("breed",item)
+
+    private fun searchByOtherFilters(){
+        val popupMenu = PopupMenu(context, binding.textHomeMoreFilters)
+        popupMenu.menuInflater.inflate(R.menu.filters_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.getByBreed -> {
+                    setupRecyclerFilterBreed()
+                    locationSelected = false
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.getByDate -> {
+                    searchByDate()
+                    return@setOnMenuItemClickListener true
+                }
+                R.id.getByLocation -> {
+                    setupRecyclerFilterLocation()
+                    locationSelected = true
+                    return@setOnMenuItemClickListener true
+                }
+
+                else -> return@setOnMenuItemClickListener false
             }
         }
+        popupMenu.show()
+    }
+
+    private fun searchByBreedFilter(){
+        dogAdapter.stopListening()
+        val searchBreed = binding.AutoCompleteTextViewBreedSearch.text.toString()
+
+        var query = db.collection("dogs")
+            .whereEqualTo("adopterName", "")
+
+        if (searchBreed.isNotEmpty()){
+            query = query.whereEqualTo("race",searchBreed)
+        }
+
         val config = PagingConfig(20,10,  false)
 
         val options = FirestorePagingOptions.Builder<DogEntity>()
@@ -346,11 +327,56 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
         dogAdapter.startListening()
         binding.recyclerHomeDogs.adapter = dogAdapter
     }
+
+    private fun searchByDate(){
+        dogAdapter.stopListening()
+
+        val query = db.collection("dogs")
+            .whereEqualTo("adopterName", "")
+            .orderBy("publicationDate", Query.Direction.DESCENDING)
+
+        val config = PagingConfig(20,10,  false)
+
+        val options = FirestorePagingOptions.Builder<DogEntity>()
+            .setLifecycleOwner(this)
+            .setQuery(query, config, DogEntity::class.java)
+            .build()
+
+        dogAdapter.updateOptions(options)
+        dogAdapter.startListening()
+        binding.recyclerHomeDogs.adapter = dogAdapter
+    }
+
+    override fun onFilterItemSelected(item: MutableList<String>) {
+        dogAdapter.stopListening()
+        var query = db.collection("dogs")
+            .whereEqualTo("adopterName", "")
+        if (item.size > 0) {
+            if (locationSelected) {
+                query = query.whereIn("location", item)
+            } else {
+                query = query.whereIn("breed", item)
+            }
+        }
+
+        val config = PagingConfig(20,10,  false)
+
+        val options = FirestorePagingOptions.Builder<DogEntity>()
+            .setLifecycleOwner(this)
+            .setQuery(query, config, DogEntity::class.java)
+            .build()
+
+        dogAdapter.updateOptions(options)
+        dogAdapter.startListening()
+        binding.recyclerHomeDogs.adapter = dogAdapter
+    }
+
     private fun safeActivityCall(action: () -> Unit) {
         if (!requireActivity().isFinishing && !requireActivity().isDestroyed ) {
             action()
         }
     }
+
     private fun safeAccessBinding(action: () -> Unit) {
         if (_binding != null && context != null) {
             action()
