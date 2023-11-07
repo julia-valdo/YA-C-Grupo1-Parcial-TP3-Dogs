@@ -3,7 +3,6 @@
     <style name="Base.Theme.DogIt" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/white</item>
-
         <item name="android:windowBackground">@color/white</item>
         <item name="android:solidColor">@color/white</item>
         <item name="android:textColor">@color/black</item>
@@ -14,6 +13,7 @@
         <item name="android:editTextColor">@color/white</item>
         <item name="colorControlHighlight">@color/dark_grey</item>
         <item name="android:textColorSecondary">@color/light_grey</item>
+        <item name="colorOnSecondaryContainer">@color/searchGrey</item>
     </style>
 
     <style name="Theme.DogIt" parent="Base.Theme.DogIt" />

@@ -7,4 +7,6 @@
     <string name="homeMenuFilterByDate">Fecha de Publicación</string>
     <string name="homeMenuFilterByLocation">Ubicación</string>
     <string name="homeMenuFilterByBreed">Raza</string>
+    <string name="homeFilterLoadLocationsError">Hubo un error al cargar las localidades!</string>
+    <string name="homeFilterLoadBreedsError">Hubo un error al cargar las razas!</string>
 </resources>
