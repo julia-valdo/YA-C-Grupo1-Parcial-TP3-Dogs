@@ -77,3 +77,16 @@ están en adopción.</p>
     <li>Retrofit</li>
     <li>Coroutines</li>
 </ul>
+
+## Preguntas:
+### 1) En el caso que se pida extender la app para otros tipos de mascotas, por ejemplo gatos, ¿la app es flexible? ¿Qué cambios realizarían?
+Si es extendible, pero habría que hacer modificaciones. Por ejemplo, habría que agregar compatibilidad con la API de la mascota específica para obtener la raza y subraza. También habría que agregar un campo para el tipo de mascota en la base de datos de Firebase, si es que queremos filtrar por tipo de mascota.
+
+### 2) ¿Qué tipo de arquitectura usaron y por qué? ¿Podría mejorarla?
+Utilizamos Kotlin con una arquitectura MVC. Creemos que se podría mejorar utilizando MVVM, para acceder a retrofit desde un ViewModel, pero no llegamos a implementarlo.
+
+### 3) ¿Tuvieron fugas o retención de memoria? ¿Qué consideraciones tuvieron en cuenta?
+No encontramos fugas ni retenciones de memoria. Sin embargo, para evitarlo tuvimos recaudos como utilizar el método onDestroy() para liberar recursos, y utilizar el método onStop() para liberar la memoria de los recursos que no se están utilizando.
+
+### 4) ¿Qué mejoras detectan que podrían realizarle a la app?
+Se podría agregar el acceso a la API desde un ViewModel, para cargar las cosas una sola vez con retrofit. No nos dió el tiempo para realizar esto, pero sabemos que es posible.

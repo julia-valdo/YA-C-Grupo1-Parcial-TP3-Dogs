@@ -44,15 +44,19 @@
     <dimen name="cardViewItemsMargin">10dp</dimen>
     <dimen name="cardViewWidth">380dp</dimen>
     <dimen name="cardViewHeight">240dp</dimen>
-    <dimen name="cardViewtxtName">30dp</dimen>
-    <dimen name="cardViewtxt">18dp</dimen>
+    <dimen name="cardViewTxtName">30dp</dimen>
+    <dimen name="cardViewTxt">18dp</dimen>
     <dimen name="cardViewShadowRadius">5</dimen>
 
     <!-- CardViewFilter -->
-    <dimen name="cardViewtxtFilter">10dp</dimen>
+    <dimen name="cardViewTxtFilter">10sp</dimen>
     <dimen name="cardViewBreedFilterCornerRadius">25dp</dimen>
     <dimen name="cardViewBreedFilterMarginRight">10dp</dimen>
+    <dimen name="cardViewBreedFilterMargin">10dp</dimen>
     <dimen name="cardViewBreedFilterHeight">50dp</dimen>
+    <dimen name="cardViewBreedFilterPadding">5dp</dimen>
+    <dimen name="cardViewBreedFilterImagePadding">10dp</dimen>
+
 
     <!-- DrawerMainNavHeader -->
     <dimen name="drawerMainNavHeaderProfilePictureSize">50dp</dimen>
