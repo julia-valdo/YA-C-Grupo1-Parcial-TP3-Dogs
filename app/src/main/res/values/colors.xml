@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple">#827397</color>
+    <color name="blue">#1B72C0</color>
+    <color name="dark_blue">#001D42</color>
+    <color name="light_grey">#ADA8A8</color>
+    <color name="searchGrey">#F7F7F7</color>
+    <color name="dark_grey">#5F5B5B</color>
+    <color name="darkest_grey">#131313</color>
+    <color name="grey">#C4C3C3</color>
+    <color name="defaultItemColorBreedFilter">#FFFFFFFF</color>
+    <color name="selectedItemColorBreedFilter">#827397</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+</resources>

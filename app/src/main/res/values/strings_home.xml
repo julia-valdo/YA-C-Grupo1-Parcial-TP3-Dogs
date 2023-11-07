@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="homeFilterText">Filtros</string>
+    <string name="homeMoreFilterText">Más filtros</string>
+    <string name="homeMenuClearFilters">Eliminar filtros</string>
+    <string name="homeSearchFilter">Buscador</string>
+    <string name="homeLoadingDogsFailed">Hubo un error al cargar los perros!</string>
+    <string name="homeMenuFilterByDate">Fecha de Publicación</string>
+    <string name="homeMenuFilterByLocation">Ubicación</string>
+    <string name="homeMenuFilterByBreed">Raza</string>
+    <string name="homeFilterLoadLocationsError">Hubo un error al cargar las localidades!</string>
+    <string name="homeFilterLoadBreedsError">Hubo un error al cargar las razas!</string>
+    <string name="homeFilterBreedNotFound">No existe una raza o sub-raza llamada así!</string>
+</resources>

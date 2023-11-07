@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutPublicationFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PublicationFragment">
+
+    <ScrollView
+        android:id="@+id/scrollViewPublication"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal5"
+        app:layout_constraintWidth_max="@dimen/inputMaxWidth">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutPublicationForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTxtPublicationDogName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:autofillHints=""
+                android:background="@drawable/style_edittext"
+                android:hint="@string/publicationDogName"
+                android:inputType="text"
+                android:padding="@dimen/inputTxtPadding"
+                android:textColor="?android:attr/textColor"
+                android:textSize="@dimen/txtInputSize" />
+
+            <Spinner
+                android:id="@+id/spinnerPublicationDogBreed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_edittext" />
+
+            <Spinner
+                android:id="@+id/spinnerPublicationDogSubBreed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_edittext" />
+
+            <Spinner
+                android:id="@+id/spinnerPublicationDogUbication"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_edittext" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogAgeAndWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogAge"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginEnd="@dimen/inputEndPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogAge"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginStart="@dimen/inputStartPadding"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogWeight"
+                    android:inputType="numberDecimal"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinnerPublicationDogGender"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_edittext" />
+
+            <EditText
+                android:id="@+id/editTxtPublicationDogDescription"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:autofillHints=""
+                android:background="@drawable/style_edittext"
+                android:hint="@string/publicationDogDescription"
+                android:inputType="text"
+                android:padding="@dimen/inputTxtPadding"
+                android:textColor="?android:attr/textColor"
+                android:textSize="@dimen/txtInputSize" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogPhoto1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogPhoto1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogPicture1"
+                    android:inputType="text"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+
+                <ImageView
+                    android:id="@+id/imgPublicationDogAddPhoto1"
+                    android:layout_width="@dimen/iconAddWidth"
+                    android:layout_height="@dimen/iconAddHeight"
+                    android:layout_marginStart="@dimen/marginLeftIcon"
+                    android:src="@drawable/icon_add_photo"
+                    app:tint="?attr/buttonTint"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogPhoto2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogPhoto2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogPicture2"
+                    android:inputType="text"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+
+                <ImageView
+                    android:id="@+id/imgPublicationDogAddPhoto2"
+                    android:layout_width="@dimen/iconAddWidth"
+                    android:layout_height="@dimen/iconAddHeight"
+                    android:layout_marginStart="@dimen/marginLeftIcon"
+                    android:src="@drawable/icon_add_photo"
+                    app:tint="?attr/buttonTint"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogPhoto3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogPhoto3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogPicture3"
+                    android:inputType="text"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+
+                <ImageView
+                    android:id="@+id/imgPublicationDogAddPhoto3"
+                    android:layout_width="@dimen/iconAddWidth"
+                    android:layout_height="@dimen/iconAddHeight"
+                    android:layout_marginStart="@dimen/marginLeftIcon"
+                    android:src="@drawable/icon_add_photo"
+                    app:tint="?attr/buttonTint"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogPhoto4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogPhoto4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogPicture4"
+                    android:inputType="text"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+
+                <ImageView
+                    android:id="@+id/imgPublicationDogAddPhoto4"
+                    android:layout_width="@dimen/iconAddWidth"
+                    android:layout_height="@dimen/iconAddHeight"
+                    android:layout_marginStart="@dimen/marginLeftIcon"
+                    android:src="@drawable/icon_add_photo"
+                    app:tint="?attr/buttonTint"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPublicationDogPhoto5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editTxtPublicationDogPhoto5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/inputTxtHeight"
+                    android:layout_marginTop="@dimen/dividerTopPadding"
+                    android:layout_marginBottom="@dimen/dividerBottomPadding"
+                    android:autofillHints=""
+                    android:background="@drawable/style_edittext"
+                    android:hint="@string/publicationDogPicture5"
+                    android:inputType="text"
+                    android:padding="@dimen/inputTxtPadding"
+                    android:textColor="?android:attr/textColor"
+                    android:textSize="@dimen/txtInputSize" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnPublicationDogSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dividerTopPadding"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:background="@drawable/style_button"
+                android:padding="@dimen/buttonTextPadding"
+                android:text="@string/publicationBtnSave"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtButtonSize"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guidelineProjectCreationHorizontal90" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBarPublication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHomeHorizontal5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHomeVertical5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHomeVertical95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

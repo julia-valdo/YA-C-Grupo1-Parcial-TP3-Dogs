@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/buttonViewItemBreedDog"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/cardViewBreedFilterHeight"
+    android:layout_marginHorizontal="@dimen/cardViewBreedFilterPadding">
+
+    <ToggleButton
+        android:id="@+id/buttonCardItemFilterDog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/style_button_filter"
+        android:drawableStart="@drawable/dog_solid"
+        android:checked="false"
+        android:padding="@dimen/cardViewBreedFilterImagePadding"
+        android:drawablePadding="@dimen/cardViewBreedFilterPadding"
+        android:textColor="@color/darkest_grey"
+        android:textSize="@dimen/cardViewTxtFilter" />
+</LinearLayout>

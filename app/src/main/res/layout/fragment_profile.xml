@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="@dimen/profileLinearLayoutMarginBottom"
+            >
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/profileImg"
+                android:layout_width="@dimen/profileImgWidth"
+                android:layout_height="@dimen/profileImgHeight"
+                android:src="@drawable/img_avatar"
+                app:civ_shadow="true"
+                app:civ_shadow_color="?attr/colorBackgroundFloating" />
+
+            <TextView
+                android:id="@+id/profileTxtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/profileTextSizeName" />
+
+            <EditText
+                android:id="@+id/editTxtPublicationDogName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/inputTxtHeight"
+                android:layout_marginBottom="@dimen/dividerBottomPadding"
+                android:autofillHints=""
+                android:background="@drawable/style_edittext"
+                android:hint="@string/profileTextEditProfileImage"
+                android:inputType="text"
+                android:padding="@dimen/inputTxtPadding"
+                android:layout_marginTop="@dimen/profileTextEditMarginTop"
+                android:textColor="?android:attr/textColor"
+                android:textSize="@dimen/txtInputSize"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/profileBtnAddPhoto"
+                android:layout_width="@dimen/profileBtnWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profileBtnMarginTop"
+                android:background="@drawable/style_button"
+                android:backgroundTint="@color/purple"
+                android:text="@string/profileBtnUploadImage" />
+
+            <Button
+                android:id="@+id/profileBtnSavePhoto"
+                android:layout_width="@dimen/profileBtnWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profileBtnMarginTop"
+                android:background="@drawable/style_button"
+                android:backgroundTint="@color/purple"
+                android:text="@string/profileBtnUploadImageSave"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

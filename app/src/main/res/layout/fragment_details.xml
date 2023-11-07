@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DetailsFragment">
+
+    <ImageView
+        android:id="@+id/imgDetailsDog1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineDetailsPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineDetailsNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline95" />
+
+    <ImageButton
+        android:id="@+id/btnDetailsPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_img_details"
+        android:padding="@dimen/detailsArrowButtonPadding"
+        android:src="@drawable/bottom_sheet_details_arrow"
+        android:layout_marginBottom="@dimen/cardViewMargin"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineDetailsPrevious"
+        app:layout_constraintTop_toBottomOf="@+id/verticalGuidelineDetailsPrevious" />
+
+    <ImageButton
+        android:id="@+id/btnDetailsNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_img_details"
+        android:padding="@dimen/detailsArrowButtonPadding"
+        android:rotation="180"
+        android:src="@drawable/bottom_sheet_details_arrow"
+        android:layout_marginBottom="@dimen/cardViewMargin"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineDetailsNext"
+        app:layout_constraintTop_toTopOf="@+id/verticalGuidelineDetailsNext" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuidelineDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline50" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/horizontalGuidelineDetails">
+
+        <include
+            android:id="@+id/DetailsBottomSheet"
+            layout="@layout/bottom_sheet_details" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

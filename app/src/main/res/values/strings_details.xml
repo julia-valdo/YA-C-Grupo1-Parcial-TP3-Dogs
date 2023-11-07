@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detailsDogAdopted">Felicitaciones por adoptar a {dogName}</string>
+    <string name="detailsDogAdoptedFailed">Ahora {dogName} es parte de tu familia</string>
+
+    <string name="detailsName">Nombre</string>
+    <string name="detailsWeight">Peso</string>
+    <string name="detailsWeightSign">{dogWeight} kg</string>
+    <string name="detailsGender">Sexo</string>
+    <string name="detailsAge">Edad</string>
+    <string name="detailsAgeLabel">Años</string>
+    <string name="detailsOwner">Dueño</string>
+    <string name="detailsInfoBox">Info box</string>
+    <string name="detailsLocation">Ubicación</string>
+    <string name="detailsAdoptBtn">Adoptar</string>
+    <string name="detailsDescription">Descripción</string>
+
+</resources>

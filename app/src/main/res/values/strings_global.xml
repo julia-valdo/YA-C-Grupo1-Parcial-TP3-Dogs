@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DogIt</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favoritos</string>
+    <string name="adoption">Adopción</string>
+    <string name="publication">Publicación</string>
+    <string name="config">Configuración</string>
+    <string name="profile">Perfil</string>
+    <string name="details">Detalles</string>
+    <string name="logout">Cerrar sesión</string>
+</resources>
