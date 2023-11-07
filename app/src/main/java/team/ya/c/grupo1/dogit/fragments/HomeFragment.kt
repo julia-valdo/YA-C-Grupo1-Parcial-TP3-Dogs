@@ -91,14 +91,15 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     private fun setupVariables() {
         binding.progressBarHome.visibility = View.VISIBLE
         binding.progressBarHomeBottom.visibility = View.GONE
+        binding.recyclerFilter.visibility = View.GONE
+
         setupRecyclerView()
         setupSwipeRefreshSettings()
-        setupRecyclerFilterLocation()
 
         loadBreedsAndSubBreeds{
+            setupRecyclerFilterLocation()
             setupAutocompleteTextView()
             setupRecyclerFilterBreed()
-            setupBreedFilter()
         }
 
         binding.AutoCompleteTextViewBreedSearch.text.clear()
@@ -206,9 +207,12 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     }
 
     private fun setupRecyclerFilterBreed() {
-        dogBreedFilterAdapter = DogFilterAdapter(breeds, this)
-        setupRecyclerViewSettings(binding.recyclerFilter,true)
-        binding.recyclerFilter.adapter = dogBreedFilterAdapter
+        setupBreedFilter{
+            dogBreedFilterAdapter = DogFilterAdapter(breeds, this)
+            setupRecyclerViewSettings(binding.recyclerFilter,true)
+            binding.recyclerFilter.adapter = dogBreedFilterAdapter
+            binding.recyclerFilter.visibility = View.VISIBLE
+        }
     }
 
     private fun setupRecyclerViewSettings(recycler : RecyclerView, isHorizontal : Boolean = false) {
@@ -218,33 +222,34 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     }
 
     private fun setupRecyclerFilterLocation() {
-        dogLocationFilterAdapter = DogFilterAdapter(filterLocations, this)
-        setupRecyclerViewSettings(binding.recyclerFilter,true)
-        binding.recyclerFilter.adapter = dogLocationFilterAdapter
-        setupLocationFilter()
+        setupLocationFilter{
+            dogLocationFilterAdapter = DogFilterAdapter(filterLocations, this)
+            setupRecyclerViewSettings(binding.recyclerFilter,true)
+            binding.recyclerFilter.adapter = dogLocationFilterAdapter
+        }
     }
 
-    private fun setupBreedFilter(){
+    private fun setupBreedFilter(action: () -> Unit){
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val result = fetchBreedDogs().sorted()
 
                 breeds.clear()
                 breeds.addAll(result)
-                dogBreedFilterAdapter.notifyDataSetChanged()
+                action()
             } catch (e: Exception) {
                 Toast.makeText(view.context, resources.getString(R.string.homeFilterLoadBreedsError), Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun setupLocationFilter(){
+    private fun setupLocationFilter(action: () -> Unit){
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val result = fetchLocationsDogs().sorted()
                 filterLocations.clear()
                 filterLocations.addAll(result)
-                dogLocationFilterAdapter.notifyDataSetChanged()
+                action()
             } catch (e: Exception) {
                 Toast.makeText(view.context, resources.getString(R.string.homeFilterLoadLocationsError), Toast.LENGTH_LONG).show()
             }
