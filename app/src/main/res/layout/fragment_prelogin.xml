@@ -12,10 +12,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelinePreloginHorizontal60"
         app:layout_constraintEnd_toStartOf="@+id/guidelinePreloginVertical95"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelinePreloginVertical5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/guidelinePreloginHorizontal10"
         app:srcCompat="@drawable/image_prelogin" />
 
     <TextView
@@ -24,46 +22,53 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/prelogin_header"
+        android:textColor="?attr/colorControlHighlight"
         android:textSize="@dimen/txtMainTitleSize"
         android:textStyle="bold"
-        android:textColor="?attr/colorControlHighlight"
-        app:layout_constraintBottom_toTopOf="@+id/btnPreloginMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPreloginMain"
-        app:layout_constraintVertical_bias="0.272" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelinePreloginVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelinePreloginVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/guidelinePreloginHorizontal61" />
 
     <TextView
         android:id="@+id/textViewPreloginDescription"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="@dimen/dividerTopPadding"
         android:text="@string/prelogin_description"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/txtParagraphSize"
-        app:layout_constraintBottom_toTopOf="@+id/btnPreloginMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPreloginHeader" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelinePreloginVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelinePreloginVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/guidelinePreloginHorizontal68" />
 
     <Button
         android:id="@+id/btnPreloginMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/style_button"
         android:gravity="center"
-        android:layout_marginTop="24dp"
+        android:padding="@dimen/buttonTextPadding"
         android:text="@string/prelogin_getStarted"
+        android:textColor="?android:solidColor"
         android:textSize="@dimen/txtButtonSize"
         android:textStyle="bold"
-        android:drawablePadding="10dp"
-        android:padding="@dimen/buttonTextPadding"
-        android:background="@drawable/style_button"
-        android:textColor="?android:solidColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPreloginMain" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelinePreloginVertical95"
+        app:layout_constraintStart_toStartOf="@+id/guidelinePreloginVertical5"
+        app:layout_constraintTop_toBottomOf="@+id/guidelinePreloginHorizontal80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinePreloginVertical5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="@dimen/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinePreloginHorizontal10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline10" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinePreloginHorizontal60"
@@ -73,11 +78,25 @@
         app:layout_constraintGuide_percent="@dimen/guideline60" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelinePreloginVertical5"
+        android:id="@+id/guidelinePreloginHorizontal61"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/guideline5" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline61" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinePreloginHorizontal68"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinePreloginHorizontal80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@dimen/guideline80" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinePreloginVertical95"

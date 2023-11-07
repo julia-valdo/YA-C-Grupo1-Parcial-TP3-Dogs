@@ -17,6 +17,9 @@
     <dimen name="guideline14">0.14</dimen>
     <dimen name="guideline15">0.15</dimen>
     <dimen name="guideline33">0.33</dimen>
+    <dimen name="guideline61">0.61</dimen>
+    <dimen name="guideline68">0.68</dimen>
+    <dimen name="guideline75">0.75</dimen>
     <dimen name="guideline93">0.93</dimen>
     <dimen name="guideline95">0.95</dimen>
 
