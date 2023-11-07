@@ -16,7 +16,7 @@ class DogFilterAdapter (
     private val onItemClick : OnFilterItemClickedListener
 ) : RecyclerView.Adapter<DogFilterHolder>(){
     private val dogListToFilter:MutableList<String> = mutableListOf()
-    //private val defaultItemBackgroundColor: Int = R.color.defaultItemColorBreedFilter
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogFilterHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_item_filter_dog, parent, false)
@@ -28,7 +28,7 @@ class DogFilterAdapter (
     override fun onBindViewHolder(holder: DogFilterHolder, @SuppressLint("RecyclerView") position: Int) {
         val breed = dogFilterList[position]
         holder.bind(breed)
-
+        holder.getButtonLayout().isChecked = dogListToFilter.contains(breed)
         holder.getButtonLayout().setOnClickListener {
             if(holder.getButtonLayout().isChecked){
                 dogListToFilter.add(breed)
