@@ -95,11 +95,16 @@ class PublicationFragment : Fragment() {
             val dogs = call.body()
             breedMap = dogs?.dogBreeds?.toMutableMap()?: mutableMapOf()
 
-            requireActivity().runOnUiThread{
-                startSpinners()
-                binding.scrollViewPublication.visibility = View.VISIBLE
-                binding.progressBarPublication.visibility = View.GONE
+            safeActivityCall {
+                requireActivity().runOnUiThread{
+                    safeAccessBinding {
+                        startSpinners()
+                        binding.scrollViewPublication.visibility = View.VISIBLE
+                        binding.progressBarPublication.visibility = View.GONE
+                    }
+                }
             }
+
         }
     }
 
@@ -355,4 +360,13 @@ class PublicationFragment : Fragment() {
         }
     }
 
+    private fun safeActivityCall(action: () -> Unit) {
+        try{
+            if (!requireActivity().isFinishing && !requireActivity().isDestroyed ) {
+                action()
+            }
+        } catch (_: IllegalStateException) {
+            // El activity ya no existia
+        }
+    }
 }

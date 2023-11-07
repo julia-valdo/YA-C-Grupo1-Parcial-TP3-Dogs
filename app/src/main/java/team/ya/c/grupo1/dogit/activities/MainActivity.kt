@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //TODO: Ver manejo de errores
         RxJavaPlugins.setErrorHandler { throwable: Throwable? -> }
 
         setupVariables()

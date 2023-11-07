@@ -219,6 +219,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
 
     private fun setupRecyclerFilterLocation() {
         dogLocationFilterAdapter = DogFilterAdapter(filterLocations, this)
+        setupRecyclerViewSettings(binding.recyclerFilter,true)
         binding.recyclerFilter.adapter = dogLocationFilterAdapter
         setupLocationFilter()
     }
@@ -226,7 +227,8 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     private fun setupBreedFilter(){
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val result = fetchBreedDogs()
+                val result = fetchBreedDogs().sorted()
+
                 breeds.clear()
                 breeds.addAll(result)
                 dogBreedFilterAdapter.notifyDataSetChanged()
@@ -239,7 +241,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     private fun setupLocationFilter(){
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val result = fetchLocationsDogs()
+                val result = fetchLocationsDogs().sorted()
                 filterLocations.clear()
                 filterLocations.addAll(result)
                 dogLocationFilterAdapter.notifyDataSetChanged()
@@ -287,7 +289,7 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                     for (document in documents) {
                         val breed = document.getString("breed")?: continue
 
-                        if(breed.contains(breed) && !dogBreedsAux.contains(breed)){
+                        if(breeds.contains(breed) && !dogBreedsAux.contains(breed)){
                             dogBreedsAux.add(breed)
                         }
                     }
@@ -398,8 +400,12 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
     }
 
     private fun safeActivityCall(action: () -> Unit) {
-        if (!requireActivity().isFinishing && !requireActivity().isDestroyed ) {
-            action()
+        try{
+            if (!requireActivity().isFinishing && !requireActivity().isDestroyed ) {
+                action()
+            }
+        } catch (_: IllegalStateException) {
+            // El activity ya no existia
         }
     }
 
