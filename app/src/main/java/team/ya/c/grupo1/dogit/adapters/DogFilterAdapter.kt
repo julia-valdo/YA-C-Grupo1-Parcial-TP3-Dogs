@@ -28,7 +28,9 @@ class DogFilterAdapter (
     override fun onBindViewHolder(holder: DogFilterHolder, @SuppressLint("RecyclerView") position: Int) {
         val breed = dogFilterList[position]
         holder.bind(breed)
+
         holder.getButtonLayout().isChecked = dogListToFilter.contains(breed)
+
         holder.getButtonLayout().setOnClickListener {
             if(holder.getButtonLayout().isChecked){
                 dogListToFilter.add(breed)
@@ -37,5 +39,10 @@ class DogFilterAdapter (
             }
             onItemClick.onFilterItemSelected(dogListToFilter)
         }
+    }
+
+    fun clearFilter(){
+        dogListToFilter.clear()
+        notifyDataSetChanged()
     }
 }

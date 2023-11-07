@@ -332,17 +332,17 @@ class HomeFragment : Fragment(), OnViewItemClickedListener, OnFilterItemClickedL
                     return@setOnMenuItemClickListener true
                 }
                 R.id.getByLocation -> {
-                    setupRecyclerFilterLocation()
+                    binding.recyclerFilter.adapter = dogLocationFilterAdapter
                     locationSelected = true
                     return@setOnMenuItemClickListener true
                 }
                 R.id.clearFilters -> {
                     filterMap.clear()
-                    applyFilters()
-                    setupRecyclerFilterLocation()
-                    setupRecyclerFilterBreed()
+                    dogBreedFilterAdapter.clearFilter()
+                    dogLocationFilterAdapter.clearFilter()
                     binding.AutoCompleteTextViewBreedSearch.text.clear()
-
+                    orderByDate = false
+                    applyFilters()
                     return@setOnMenuItemClickListener true
                 }
                 else -> return@setOnMenuItemClickListener false
