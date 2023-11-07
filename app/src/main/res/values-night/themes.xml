@@ -15,5 +15,7 @@
         <item name="android:textColorSecondary">@color/dark_grey</item>
         <item name="android:editTextColor">@color/dark_grey</item>
         <item name="colorOnSecondaryContainer">@color/dark_grey</item>
+
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 </resources>

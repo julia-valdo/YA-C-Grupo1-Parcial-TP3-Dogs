@@ -10,4 +10,8 @@
         android:id="@+id/getByLocation"
         android:title="@string/homeMenuFilterByLocation" />
 
+    <item
+        android:id="@+id/clearFilters"
+        android:title="@string/homeMenuClearFilters" />
+
 </menu>

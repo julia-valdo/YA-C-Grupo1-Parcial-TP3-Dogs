@@ -12,7 +12,6 @@
     <dimen name="guideline90">0.90</dimen>
 
 
-
     <dimen name="guideline5">0.05</dimen>
     <dimen name="guideline14">0.14</dimen>
     <dimen name="guideline15">0.15</dimen>
@@ -28,8 +27,8 @@
     <dimen name="globalLineDivider">2dp</dimen>
     <dimen name="txtInputWidth">320dp</dimen>
     <dimen name="txtInputHeight">50dp</dimen>
-    <dimen name="HomeHeight50">50dp</dimen>
-    <dimen name="HomeWidth50">50dp</dimen>
+    <dimen name="homeHeight50">50dp</dimen>
+    <dimen name="homeWidth50">50dp</dimen>
 
     <!-- Text size -->
     <dimen name="txtMainTitleSize">30sp</dimen>

@@ -16,42 +16,42 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
         app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal5" />
 
-
-    <AutoCompleteTextView
-        android:id="@+id/AutoCompleteTextViewBreedSearch"
+    <RelativeLayout
+        android:id="@+id/linearLayoutSearchByBreed"
         android:layout_width="0dp"
-        android:layout_height="@dimen/HomeHeight50"
-        android:hint="@string/homeSearchFilter"
-        android:textSize="15dp"
-        android:paddingStart="16dp"
-        android:textColor="@color/purple"
-        android:background="@drawable/style_search_home"
-        android:layout_marginTop="@dimen/marginTop20"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal14"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical93"
-        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/buttonSearchByBreed"
-        android:layout_width="@dimen/HomeWidth50"
-        android:layout_height="@dimen/HomeHeight50"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/marginTop20"
-        android:background="@drawable/style_button"
-        android:gravity="center"
-        android:src="@drawable/search"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHomeHorizontal14"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5">
+
+        <AutoCompleteTextView
+            android:id="@+id/AutoCompleteTextViewBreedSearch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/homeHeight50"
+            android:hint="@string/homeSearchFilter"
+            android:textSize="@dimen/txtInputSize"
+            android:paddingHorizontal="@dimen/inputTxtPadding"
+            android:textColor="@color/purple"
+            android:background="@drawable/style_search_home" />
+
+        <ImageButton
+            android:id="@+id/buttonSearchByBreed"
+            android:layout_width="@dimen/homeWidth50"
+            android:layout_height="@dimen/homeHeight50"
+            android:layout_alignEnd="@id/AutoCompleteTextViewBreedSearch"
+            android:background="@drawable/style_button"
+            android:src="@drawable/search" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/textHomeFilterBreed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop20"
         android:text="@string/homeFilterText"
         android:textColor="@color/dark_grey"
-        android:layout_marginTop="@dimen/marginTop20"
         android:textSize="@dimen/txtSecondaryTitleSize"
         app:layout_constraintBottom_toTopOf="@+id/recyclerFilter"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
@@ -75,8 +75,8 @@
         android:id="@+id/recyclerFilter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginVertical="@dimen/marginTop10"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/guidelineHomeVertical95"
         app:layout_constraintStart_toStartOf="@+id/guidelineHomeVertical5"
         app:layout_constraintTop_toBottomOf="@+id/textHomeFilterBreed" />
@@ -90,14 +90,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHomeHorizontal33">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerFilter">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerHomeDogs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/swipeRefreshHome"
-          />
+            android:layout_height="match_parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
@@ -121,13 +119,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="@dimen/guideline5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineHomeHorizontal33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="@dimen/guideline33" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHomeVertical5"

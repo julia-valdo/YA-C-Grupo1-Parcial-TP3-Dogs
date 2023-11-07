@@ -14,6 +14,8 @@
         <item name="colorControlHighlight">@color/dark_grey</item>
         <item name="android:textColorSecondary">@color/light_grey</item>
         <item name="colorOnSecondaryContainer">@color/searchGrey</item>
+
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 
     <style name="Theme.DogIt" parent="Base.Theme.DogIt" />
